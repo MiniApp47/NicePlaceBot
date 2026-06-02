@@ -247,8 +247,8 @@
             position: absolute;
             top: -5px;
             right: -5px;
-            background: #ef233c;
-            color: white;
+            background: #b45420;
+            color: var(--background-color);
             border-radius: 50%;
             font-size: 0.7rem;
             width: 18px;
@@ -375,6 +375,7 @@
         }
 
         .product-card .name {
+                margin-top: 3vh;
             font-weight: 500;
             justify-content: center;
             display: flex;
@@ -455,12 +456,12 @@
 
         /* DETAILS PRODUIT (Optimisé & Fusionné) */
         #page-product .product-details {
-            background: rgba(44, 44, 46, 0.85) !important;
-            backdrop-filter: blur(10px) !important;
-            -webkit-backdrop-filter: blur(10px) !important;
-            border-radius: 20px !important;
-            padding: 20px !important;
-            margin-top: 20px !important;
+            background: rgb(44 44 46 / 68%) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border-radius: 20px !important;
+    padding: 20px !important;
+    margin-top: 5vh !important;
             border: 1px solid rgba(255, 255, 255, 0.1) !important;
             display: flex;
             flex-direction: column;
@@ -530,7 +531,7 @@
         }
 
         .add-to-cart-btn {
-            background: #ff1c1c;
+            background: #b45420;
             border: 1px solid white;
             border-radius: 8px;
             color: white;
@@ -544,7 +545,7 @@
 
         .product-description {
             font-size: 0.95rem;
-            color: #ef233c;
+            color: #b45420;
             margin-top: 15px;
             margin-bottom: 20px;
             line-height: 1.4;
@@ -589,7 +590,7 @@
         }
 
         .cart-item .price {
-            color: #ef233c;
+            color: #b45420;
             font-weight: 700;
             margin-bottom: 1vh;
         }
@@ -615,8 +616,8 @@
         }
 
         .cart-summary {
-            background: #7d1903ad;
-            color: white;
+            background: #ff8039ba;
+            color: #000000;
             padding: 15px;
             border-radius: 10px;
             margin-top: 20px;
@@ -796,6 +797,7 @@
             height: 150px; /* Grande image */
             position: relative;
             overflow: hidden;
+            border-radius: 15px;
         }
 
         .accordion-header .ImgReseaux {
@@ -1020,15 +1022,15 @@
         </button>
         <div class="accordion-content">
             <p style="text-align: center; color: white; line-height: 1.6;">
-                <span style="color: #ff5252; font-weight: bold; font-size: 1.1em;">🏆 Le meilleur service de livraison dans tout le 18 (Le Cher) et ses alentours !</span><br><br>
+<!--                 <span style="color: #ff5252; font-weight: bold; font-size: 1.1em;">🏆 Le meilleur service de livraison dans tout le 18 (Le Cher) et ses alentours !</span><br><br>
                 📍 <strong>Zone d'action :</strong> Tout le département 18 et ses zones limitrophes.<br><br>
                 🤝 <strong>Service client :</strong> Pour la moindre question, un renseignement ou une demande particulière, notre équipe est à votre entière disposition. N'hésitez pas à nous solliciter !
-            </p>
+ -->            </p>
         </div>
     </div>
 
     <!-- SECTION 2 : RÉSEAUX SOCIAUX -->
-    <div class="accordion-item">
+  <!--   <div class="accordion-item">
         <button class="accordion-header">
             <img src="InfoReseaux.png" class="ImgReseaux" alt="">
             <span style="font-weight: bold; color: #333;">RÉSEAUX SOCIAUX 🌐</span>
@@ -1045,7 +1047,7 @@
                 <span style="color: #ff5252; font-weight: bold;">⚠️ Rejoignez nos réseaux via l'onglet "LINKS" pour ne rater aucune exclusivité !</span>
             </p>
         </div>
-    </div>
+    </div> -->
 
 </div>
             </div>
@@ -1311,7 +1313,7 @@
         Validez votre commande directement via WhatsApp :
     </p>
     <div style="display: flex; gap: 10px; width: 100%;">
-        <button id="confirm-whatsapp" class="main-action-btn" style="flex: 1; background: #25D366; color: white; border: 1px solid #128C7E; font-size: 1.1rem;">WhatsApp 💬</button>
+        <button id="confirm-whatsapp" class="main-action-btn" style="flex: 1; background: #069631d9; color: white; border: 1px solid #128C7E; font-size: 1.1rem;">WhatsApp 💬</button>
     </div>
 </div>
     </div>

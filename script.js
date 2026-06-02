@@ -20,32 +20,32 @@ document.addEventListener('DOMContentLoaded', function () {
   const contactLinks = [
         {
             name: 'SNAPCHAT 👻',
-            url: 'https://snapchat.com/t/eX8ZP9rG',
+            url: '',
             id: 'snapchat',
             className: 'snapchat', 
             text: "SNAPCHAT 👻"
         },
         {
-            name: 'TELEGRAM 💬',
-            url: 'https://t.me/fastsafepremium',
+            name: 'TELEGRAM 🌐',
+            url: '',
             id: 'telegram',
             className: 'telegram',
-            text: "TELEGRAM 💬"
+            text: "TELEGRAM 🌐"
         },
         {
-            name: 'CANAL TELEGRAM 💬',
-            url: 'https://t.me/+wbGKOIegFEYxMTY0',
-            id: 'telegram',
-            className: 'telegram',
-            text: "CANAL TELEGRAM 💬"
+            name: 'WHATSAPP 💬',
+            url: '',
+            id: 'whatsapp',
+            className: 'whatsapp',
+            text: "WHATSAPP 💬"
         },
         {
             name: 'SIGNAL 🔒',
             // Remplacer par ton lien exact si besoin, ou utiliser le username copiable
-            url: 'https://signal.me/#eu/fastsafepremium.12', 
+            url: '', 
             id: 'signal',
             className: 'signal',
-            text: "SIGNAL 🔒 (fastsafepremium.12)"
+            text: "SIGNAL 🔒 "
         },
     ];
 
