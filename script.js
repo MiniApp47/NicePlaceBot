@@ -943,7 +943,7 @@ function renderProductListSimple(categoryId) {
         // --- 3. INJECTION (On cache la galerie si pas de média) ---
         detailsContainer.innerHTML = `
             ${hasMedia ? `<div class="product-gallery-wrapper">${galleryHTML}</div>` : ''}
-            ${hasMedia ? `<div class="gallery-counter">Swipe ➡️</div>` : ''} 
+            ${hasMedia ? `<div class="gallery-counter">Swipe pour voir la video➡️</div>` : ''} 
 
             <div class="name" style="margin-top: ${hasMedia ? '0' : '20px'}">${product.name}</div>
             <div class="farm">${product.farm}</div>
