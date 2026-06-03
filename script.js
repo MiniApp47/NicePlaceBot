@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             type: 'Weed',
                             featured: true,
                             image:'ProductU.png',
-                            video:'VideoU.mov',
+                            video:'VideuU.mov',
 description: '🇺🇸 Cali USA 🇺🇸\n\nUne fleur au profil bien marqué, avec une belle présence visuelle et une odeur qui ressort direct à l’ouverture. Texture propre, rendu premium et goût travaillé.\n\n💎 Sélection idéale pour ceux qui aiment les produits bien finis, parfumés et efficaces en bouche.\n🔥 Une valeur sûre pour les amateurs de qualité US.',                            tarifs: [
                                 { weight: '3.5G', price: 50.00 },               
                                 { weight: '50G', price: 500.00 },
@@ -112,7 +112,7 @@ description: '🇪🇸 Amnesia Haze 🇪🇸\n\nUn grand classique, frais et par
                             type: 'Hash',
                             featured: true,
                             image:'ProductM.png',
-                            video:'VideoM.mov',
+                            video:'VideoM.Mov',
 description: '🇪🇸 Moula 🇪🇸\n\nUn produit propre, accessible et efficace, avec une texture agréable et une odeur bien présente. Idéal pour ceux qui cherchent une valeur sûre sans se ruiner.\n\n🍫 Goût classique, bonne tenue, qualité régulière.\n💰 Très bon choix pour les petits comme les gros formats.',                            tarifs: [
                                 { weight: '1OG', price: 50.00 },               
                                 { weight: '50G', price: 200.00 },
