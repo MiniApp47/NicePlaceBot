@@ -61,16 +61,16 @@ document.addEventListener('DOMContentLoaded', function () {
             image: 'CategWeed.png', 
             products: [
                   {
-                            id: 'Cali usa 🇺🇸',
+                            id: 'Sunset Shark 🦈',
                             flag: '🇺🇸',
-                            name: 'Cali usa 🇺🇸',
-                            farm: '🌾 No Farm 🌾',
+                            name: 'Sunset Shark 🦈',
+                            farm: 'Nice\'Selection 🧞',
                             promoEligible: true,
                             type: 'Weed',
                             featured: true,
-                            image:'ProductU.png',
-                            video:'VideuU.mov',
-description: '🇺🇸 Cali USA 🇺🇸\n\nUne fleur au profil bien marqué, avec une belle présence visuelle et une odeur qui ressort direct à l’ouverture. Texture propre, rendu premium et goût travaillé.\n\n💎 Sélection idéale pour ceux qui aiment les produits bien finis, parfumés et efficaces en bouche.\n🔥 Une valeur sûre pour les amateurs de qualité US.',                            tarifs: [
+                            image:'ProductUS1.png',
+                            video:'VideuUS.mov',
+                            description: '🇺🇸 Cali USA 🇺🇸\n\nUne fleur au profil bien marqué, avec une belle présence visuelle et une odeur qui ressort direct à l’ouverture. Texture propre, rendu premium et goût travaillé.\n\n💎 Sélection idéale pour ceux qui aiment les produits bien finis, parfumés et efficaces en bouche.\n🔥 Une valeur sûre pour les amateurs de qualité US.',                            tarifs: [
                                 { weight: '3.5G', price: 50.00 },               
                                 { weight: '50G', price: 500.00 },
                             ]
@@ -79,13 +79,13 @@ description: '🇺🇸 Cali USA 🇺🇸\n\nUne fleur au profil bien marqué, av
                             id: 'Amnesia haze 🇪🇸',
                             flag: '🇪🇸',
                             name: 'Amnesia haze 🇪🇸',
-                            farm: '🌾 No Farm 🌾',
+                            farm: 'Nice\'Selection 🧞',
                             promoEligible: true,
                             type: 'Weed',
                             featured: true,
-                            image:'',
-                            video:'',
-description: '🇪🇸 Amnesia Haze 🇪🇸\n\nUn grand classique, frais et parfumé, avec des notes végétales, citronnées et légèrement épicées. Une fleur simple, efficace et agréable au quotidien.\n\n🌿 Belle odeur, bon goût, combustion propre.\n👌 Parfait pour ceux qui veulent un produit fiable avec un bon rapport qualité/prix.',                            tarifs: [
+                            image:'ProductU.png',
+                            video:'VideuU.mov',
+                            description: '🇪🇸 Amnesia Haze 🇪🇸\n\nUn grand classique, frais et parfumé, avec des notes végétales, citronnées et légèrement épicées. Une fleur simple, efficace et agréable au quotidien.\n\n🌿 Belle odeur, bon goût, combustion propre.\n👌 Parfait pour ceux qui veulent un produit fiable avec un bon rapport qualité/prix.',                            tarifs: [
                                 { weight: '5.5G', price: 50.00 },               
                                 { weight: '50G', price: 350.00 },
                                 { weight: '100G', price: 600.00 },
@@ -104,16 +104,17 @@ description: '🇪🇸 Amnesia Haze 🇪🇸\n\nUn grand classique, frais et par
             image: 'CategHash.png',
             products: [
                     {
-                            id: 'Moula 🇪🇸',
+                            id: 'Mario 🍄',
                             flag: '🇪🇸',
-                            name: 'Moula 🇪🇸',
-                            farm: '🌾 No Farm 🌾',
+                            name: 'Mario 🍄',
+                            farm: 'Nice\'Selection 🧞',
                             promoEligible: true,
                             type: 'Hash',
                             featured: true,
                             image:'ProductM.png',
                             video:'VideoM.Mov',
-description: '🇪🇸 Moula 🇪🇸\n\nUn produit propre, accessible et efficace, avec une texture agréable et une odeur bien présente. Idéal pour ceux qui cherchent une valeur sûre sans se ruiner.\n\n🍫 Goût classique, bonne tenue, qualité régulière.\n💰 Très bon choix pour les petits comme les gros formats.',                            tarifs: [
+                            description: '🇪🇸 Moula 🇪🇸\n\nUn produit propre, accessible et efficace, avec une texture agréable et une odeur bien présente. Idéal pour ceux qui cherchent une valeur sûre sans se ruiner.\n\n🍫 Goût classique, bonne tenue, qualité régulière.\n💰 Très bon choix pour les petits comme les gros formats.',                            
+                            tarifs: [
                                 { weight: '1OG', price: 50.00 },               
                                 { weight: '50G', price: 200.00 },
                                 { weight: '100G', price: 350.00 },
@@ -122,39 +123,42 @@ description: '🇪🇸 Moula 🇪🇸\n\nUn produit propre, accessible et effica
                     {
                             id: 'Honey Gas',
                             flag: '🇪🇸',
-                            name: 'Honey Gas 🍯',
-                            farm: '🌾 No Farm 🌾',
+                            name: 'Honey Gas 220/105u 🍯',
+                            farm: 'Nice\'Selection 🧞',
                             promoEligible: true,
                             type: 'Hash',
                             featured: true,
-                            image:'ProductH.png',
-                            video:'VideoH.mov',
-                            videos:['VideoH2.mov','VideoH3.mov'],
-description: '🍯 Honey Gas 🍯\n\n🏜️ Dry 220/105u 🏜️\n\nUne sélection bien travaillée avec un profil sucré et gas, entre douceur mielleuse et notes plus lourdes en bouche. Texture propre, odeur marquée et rendu premium.\n\n🍯 Arômes gourmands\n⛽ Notes gas bien présentes\n🔥 Produit fait pour les connaisseurs qui veulent du goût et de la qualité.',                            tarifs: [
+                            image:'ProductHHH.png',
+                            video:'VideoH22.mov',
+                            /* videos:['VideoH2.mov','VideoH3.mov'], */
+                            description: '🍯 Honey Gas 🍯\n\n🏜️ Dry 220/105u 🏜️\n\nUne sélection bien travaillée avec un profil sucré et gas, entre douceur mielleuse et notes plus lourdes en bouche. Texture propre, odeur marquée et rendu premium.\n\n🍯 Arômes gourmands\n⛽ Notes gas bien présentes\n🔥 Produit fait pour les connaisseurs qui veulent du goût et de la qualité.',                            
+                            tarifs: [
                                 { weight: '5G', price: 60.00 },
-                                { weight: '1OG', price: 100.00 },               
-                                { weight: '50G', price: 350.00 },
+                                { weight: '1OG', price: 110.00 },         
+                                { weight: '50G', price: 450.00 },
+                                { weight: '100G', price: 800.00 },
                             ]
                     },
                     {
-                            id: 'Olive 🫒',
-                            flag: '🇪🇸',
-                            name: 'Olive 🫒',
-                            farm: '🌾 No Farm 🌾',
+                            id: 'Olivette 🫒',
+                            flag: '🇺🇸',
+                            name: '🥭 Forbidden Fruit 🍓',
+                            farm: 'Nice\'Selection 🧞',
                             promoEligible: true,
                             type: 'Hash',
                             featured: true,
-                            image:'',
-                            video:'',
-description: '🫒 Olive 🫒\n\n🧊 Frozen 🧊\n\nUne texture fraîche et travaillée, avec un rendu propre et une belle intensité aromatique. Produit sélectionné pour son aspect premium et son côté bien parfumé.\n\n❄️ Qualité frozen\n🫒 Texture soignée\n🏆 Idéal pour ceux qui aiment les produits rares et bien finis.',                            tarifs: [
-                                { weight: '1OG', price: 150.00 },               
+                            image:'ProductO.png',
+                            video:'VideoO.mov',
+                            description: 'Olivette 🫒 \n 🪬 Static 🪬\n\nUne texture fraîche et travaillée, avec un rendu propre et une belle intensité aromatique. Produit sélectionné pour son aspect premium et son côté bien parfumé.\n\n❄️ Qualité Static\n🫒 Texture soignée\n🏆 Idéal pour ceux qui aiment les produits rares et bien finis.',                            
+                            tarifs: [
+                                { weight: '1OG', price: 180.00 },         
                             ]
                     },
                     {
                             id: 'Frozen buffy 🇹🇭🇺🇸',
                             flag: '🇺🇸',
                             name: 'Frozen buffy 🇹🇭🇺🇸',
-                            farm: '🌾 No Farm 🌾',
+                            farm: 'Nice\'Selection 🧞',
                             promoEligible: true,
                             featured: true,
                             type: 'Hash',
@@ -168,7 +172,7 @@ description: '🫒 Olive 🫒\n\n🧊 Frozen 🧊\n\nUne texture fraîche et tra
                                 'VideoSift.mov', // Ta 1ère vidéo
                                 'VideoSift2.mov'  // Ta 2ème vidéo
                             ], */
-description: '🇹🇭🇺🇸 Frozen Buffy 🇹🇭🇺🇸\n\nUne sélection frozen haut de gamme avec plusieurs saveurs disponibles. Produit très parfumé, texture premium et profil aromatique bien travaillé.\n\n🔥 Une gamme lourde pour ceux qui veulent du choix, du goût et une vraie qualité.',
+                            description: '🇹🇭🇺🇸 Frozen Buffy 🇹🇭🇺🇸\n\nUne sélection frozen haut de gamme avec plusieurs saveurs disponibles. Produit très parfumé, texture premium et profil aromatique bien travaillé.\n\n🔥 Une gamme lourde pour ceux qui veulent du choix, du goût et une vraie qualité.',
                             // 👇 NOUVELLE STRUCTURE
                             variantTitle: 'Saveurs Frozen ❄️ :',
                             jars: [
@@ -198,7 +202,7 @@ description: '🇹🇭🇺🇸 Frozen Buffy 🇹🇭🇺🇸\n\nUne sélection f
                             id: 'Cc 🇨🇴',
                             flag: '🇨🇴',
                             name: 'Cc 🇨🇴',
-                            farm: '🌾 No Farm 🌾',
+                            farm: 'Nice\'Selection 🧞',
                             promoEligible: true,
                             featured: true,
                             type: 'Hash',
