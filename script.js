@@ -68,10 +68,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             promoEligible: true,
                             type: 'Weed',
                             featured: true,
-                            image:'',
-                            video:'',
-                            description: '',
-                            tarifs: [
+                            image:'ProductU.png',
+                            video:'VideoU.mov',
+description: '🇺🇸 Cali USA 🇺🇸\n\nUne fleur au profil bien marqué, avec une belle présence visuelle et une odeur qui ressort direct à l’ouverture. Texture propre, rendu premium et goût travaillé.\n\n💎 Sélection idéale pour ceux qui aiment les produits bien finis, parfumés et efficaces en bouche.\n🔥 Une valeur sûre pour les amateurs de qualité US.',                            tarifs: [
                                 { weight: '3.5G', price: 50.00 },               
                                 { weight: '50G', price: 500.00 },
                             ]
@@ -86,8 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             featured: true,
                             image:'',
                             video:'',
-                            description: '',
-                            tarifs: [
+description: '🇪🇸 Amnesia Haze 🇪🇸\n\nUn grand classique, frais et parfumé, avec des notes végétales, citronnées et légèrement épicées. Une fleur simple, efficace et agréable au quotidien.\n\n🌿 Belle odeur, bon goût, combustion propre.\n👌 Parfait pour ceux qui veulent un produit fiable avec un bon rapport qualité/prix.',                            tarifs: [
                                 { weight: '5.5G', price: 50.00 },               
                                 { weight: '50G', price: 350.00 },
                                 { weight: '100G', price: 600.00 },
@@ -113,29 +111,28 @@ document.addEventListener('DOMContentLoaded', function () {
                             promoEligible: true,
                             type: 'Hash',
                             featured: true,
-                            image:'',
-                            video:'',
-                            description: '',
-                            tarifs: [
+                            image:'ProductM.png',
+                            video:'VideoM.mov',
+description: '🇪🇸 Moula 🇪🇸\n\nUn produit propre, accessible et efficace, avec une texture agréable et une odeur bien présente. Idéal pour ceux qui cherchent une valeur sûre sans se ruiner.\n\n🍫 Goût classique, bonne tenue, qualité régulière.\n💰 Très bon choix pour les petits comme les gros formats.',                            tarifs: [
                                 { weight: '1OG', price: 50.00 },               
                                 { weight: '50G', price: 200.00 },
                                 { weight: '100G', price: 350.00 },
                             ]
                     },
                     {
-                            id: 'Dry 🇪🇸',
+                            id: 'Honey Gas',
                             flag: '🇪🇸',
-                            name: 'Dry 🇪🇸',
+                            name: 'Honey Gas 🍯',
                             farm: '🌾 No Farm 🌾',
                             promoEligible: true,
                             type: 'Hash',
                             featured: true,
-                            image:'',
-                            video:'',
-                            description: '',
-                            tarifs: [
-                                { weight: '5G', price: 50.00 },
-                                { weight: '1OG', price: 90.00 },               
+                            image:'ProductH.png',
+                            video:'VideoH.mov',
+                            videos:['VideoH2.mov','VideoH3.mov'],
+description: '🍯 Honey Gas 🍯\n\n🏜️ Dry 220/105u 🏜️\n\nUne sélection bien travaillée avec un profil sucré et gas, entre douceur mielleuse et notes plus lourdes en bouche. Texture propre, odeur marquée et rendu premium.\n\n🍯 Arômes gourmands\n⛽ Notes gas bien présentes\n🔥 Produit fait pour les connaisseurs qui veulent du goût et de la qualité.',                            tarifs: [
+                                { weight: '5G', price: 60.00 },
+                                { weight: '1OG', price: 100.00 },               
                                 { weight: '50G', price: 350.00 },
                             ]
                     },
@@ -149,8 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             featured: true,
                             image:'',
                             video:'',
-                            description: '🧊 Frozen 🧊',
-                            tarifs: [
+description: '🫒 Olive 🫒\n\n🧊 Frozen 🧊\n\nUne texture fraîche et travaillée, avec un rendu propre et une belle intensité aromatique. Produit sélectionné pour son aspect premium et son côté bien parfumé.\n\n❄️ Qualité frozen\n🫒 Texture soignée\n🏆 Idéal pour ceux qui aiment les produits rares et bien finis.',                            tarifs: [
                                 { weight: '1OG', price: 150.00 },               
                             ]
                     },
@@ -162,6 +158,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             promoEligible: true,
                             featured: true,
                             type: 'Hash',
+                            image:'ProductFB.png',
+                            video:'VideoFB.mov',
                             /* image: 'ProductSift.jpg',
                             images: ['ProductSift.jpg','ProductTangier.jpg','ProductGrappe.jpg'],
                             videos: [
@@ -170,16 +168,15 @@ document.addEventListener('DOMContentLoaded', function () {
                                 'VideoSift.mov', // Ta 1ère vidéo
                                 'VideoSift2.mov'  // Ta 2ème vidéo
                             ], */
-                            description: '',
-
+description: '🇹🇭🇺🇸 Frozen Buffy 🇹🇭🇺🇸\n\nUne sélection frozen haut de gamme avec plusieurs saveurs disponibles. Produit très parfumé, texture premium et profil aromatique bien travaillé.\n\n🔥 Une gamme lourde pour ceux qui veulent du choix, du goût et une vraie qualité.',
                             // 👇 NOUVELLE STRUCTURE
                             variantTitle: 'Saveurs Frozen ❄️ :',
                             jars: [
-                                { name: 'ZUSHI X MINT', emoji: '💨💨', colorClass: 'style-gmo' },
+                                { name: 'GRAPPE GAS', emoji: '🍇', colorClass: 'style-grappe' },
                                 { name: 'MELANCOTONE', emoji: '💀', colorClass: 'style-purple' },
                                 { name: 'RS CHERRY', emoji: '🍮', colorClass: 'style-red' },
                                 { name: 'HANSOLO BURGER', emoji: '🍊', colorClass: 'style-tangier' },
-                                { name: 'GRAPPE GAS', emoji: '🍇', colorClass: 'style-grappe' },
+                                { name: 'ZUSHI X MINT', emoji: '💨💨', colorClass: 'style-gmo' },
                             ],
 
                             tarifs: [
@@ -205,9 +202,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             promoEligible: true,
                             featured: true,
                             type: 'Hash',
-                            image:'',
-                            video:'',
-                            description: '',
+                            image:'ProductC.png',
+                            video:'VideoC.mov',
+                            description: 'Produit spécial disponible selon arrivage.\n\n📲 Pour plus d’informations, passe en privé.',
                             tarifs: [
                                 { weight: '1c', price: 60.00 },               
                                 { weight: '3c', price: 160.00 },               
@@ -648,14 +645,18 @@ return searchMatch && selectMatch;
                 ? product.tarifs[0].price.toFixed(2)
                 : '0.00';
 
-            card.innerHTML = `
-                ${imgHTML}
-                <div class="info">
-                    <div class="name">${product.name} ${flagHTML}</div>
-                    <div class="farm">${product.farm || ''}</div>
-                    <div class="price">${firstPrice}€</div>
-                </div>
-            `;
+           const mediaHTML = product.image
+    ? `<div class="product-media"><img src="${product.image}" alt="${product.name}"></div>`
+    : `<div class="product-media product-media-empty"></div>`;
+
+card.innerHTML = `
+    ${mediaHTML}
+    <div class="info">
+        <div class="name">${product.name} ${flagHTML}</div>
+        <div class="farm">${product.farm}</div>
+        <div class="price">${typeof product.tarifs[0].price === 'number' ? product.tarifs[0].price.toFixed(2) + '€' : product.tarifs[0].price}</div>
+    </div>
+`;
 
             grid.appendChild(card);
         });
