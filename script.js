@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // ============================================================
         {
             id: 'BEUH',
-            name: '🌿 BEUH',
+            name: '💐 BEUH 💜',
             type: 'Fleurs',
             quality: '🌿 Fleurs',
             image: 'CategWeed.png', 
@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             farm: '🌾 No Farm 🌾',
                             promoEligible: true,
                             type: 'Weed',
+                            featured: true,
                             image:'',
                             video:'',
                             description: '',
@@ -82,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             farm: '🌾 No Farm 🌾',
                             promoEligible: true,
                             type: 'Weed',
+                            featured: true,
                             image:'',
                             video:'',
                             description: '',
@@ -98,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // ============================================================
         {
             id: 'HASH',
-            name: '🍫 HASH',
+            name: '🍩 HASH 🧸',
             type: 'Hash',
             quality: '🍫 Hashish',
             image: 'CategHash.png',
@@ -110,6 +112,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             farm: '🌾 No Farm 🌾',
                             promoEligible: true,
                             type: 'Hash',
+                            featured: true,
                             image:'',
                             video:'',
                             description: '',
@@ -126,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             farm: '🌾 No Farm 🌾',
                             promoEligible: true,
                             type: 'Hash',
+                            featured: true,
                             image:'',
                             video:'',
                             description: '',
@@ -142,6 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             farm: '🌾 No Farm 🌾',
                             promoEligible: true,
                             type: 'Hash',
+                            featured: true,
                             image:'',
                             video:'',
                             description: '🧊 Frozen 🧊',
@@ -155,6 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             name: 'Frozen buffy 🇹🇭🇺🇸',
                             farm: '🌾 No Farm 🌾',
                             promoEligible: true,
+                            featured: true,
                             type: 'Hash',
                             /* image: 'ProductSift.jpg',
                             images: ['ProductSift.jpg','ProductTangier.jpg','ProductGrappe.jpg'],
@@ -186,7 +192,7 @@ document.addEventListener('DOMContentLoaded', function () {
         },
         {
             id: 'BLANCHE',
-            name: 'BLANCHE 🤍',
+            name: '🔌 BLANCHE ☣️',
             type: 'Blanche',
             quality: '🤍 Spécial',
             image: 'CategBlanche.png',
@@ -197,6 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             name: 'Cc 🇨🇴',
                             farm: '🌾 No Farm 🌾',
                             promoEligible: true,
+                            featured: true,
                             type: 'Hash',
                             image:'',
                             video:'',
@@ -466,155 +473,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // --- MODIFIÉ : renderHomePage ---
 
-    function renderHomePage() {
-        // Toujours afficher le conteneur principal des filtres
-        filterContainer.style.display = 'flex';
+   function renderHomePage() {
+    // Toujours afficher les filtres
+    filterContainer.style.display = 'flex';
 
-        // On enlève les anciens boutons "retour"
-        const existingBackBtnCat = filterContainer.querySelector('.back-to-categories-btn');
-        if (existingBackBtnCat) existingBackBtnCat.remove();
-        const existingBackBtnFarm = filterContainer.querySelector('.back-to-farms-btn');
-        if (existingBackBtnFarm) existingBackBtnFarm.remove();
+    // On enlève les anciens boutons retour si jamais ils existent
+    const existingBackBtnCat = filterContainer.querySelector('.back-to-categories-btn');
+    if (existingBackBtnCat) existingBackBtnCat.remove();
 
+    const existingBackBtnFarm = filterContainer.querySelector('.back-to-farms-btn');
+    if (existingBackBtnFarm) existingBackBtnFarm.remove();
 
-        if (currentView === 'categories') {
-            renderCategoryList();
+    // Sur l'accueil : recherche + sélection du chef
+    searchFilterWrapper.style.display = 'flex';
+    qualityFilterWrapper.style.display = 'flex';
 
-            // --- GESTION DES FILTRES (Vue Catégorie) ---
-            searchFilterWrapper.style.display = 'none';
-            farmFilterWrapper.style.display = 'none';
-            qualityFilterWrapper.style.display = 'flex'; // On montre QUE la qualité
+    // On cache le filtre farm sur l'accueil
+    farmFilterWrapper.style.display = 'none';
 
-            // --- GESTION DU STYLE DE GRILLE ---
-            productListContainer.style.gridTemplateColumns = 'repeat(1, 1fr)';
+    // La grande grille contient des sections
+    productListContainer.style.gridTemplateColumns = '1fr';
+    productListContainer.style.gap = '25px';
 
-        } else if (currentView === 'farms') {
-            renderFarmList(currentCategoryId);
-
-            // --- GESTION DES FILTRES (Vue Farms) ---
-            searchFilterWrapper.style.display = 'none';
-            farmFilterWrapper.style.display = 'none'; // Pas de filtres pour les farms
-            qualityFilterWrapper.style.display = 'none';
-
-            // --- GESTION DU STYLE DE GRILLE ---
-            productListContainer.style.gridTemplateColumns = 'repeat(1, 1fr)'; // 1 colonne pour les farms
-
-            // --- AJOUT BOUTON RETOUR (vers Catégories) ---
-            const category = appData.find(c => c.id === currentCategoryId);
-            const backButton = document.createElement('button');
-            backButton.className = 'back-to-categories-btn'; // CLASSE IMPORTANTE
-            backButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg> ${category.name}`;
-            backButton.style.cssText = `
-            border: none;
-            color: #000000;
-    padding: 40px;
-    font-weight: 700;
-    cursor: pointer;
-    gap: 10px;
-    box-sizing: border-box;
-    margin-top: 3vh;
-    font-family: Copperplate;
-    height: 7vh;
-    font-size: 1.8vh;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(182deg, rgb(222 108 44), rgb(0 0 0 / 34%));
-                        border-radius: 10px;`;
-
-            filterContainer.prepend(backButton);
-
-        } else if (currentView === 'simple_products') { 
-
-            updateFarmFilter(currentCategoryId);
-
-            renderProductListSimple(currentCategoryId);
-
-            // --- GESTION DES FILTRES ---
-            // 1. On AFFICHE la barre de recherche
-            searchFilterWrapper.style.display = 'flex';
-            
-            // 2. On AFFICHE le filtre Farm
-            farmFilterWrapper.style.display = 'flex'; 
-            
-            // 3. On CACHE le filtre Qualité ("Sélection du chef")
-            qualityFilterWrapper.style.display = 'none';
-
-            // --- AJOUT BOUTON RETOUR (vers Catégories) ---
-            const category = appData.find(c => c.id === currentCategoryId);
-            const backButton = document.createElement('button');
-            backButton.className = 'back-to-categories-btn';
-            backButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg> ${category.name}`;
-
-            backButton.style.cssText = `
-            border: none;
-            color: #000000;
-    padding: 40px;
-    font-weight: 700;
-    cursor: pointer;
-    gap: 10px;
-    box-sizing: border-box;
-    margin-top: 3vh;
-    font-family: Copperplate;
-    height: 7vh;
-    font-size: 1.8vh;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(182deg, rgb(222 108 44), rgb(0 0 0 / 34%));
-            border-radius: 10px;`;
-
-            filterContainer.prepend(backButton);
-
-            // --- GESTION DU STYLE DE GRILLE ---
-            productListContainer.style.gridTemplateColumns = 'repeat(2, 1fr)';
-
-        } else if (currentView === 'products') {
-            updateFarmFilter(currentCategoryId, currentFarmId); 
-
-            renderProductList(currentCategoryId, currentFarmId);
-
-            // --- GESTION DES FILTRES (Vue Produit) ---
-            searchFilterWrapper.style.display = 'flex';
-            farmFilterWrapper.style.display = 'flex'; // On montre les filtres produits
-            qualityFilterWrapper.style.display = 'none'; // On cache la qualité
-
-            // --- GESTION DU STYLE DE GRILLE ---
-            productListContainer.style.gridTemplateColumns = 'repeat(2, 1fr)'; // 2 colonnes
-
-            // --- AJOUT BOUTON RETOUR (vers Farms) ---
-            const category = appData.find(c => c.id === currentCategoryId);
-            const farm = category.farms.find(f => f.id === currentFarmId);
-            const backButton = document.createElement('button');
-            backButton.className = 'back-to-farms-btn'; // CLASSE IMPORTANTE
-            backButton.innerHTML = `<svg width="24"
-             height="24"
-              viewBox="0 0 24 24"
-              ><path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>  ${farm.name}`;
-            backButton.style.cssText = `
-            border: none;
-            color: #000000;
-    padding: 40px;
-    font-weight: 700;
-    cursor: pointer;
-    gap: 10px;
-    box-sizing: border-box;
-    margin-top: 3vh;
-    font-family: Copperplate;
-    height: 7vh;
-    font-size: 1.8vh;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: linear-gradient(182deg, #abc633, #ffffff57);
-                        border-radius: 10px;`;
-
-            filterContainer.prepend(backButton);
-        }
-    }
+    // Affiche tous les produits directement avec séparation
+    renderCategoryList();
+}
 
 // --- FONCTION MODIFIÉE : Filtre intelligent par Sous-Catégorie ---
 function updateFarmFilter(categoryId, subCategoryId = null) {
@@ -670,36 +553,120 @@ function updateFarmFilter(categoryId, subCategoryId = null) {
     }
 }
 
-    // --- MODIFIÉ : renderCategoryList ---
-    // Prend en compte le filtre qualité
-    function renderCategoryList() {
-        const filteredCategories = appData.filter(category => {
-            const searchMatch = category.name.toLowerCase().includes(currentFilters.searchTerm.toLowerCase());
-            // --- AJOUT ---
-            const qualityMatch = currentFilters.quality === 'all' || category.quality === currentFilters.quality;
-            return searchMatch && qualityMatch;
-            // --- FIN AJOUT ---
-        });
+  function renderCategoryList() {
+    productListContainer.innerHTML = '';
 
-        productListContainer.innerHTML = '';
-        if (filteredCategories.length === 0) {
-            productListContainer.innerHTML = '<p class="no-results">Aucune catégorie ne correspond à votre recherche.</p>';
-            return;
+    const searchTerm = currentFilters.searchTerm.toLowerCase().trim();
+    let hasResults = false;
+
+    appData.forEach(category => {
+        let productsInCategory = [];
+
+        // Cas catégorie simple avec products directement
+        if (category.products) {
+            productsInCategory = category.products.map(product => ({
+                product,
+                category
+            }));
         }
 
-        filteredCategories.forEach(category => {
+        // Cas ancien système avec farms
+        if (category.farms) {
+            category.farms.forEach(farm => {
+                farm.products.forEach(product => {
+                    productsInCategory.push({
+                        product,
+                        category,
+                        farm
+                    });
+                });
+            });
+        }
+
+        const filteredProducts = productsInCategory.filter(({ product, category }) => {
+            const productName = product.name ? product.name.toLowerCase() : '';
+            const productFarm = product.farm ? product.farm.toLowerCase() : '';
+            const categoryName = category.name ? category.name.toLowerCase() : '';
+
+            const searchMatch =
+                searchTerm === '' ||
+                productName.includes(searchTerm) ||
+                productFarm.includes(searchTerm) ||
+                categoryName.includes(searchTerm);
+
+           let selectMatch = true;
+
+// Sélection du chef = uniquement les produits avec featured: true
+if (currentFilters.quality === 'chef') {
+    selectMatch = product.featured === true;
+}
+
+// Si on choisit un produit précis dans le select
+else if (currentFilters.quality.startsWith('product:')) {
+    const selectedProductId = currentFilters.quality.replace('product:', '');
+    selectMatch = product.id === selectedProductId;
+}
+
+return searchMatch && selectMatch;
+        });
+
+        if (filteredProducts.length === 0) return;
+
+        hasResults = true;
+
+        const section = document.createElement('section');
+        section.className = `home-category-section category-${category.id}`;
+
+        section.innerHTML = `
+            <h2 class="home-category-title">${category.name}</h2>
+            <div class="home-products-grid"></div>
+        `;
+
+        const grid = section.querySelector('.home-products-grid');
+
+        filteredProducts.forEach(({ product }) => {
             const card = document.createElement('div');
-            card.className = 'category-card';
-            card.dataset.categoryId = category.id;
+            card.className = 'product-card product-item-card';
+            card.dataset.productId = product.id;
+
+            if (product.type === 'Pack' || product.id === 'PackNoel2025') {
+                card.classList.add('full-width');
+            }
+
+            if (product.clickable === false) {
+                card.classList.add('unclickable');
+            }
+
+            const flagHTML = product.flag ? `<span class="product-flag">${product.flag}</span>` : '';
+
+            let imgHTML = '';
+            if (product.image && product.image !== '') {
+                imgHTML = `<img src="${product.image}" alt="${product.name}">`;
+            }
+
+            const firstPrice = product.tarifs && product.tarifs.length > 0
+                ? product.tarifs[0].price.toFixed(2)
+                : '0.00';
 
             card.innerHTML = `
-                <img src="${category.image}" alt="${category.name}">
-              
+                ${imgHTML}
+                <div class="info">
+                    <div class="name">${product.name} ${flagHTML}</div>
+                    <div class="farm">${product.farm || ''}</div>
+                    <div class="price">${firstPrice}€</div>
+                </div>
             `;
-            productListContainer.appendChild(card);
-        });
-    }
 
+            grid.appendChild(card);
+        });
+
+        productListContainer.appendChild(section);
+    });
+
+    if (!hasResults) {
+        productListContainer.innerHTML = '<p class="no-results">Aucun produit trouvé.</p>';
+    }
+}
     // --- NOUVELLE FONCTION ---
     // Affiche la liste des FARMS pour une catégorie
     // --- FONCTION MODIFIÉE : Affichage liste bouton ---
@@ -1185,11 +1152,14 @@ function renderProductListSimple(categoryId) {
         }
     });
 
-    // 2. On remplit le filtre QUALITÉ (Pour la page d'accueil)
-    const categoryQualities = appData.map(c => c.quality).filter(Boolean); // filter Boolean enlève les vides
-    const qualities = ['all', ...new Set(categoryQualities)];
-    qualityFilter.innerHTML = qualities.map(q => `<option value="${q}">${q === 'all' ? 'SELECTION DU CHEF' : q}</option>`).join('');
+  const productOptions = allNestedProducts.map(product => {
+    return `<option value="product:${product.id}">${product.name}</option>`;
+}).join('');
 
+qualityFilter.innerHTML = `
+    <option value="all">⭐ SELECTION DU CHEF</option>
+    ${productOptions}
+`;
     // 3. On remplit le filtre FARM (Pour la page produits)
     // On récupère la propriété 'farm' de chaque produit
     const productFarms = allNestedProducts.map(p => p.farm).filter(f => f); // Garde seulement si une farm est définie

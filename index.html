@@ -445,6 +445,68 @@
             margin-bottom: 5px;
         }
 
+        .home-category-section {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+}
+
+.home-category-title {
+    margin: 10px 15px 0 15px;
+    padding: 14px;
+    border-radius: 14px;
+    text-align: center;
+    font-family: Copperplate, Impact, sans-serif;
+    font-size: 1.3rem;
+    color: white;
+    background: linear-gradient(90deg, #000000, #e56a14, #000000);
+    box-shadow: 0 0 10px 2px #e56a14;
+}
+
+.home-products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.home-products-grid .full-width {
+    grid-column: 1 / -1;
+}
+
+/* COULEURS DES SECTIONS ACCUEIL */
+.category-BEUH .home-category-title {
+    background: linear-gradient(90deg, #003b16, #aaffca, #003b16);
+    box-shadow: 0 0 12px 2px #9fff1e;
+    color: #000000;
+}
+
+.category-HASH .home-category-title {
+    background: linear-gradient(90deg, #2b1600, #c9822b, #2b1600);
+    box-shadow: 0 0 12px 2px #c9822b;
+    color: #ffffff;
+}
+
+.category-BLANCHE .home-category-title {
+    background: linear-gradient(90deg, #dcdcdc, #ffffff, #9e9e9e);
+    box-shadow: 0 0 12px 2px #ffffff;
+    color: #000000;
+}
+
+.category-BEUH .product-card {
+    border-color: #1eff73;
+    box-shadow: 0 0 8px rgba(30, 255, 115, 0.35);
+}
+
+.category-HASH .product-card {
+    border-color: #c9822b;
+    box-shadow: 0 0 8px rgba(201, 130, 43, 0.35);
+}
+
+.category-BLANCHE .product-card {
+    border-color: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+}
+
         /* --- Page Produit & Détails --- */
         #page-product .product-video {
             width: 85%;
