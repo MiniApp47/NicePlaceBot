@@ -50,50 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
     ];
 
     const appData = [
-        // ============================================================
-        // CATEGORIE 1 : BEUH 🌿
-        // ============================================================
-        {
-            id: 'BEUH',
-            name: '💐 BEUH 💜',
-            type: 'Fleurs',
-            quality: '🌿 Fleurs',
-            image: 'CategWeed.png', 
-            products: [
-                  {
-                            id: 'Sunset Shark 🦈',
-                            flag: '🇺🇸',
-                            name: 'Sunset Shark 🦈',
-                            farm: 'Nice\'Selection 🧞',
-                            promoEligible: true,
-                            type: 'Weed',
-                            featured: true,
-                            image:'ProductUS1.png',
-                            video:'VideuUS.mov',
-                            description: '🇺🇸 Cali USA 🇺🇸\n\nUne fleur au profil bien marqué, avec une belle présence visuelle et une odeur qui ressort direct à l’ouverture. Texture propre, rendu premium et goût travaillé.\n\n💎 Sélection idéale pour ceux qui aiment les produits bien finis, parfumés et efficaces en bouche.\n🔥 Une valeur sûre pour les amateurs de qualité US.',                            tarifs: [
-                                { weight: '3.5G', price: 50.00 },               
-                                { weight: '50G', price: 500.00 },
-                            ]
-                    },
-                  {
-                            id: 'Amnesia haze 🇪🇸',
-                            flag: '🇪🇸',
-                            name: 'Amnesia haze 🇪🇸',
-                            farm: 'Nice\'Selection 🧞',
-                            promoEligible: true,
-                            type: 'Weed',
-                            featured: true,
-                            image:'ProductU.png',
-                            video:'VideuU.mov',
-                            description: '🇪🇸 Amnesia Haze 🇪🇸\n\nUn grand classique, frais et parfumé, avec des notes végétales, citronnées et légèrement épicées. Une fleur simple, efficace et agréable au quotidien.\n\n🌿 Belle odeur, bon goût, combustion propre.\n👌 Parfait pour ceux qui veulent un produit fiable avec un bon rapport qualité/prix.',                            tarifs: [
-                                { weight: '5.5G', price: 50.00 },               
-                                { weight: '50G', price: 350.00 },
-                                { weight: '100G', price: 600.00 },
-                            ]
-                    },
-            ]
-        },
-        // ============================================================
+         // ============================================================
         // CATEGORIE 2 : HASH 🍫
         // ============================================================
         {
@@ -162,8 +119,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             promoEligible: true,
                             featured: true,
                             type: 'Hash',
-                            image:'ProductFB.png',
-                            video:'VideoFB.mov',
+                            image:'ProductFB1.png',
+                            video:'VideoFB1.mp4',
                             /* image: 'ProductSift.jpg',
                             images: ['ProductSift.jpg','ProductTangier.jpg','ProductGrappe.jpg'],
                             videos: [
@@ -177,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             variantTitle: 'Saveurs Frozen ❄️ :',
                             jars: [
                                 { name: 'GRAPPE GAS', emoji: '🍇', colorClass: 'style-grappe' },
-                                { name: 'MELANCOTONE', emoji: '💀', colorClass: 'style-purple' },
+                                { name: 'MELANCOTONE', emoji: '🍑', colorClass: 'style-passion' },
                                 { name: 'RS CHERRY', emoji: '🍮', colorClass: 'style-red' },
                                 { name: 'HANSOLO BURGER', emoji: '🍊', colorClass: 'style-tangier' },
                                 { name: 'ZUSHI X MINT', emoji: '💨💨', colorClass: 'style-gmo' },
@@ -191,6 +148,50 @@ document.addEventListener('DOMContentLoaded', function () {
                         },
             ]
         },
+        // ============================================================
+        // CATEGORIE 1 : BEUH 🌿
+        // ============================================================
+        {
+            id: 'BEUH',
+            name: '💐 BEUH 💜',
+            type: 'Fleurs',
+            quality: '🌿 Fleurs',
+            image: 'CategWeed.png', 
+            products: [
+                  {
+                            id: 'Sunset Shark 🦈',
+                            flag: '🇺🇸',
+                            name: 'Sunset Shark 🦈',
+                            farm: 'Nice\'Selection 🧞',
+                            promoEligible: true,
+                            type: 'Weed',
+                            featured: true,
+                            image:'ProductUS1.png',
+                            video:'VideuUS.mov',
+                            description: '🇺🇸 Cali USA 🇺🇸\n\nUne fleur au profil bien marqué, avec une belle présence visuelle et une odeur qui ressort direct à l’ouverture. Texture propre, rendu premium et goût travaillé.\n\n💎 Sélection idéale pour ceux qui aiment les produits bien finis, parfumés et efficaces en bouche.\n🔥 Une valeur sûre pour les amateurs de qualité US.',                            tarifs: [
+                                { weight: '3.5G', price: 50.00 },               
+                                { weight: '50G', price: 500.00 },
+                            ]
+                    },
+                  {
+                            id: 'Amnesia haze 🇪🇸',
+                            flag: '🇪🇸',
+                            name: 'Amnesia haze 🇪🇸',
+                            farm: 'Nice\'Selection 🧞',
+                            promoEligible: true,
+                            type: 'Weed',
+                            featured: true,
+                            image:'ProductU.png',
+                            video:'VideuU.mov',
+                            description: '🇪🇸 Amnesia Haze 🇪🇸\n\nUn grand classique, frais et parfumé, avec des notes végétales, citronnées et légèrement épicées. Une fleur simple, efficace et agréable au quotidien.\n\n🌿 Belle odeur, bon goût, combustion propre.\n👌 Parfait pour ceux qui veulent un produit fiable avec un bon rapport qualité/prix.',                            tarifs: [
+                                { weight: '5.5G', price: 50.00 },               
+                                { weight: '50G', price: 350.00 },
+                                { weight: '100G', price: 600.00 },
+                            ]
+                    },
+            ]
+        },
+       
         {
             id: 'BLANCHE',
             name: '🔌 BLANCHE ☣️',
