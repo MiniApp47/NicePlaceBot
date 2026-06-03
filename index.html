@@ -990,7 +990,32 @@
         .product-gallery-wrapper::-webkit-scrollbar { display: none; }
         .gallery-item { flex: 0 0 100%; scroll-snap-align: center; height: 350px; border-radius: 12px; overflow: hidden; background: #000; }
         .gallery-item img, .gallery-item video { width: 100%; height: 100%; object-fit: cover; }
-        .gallery-counter { text-align: center; color: #8e8e93; font-size: 0.8rem; margin-top: -5px; margin-bottom: 10px; }
+        /* .gallery-counter { text-align: center;     color: #00f6da;
+                                                    font-size: 1.2rem;
+                                                   margin-top: -5px; margin-bottom: 10px; } */
+
+                                                   .gallery-counter {
+    text-align: center;
+    color: #00ffe1;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: -5px;
+    margin-bottom: 10px;
+    animation: swipeMove 1.1s ease-in-out infinite alternate;
+    text-shadow: 0 0 8px rgba(0, 255, 225, 0.8);
+}
+
+@keyframes swipeMove {
+    0% {
+        transform: translateX(30px);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateX(-30px);
+        opacity: 1;
+    }
+}
 
         .variant-selector-container { margin-bottom: 20px; background: #252525; padding: 15px; border-radius: 12px; }
         .variant-title { font-size: 0.95rem; color: #8e8e93; margin-bottom: 10px; font-weight: 600; }
