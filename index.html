@@ -195,7 +195,7 @@
             color: white;
             position: relative;
             cursor: pointer;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             box-shadow: 0px 0px 10px 2px #e56a14;
@@ -422,6 +422,44 @@
             grid-column: 1 / -1;
         }
 
+.nav-cart-icon-zone {
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.nav-cart-number {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #ffcc00, #ff6900);
+    color: #000;
+    font-size: 1rem;
+    font-weight: 900;
+    font-family: Impact, fantasy;
+    box-shadow: 0 0 10px orange;
+    animation: cartNumberPop 0.25s ease;
+}
+
+@keyframes cartNumberPop {
+    0% {
+        transform: scale(0.4);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+
+
         /* Barre de navigation en bas */
         .bottom-nav {
             position: fixed;
@@ -434,6 +472,8 @@
             align-items: center;
             padding: 10px 0;
             z-index: 50;
+            justify-content: space-around;
+
         }
 
         .nav-item {
@@ -445,7 +485,7 @@
     font-size: 0.7rem;
     background: #80808091;
     border-radius: 20px;
-    width: 10vh;
+    width: 8.5vh;
     padding: 1vh;
     border: none;
     box-shadow: 0px 0px 10px 2px #e85f21;
@@ -779,6 +819,23 @@
             visibility: visible;
             animation: fadein 0.5s, fadeout 0.5s 2.5s;
         }
+        .toast-cart-link {
+    margin-top: 10px;
+    background: #000000d9;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 9px 14px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+        display: none;
+}
+
+.toast-cart-link:active {
+    transform: scale(0.96);
+}
 
         @keyframes fadein {
             from { bottom: 0; opacity: 0; }
@@ -1505,6 +1562,17 @@
             <p style="
             margin: inherit;"> LINKS </p>
         </button>
+         <button id="nav-cart" data-page="page-cart" class="nav-item">
+    <div class="nav-cart-icon-zone">
+        <svg id="nav-cart-svg" width="20" height="20">
+            <use href="#icon-cart" />
+        </svg>
+
+        <span id="nav-cart-number" class="nav-cart-number">0</span>
+    </div>
+
+    <p style="margin: inherit;">PANIER</p>
+</button>
        <!--  <button id="nav-avis" data-page="page-avis" class="nav-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>

@@ -378,6 +378,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentFarmId = null; // Garde en mémoire la farm sélectionnée
     let appliedPromo = null; // Pour suivre le code promo
     let paymentMethod = 'Espèce'; // Méthode de paiement par défaut
+    let notificationTimeout = null; // Timer pour la notification panier
 
     // --- DÉFINIS TES CODES PROMO ICI ---
     const validPromoCodes = {
@@ -451,24 +452,27 @@ document.addEventListener('DOMContentLoaded', function () {
         const infoNav = document.getElementById('nav-info'); // On ajoute l'info
         const contactNav = document.getElementById('nav-contact');
         const avisNav = document.getElementById('nav-avis'); // <-- AJOUT ICI
+        const cartNav = document.getElementById('nav-cart');
 
         // On reset tout
         homeNav.classList.remove('active');
         infoNav.classList.remove('active');
         contactNav.classList.remove('active');
         if (avisNav) avisNav.classList.remove('active'); // <-- AJOUT ICI
+        if (cartNav) cartNav.classList.remove('active');
 
         // On active le bon
-        if (pageId === 'page-contact') {
-            contactNav.classList.add('active');
-        } else if (pageId === 'page-info') {
-            infoNav.classList.add('active');
-        } else if (pageId === 'page-avis') { // <-- LA NOUVELLE CONDITION
-            if (avisNav) avisNav.classList.add('active');
-        }else {
-            // Pour page-home, page-produit, panier, etc.
-            homeNav.classList.add('active');
-        }
+      if (pageId === 'page-contact') {
+    contactNav.classList.add('active');
+} else if (pageId === 'page-info') {
+    infoNav.classList.add('active');
+} else if (pageId === 'page-cart' || pageId === 'page-confirmation') {
+    if (cartNav) cartNav.classList.add('active');
+} else if (pageId === 'page-avis') {
+    if (avisNav) avisNav.classList.add('active');
+} else {
+    homeNav.classList.add('active');
+}
     }
 
     // --- LOGIQUE D'AFFICHAGE ---
@@ -1133,14 +1137,31 @@ function renderProductListSimple(categoryId) {
     }
 
     // Met à jour le compteur du panier (inchangé)
-    function updateCartCount() {
-        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-        const cartCountElements = document.querySelectorAll('.cart-count');
-        cartCountElements.forEach(el => {
-            el.innerText = count;
-            el.style.display = count > 0 ? 'flex' : 'none';
-        });
+   function updateCartCount() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+    // Ancien compteur panier, si tu l'as encore ailleurs dans le site
+    document.querySelectorAll('.cart-count').forEach(count => {
+        count.textContent = totalItems;
+        count.style.display = totalItems > 0 ? 'flex' : 'none';
+    });
+
+    // Nouveau bouton panier dans la navbar
+    const navCartSvg = document.getElementById('nav-cart-svg');
+    const navCartNumber = document.getElementById('nav-cart-number');
+
+    if (navCartSvg && navCartNumber) {
+        if (totalItems > 0) {
+            navCartSvg.style.display = 'none';
+            navCartNumber.style.display = 'flex';
+            navCartNumber.textContent = totalItems > 99 ? '99+' : totalItems;
+        } else {
+            navCartSvg.style.display = 'block';
+            navCartNumber.style.display = 'none';
+            navCartNumber.textContent = '0';
+        }
     }
+}
 
   // --- MODIFIÉ : populateFilters ---
   function populateFilters() {
@@ -1191,22 +1212,24 @@ qualityFilter.innerHTML = `
 }
 
     // --- NOTIFICATION (inchangé) ---
-    let notificationTimeout;
-    function showNotification(message) {
-        const notification = document.getElementById('notification-toast');
-        if (!notification) return;
+   function showNotification(message) {
+    const notification = document.getElementById('notification-toast');
+    if (!notification) return;
 
-        clearTimeout(notificationTimeout);
+    clearTimeout(notificationTimeout);
+
+    notification.classList.remove('show');
+    notification.innerHTML = '';
+    void notification.offsetWidth;
+
+    notification.textContent = message;
+    notification.classList.add('show');
+
+    notificationTimeout = setTimeout(() => {
         notification.classList.remove('show');
-        void notification.offsetWidth;
-
-        notification.innerText = message;
-        notification.classList.add('show');
-
-        notificationTimeout = setTimeout(() => {
-            notification.classList.remove('show');
-        }, 3000);
-    }
+        notification.innerHTML = '';
+    }, 3000);
+}
 
     // --- LOGIQUE DU PANIER ---
 
@@ -1437,6 +1460,10 @@ const message = formatOrderMessage();
                 renderHomePage();
             }
 
+            if (pageId === 'page-cart') {
+    renderCart();
+}
+
             showPage(pageId);
         });
     });
@@ -1591,6 +1618,7 @@ const message = formatOrderMessage();
 
             addToCart(btn.dataset.productId, btn.dataset.weight, parseFloat(btn.dataset.price), selectedVariant);
         }
+
 
         // Clic sur les boutons de quantité
         if (target.closest('.quantity-btn')) {
