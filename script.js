@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }, 100);
 
 
+
   const contactLinks = [
         {
             name: 'SNAPCHAT 👻',
@@ -1231,6 +1232,27 @@ qualityFilter.innerHTML = `
     }, 3000);
 }
 
+function showStartPromoPopup() {
+    const popup = document.getElementById('start-promo-popup');
+    const closeBtn = document.getElementById('start-promo-close');
+
+    if (!popup) return;
+
+    popup.classList.add('show');
+
+    if (closeBtn) {
+        closeBtn.onclick = function () {
+            popup.classList.remove('show');
+        };
+    }
+
+    popup.onclick = function (e) {
+        if (e.target === popup) {
+            popup.classList.remove('show');
+        }
+    };
+}
+
     // --- LOGIQUE DU PANIER ---
 
     // Ajoute le paramètre 'variant' à la fin
@@ -1679,14 +1701,22 @@ if (target.closest('#confirm-whatsapp')) {
     });
 
     // --- INITIALISATION DE L'APP ---
-    function init() {
-        setTimeout(() => {
-            populateFilters();
-            renderHomePage(); // Affiche les catégories au début
-            updateCartCount();
-            showPage('page-home');
-        }, 1500);
-    }
+   function init() {
+    setTimeout(() => {
+        populateFilters();
+        renderHomePage();
+        updateCartCount();
 
-    init();
+        // Cache le loader et affiche la home
+        showPage('page-home');
+
+        // Affiche la popup promo juste après le chargement
+        setTimeout(() => {
+            showStartPromoPopup();
+        }, 400);
+
+    }, 3000);
+}
+
+init();
 });

@@ -1150,7 +1150,99 @@
         .image-modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center; }
         .modal-content { max-width: 90%; max-height: 90%; border-radius: 10px; }
         .close-modal { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
-    </style>
+   
+   
+   /* --- POPUP PROMO AU DÉMARRAGE --- */
+#start-promo-popup {
+    visibility: hidden;
+    opacity: 0;
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+#start-promo-popup.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.start-promo-card {
+    position: relative;
+    width: 100%;
+    max-width: 380px;
+    background: linear-gradient(180deg, #ffcc00, #ff6900, #1c1c1d);
+    border: 2px solid #ffffff;
+    border-radius: 22px;
+    padding: 22px 18px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 25px rgba(255, 105, 0, 0.8);
+    animation: promoPop 0.35s ease;
+}
+
+.start-promo-close {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.55);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.start-promo-title {
+    font-family: Impact, fantasy;
+    font-size: 1.45rem;
+    color: #000;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+}
+
+.start-promo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.start-promo-line {
+    background: rgba(0, 0, 0, 0.62);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 14px;
+    padding: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    font-weight: 700;
+}
+
+.start-promo-gift {
+    color: #ffcc00;
+}
+
+@keyframes promoPop {
+    0% {
+        transform: scale(0.75);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+   
+   </style>
 </head>
 
 <body>
@@ -1580,6 +1672,36 @@
             <p style="margin: inherit;"> AVIS </p>
         </button> -->
     </div>
+
+    <div id="start-promo-popup">
+    <div class="start-promo-card">
+        <button id="start-promo-close" class="start-promo-close" type="button">×</button>
+
+        <div class="start-promo-title">🎁 OFFRES DU MOMENT 🎁</div>
+
+        <div class="start-promo-list">
+            <div class="start-promo-line">
+                🌿 4 pochettes de beuh achetées<br>
+                <span class="start-promo-gift">+ 1 pochette offerte</span>
+            </div>
+
+            <div class="start-promo-line">
+                🇺🇸 4 pochettes de Cali achetées<br>
+                <span class="start-promo-gift">+ 1 pochette offerte</span>
+            </div>
+
+            <div class="start-promo-line">
+                🟡 4 pochettes de jaune achetées<br>
+                <span class="start-promo-gift">+ 1 pochette offerte</span>
+            </div>
+
+            <div class="start-promo-line">
+                🍫 4 pochettes de dry achetées<br>
+                <span class="start-promo-gift">+ 1 pochette offerte</span>
+            </div>
+        </div>
+    </div>
+</div>
 
     <div id="notification-toast"></div>
     <script src="script.js"></script>
