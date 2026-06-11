@@ -143,6 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                             tarifs: [
                                 { weight: '1OG', price: 200.00 },               
+                                { weight: '20G', price: 300.00 },               
                                 { weight: '50G', price: 700.00 },
                                 { weight: '100G', price: 1300.00 },
                             ]
