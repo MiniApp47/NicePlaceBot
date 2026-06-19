@@ -62,6 +62,24 @@ document.addEventListener('DOMContentLoaded', function () {
             image: 'CategHash.png',
             products: [
                     {
+                            id: 'Papaya Sorbet 🍧',
+                            flag: '🇪🇸',
+                            name: 'Mario 🍄',
+                            farm: 'Papaya Sorbet 🍧',
+                            promoEligible: true,
+                            type: 'Hash',
+                            featured: true,
+                            image:'ProductPS.png',
+                            video:'VideoPS.mov',
+                            description: '🇪🇸 Papaya Sorbet 🇪🇸\n\nUne extraction premium au profil aromatique intensément fruité. Texture malléable et fondante, offrant une diffusion de saveurs exotiques douces et sucrées dès les premières notes.\n\n🍧 Arômes de fruits tropicaux et de papaye\n✨ Texture crémeuse et combustion propre\n🏆 Recommandé pour les connaisseurs à la recherche d\'un profil terpénique exotique et marqué.',                            
+                            tarifs: [
+                                { weight: '5G', price: 50.00 },               
+                                { weight: '20G', price: 180.00 },
+                                { weight: '50G', price: 400.00 },
+                                { weight: '100G', price: 650.00 },
+                            ]
+                    },
+                    {
                             id: 'Mario 🍄',
                             flag: '🇪🇸',
                             name: 'Mario 🍄',
@@ -78,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '100G', price: 350.00 },
                             ]
                     },
-                    {
+                   /*  {
                             id: 'Honey Gas',
                             flag: '🇪🇸',
                             name: 'Honey Gas 220/105u 🍯',
@@ -88,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             featured: true,
                             image:'ProductHHH.png',
                             video:'VideoH22.mov',
-                            /* videos:['VideoH2.mov','VideoH3.mov'], */
+                            /* videos:['VideoH2.mov','VideoH3.mov'],
                             description: '🍯 Honey Gas 🍯\n\n🏜️ Dry 220/105u 🏜️\n\nUne sélection bien travaillée avec un profil sucré et gas, entre douceur mielleuse et notes plus lourdes en bouche. Texture propre, odeur marquée et rendu premium.\n\n🍯 Arômes gourmands\n⛽ Notes gas bien présentes\n🔥 Produit fait pour les connaisseurs qui veulent du goût et de la qualité.',                            
                             tarifs: [
                                 { weight: '5G', price: 60.00 },
@@ -96,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '50G', price: 450.00 },
                                 { weight: '100G', price: 800.00 },
                             ]
-                    },
+                    }, */
                     {
                             id: 'Olivette 🫒',
                             flag: '🇺🇸',
@@ -161,6 +179,23 @@ document.addEventListener('DOMContentLoaded', function () {
             image: 'CategWeed.png', 
             products: [
                   {
+                            id: 'Amnesia hollandaise 🇳🇱',
+                            flag: '🇳🇱',
+                            name: 'Amnesia hollandaise 🇳🇱',
+                            farm: 'Nice\'Selection 🧞',
+                            promoEligible: true,
+                            type: 'Weed',
+                            featured: true,
+                            image:'ProductHO.png',
+                            video:'VideoHO.mov',
+                            description: '🇳🇱 Amnesia Hollandaise 🇳🇱\n\nL\'incontournable classique des coffee shops. Une structure florale dense et résineuse, libérant un parfum terreux profond avec des notes acidulées et d\'agrumes caractéristiques.\n\n🍋 Notes citronnées et boisées intenses\n🌿 Fleurs compactes et manucure soignée\n⚡️ Une valeur sûre garantissant une expérience optimale et un goût authentique.',                            
+                            tarifs: [
+                                { weight: '6G', price: 50.00 },               
+                                { weight: '50G', price: 350.00 },
+                                { weight: '100G', price: 600.00 },
+                            ]
+                    },
+                  {
                             id: 'Sunset Shark 🦈',
                             flag: '🇺🇸',
                             name: 'Sunset Shark 🦈',
@@ -170,7 +205,8 @@ document.addEventListener('DOMContentLoaded', function () {
                             featured: true,
                             image:'ProductUS1.png',
                             video:'VideuUS.mov',
-                            description: '🇺🇸 Cali USA 🇺🇸\n\nUne fleur au profil bien marqué, avec une belle présence visuelle et une odeur qui ressort direct à l’ouverture. Texture propre, rendu premium et goût travaillé.\n\n💎 Sélection idéale pour ceux qui aiment les produits bien finis, parfumés et efficaces en bouche.\n🔥 Une valeur sûre pour les amateurs de qualité US.',                            tarifs: [
+                            description: '🇺🇸 Cali USA 🇺🇸\n\nUne fleur au profil bien marqué, avec une belle présence visuelle et une odeur qui ressort direct à l’ouverture. Texture propre, rendu premium et goût travaillé.\n\n💎 Sélection idéale pour ceux qui aiment les produits bien finis, parfumés et efficaces en bouche.\n🔥 Une valeur sûre pour les amateurs de qualité US.',                            
+                            tarifs: [
                                 { weight: '3.5G', price: 50.00 },               
                                 { weight: '50G', price: 500.00 },
                             ]
