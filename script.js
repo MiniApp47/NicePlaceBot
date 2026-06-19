@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     {
                             id: 'Papaya Sorbet 🍧',
                             flag: '🇪🇸',
-                            name: 'Mario 🍄',
-                            farm: 'Papaya Sorbet 🍧',
+                            name: 'Papaya Sorbet 🍧',
+                            farm: 'Nice\'Selection 🧞',
                             promoEligible: true,
                             type: 'Hash',
                             featured: true,
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '50G', price: 500.00 },
                             ]
                     },
-                  {
+                 /*  {
                             id: 'Amnesia haze 🇪🇸',
                             flag: '🇪🇸',
                             name: 'Amnesia haze 🇪🇸',
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '50G', price: 350.00 },
                                 { weight: '100G', price: 600.00 },
                             ]
-                    },
+                    }, */
             ]
         },
        
