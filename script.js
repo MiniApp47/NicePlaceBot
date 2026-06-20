@@ -179,6 +179,23 @@ document.addEventListener('DOMContentLoaded', function () {
             image: 'CategWeed.png', 
             products: [
                   {
+                            id: 'Gold Dream Runtz🇺🇸🇹🇭',
+                            flag: '🇺🇸',
+                            name: 'Gold Dream Runtz🇺🇸🇹🇭',
+                            farm: 'Nice\'Selection 🧞',
+                            promoEligible: true,
+                            type: 'Weed',
+                            featured: true,
+                            image:'ProductGDR.png',
+                            video:'VideuGDR.mov',
+                            description: '',                            
+                            tarifs: [
+                                { weight: '4.5G', price: 50.00 },               
+                                { weight: '50G', price: 450.00 },
+                                { weight: '100G', price: 800.00 },
+                            ]
+                    },
+                    {
                             id: 'Amnesia hollandaise 🇳🇱',
                             flag: '🇳🇱',
                             name: 'Amnesia hollandaise 🇳🇱',
@@ -195,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '100G', price: 600.00 },
                             ]
                     },
-                  {
+                /*   {
                             id: 'Sunset Shark 🦈',
                             flag: '🇺🇸',
                             name: 'Sunset Shark 🦈',
@@ -210,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 { weight: '3.5G', price: 50.00 },               
                                 { weight: '50G', price: 500.00 },
                             ]
-                    },
+                    }, */
                  /*  {
                             id: 'Amnesia haze 🇪🇸',
                             flag: '🇪🇸',
