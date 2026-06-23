@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             type: 'Weed',
                             featured: true,
                             image:'ProductGDR.png',
-                            video:'VideuGDR.mov',
+                            video:'VideoGDR.mov',
                             description: '',                            
                             tarifs: [
                                 { weight: '4.5G', price: 50.00 },               
