@@ -20,33 +20,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const contactLinks = [
         {
-            name: 'SNAPCHAT 👻',
-            url: '',
-            id: 'snapchat',
-            className: 'snapchat', 
-            text: "SNAPCHAT 👻"
-        },
-        {
             name: 'TELEGRAM 🌐',
-            url: '',
+            url: 'https://t.me/niiceplace91',
             id: 'telegram',
             className: 'telegram',
             text: "TELEGRAM 🌐"
         },
         {
             name: 'WHATSAPP 💬',
-            url: '',
+            url: 'https://wa.me/33745923730',
             id: 'whatsapp',
             className: 'whatsapp',
             text: "WHATSAPP 💬"
-        },
-        {
-            name: 'SIGNAL 🔒',
-            // Remplacer par ton lien exact si besoin, ou utiliser le username copiable
-            url: '', 
-            id: 'signal',
-            className: 'signal',
-            text: "SIGNAL 🔒 "
         },
     ];
 
@@ -1459,7 +1444,7 @@ message += `💳 Paiement : ${paymentMethod}`;
     }
 
     // --- WHATSAPP CONTACT SAFE ---
-const WHATSAPP_NUMBER = "33753997488"; // Remplace par ton numéro, sans + ni espace
+const WHATSAPP_NUMBER = "33745923730"; // Remplace par ton numéro, sans + ni espace
 
 function openWhatsAppContact() {
 const message = formatOrderMessage();
