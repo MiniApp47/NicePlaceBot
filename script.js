@@ -1638,6 +1638,41 @@ document.addEventListener("DOMContentLoaded", function () {
       tg.BackButton.hide();
     });
   };
+
+
+  function validateCustomerAddress() {
+    const addressInput = document.getElementById('customer-address');
+    const addressError = document.getElementById('address-error');
+
+    if (!addressInput) return true;
+
+    const address = addressInput.value.trim();
+
+    if (address.length < 5) {
+        if (addressError) {
+            addressError.style.display = 'block';
+        }
+
+        addressInput.style.border = '2px solid #ff5252';
+        addressInput.focus();
+
+        showNotification('📍 Merci de remplir ton adresse avant de commander.');
+
+        if (window.Telegram && window.Telegram.WebApp && tg.HapticFeedback) {
+            tg.HapticFeedback.notificationOccurred('error');
+        }
+
+        return false;
+    }
+
+    if (addressError) {
+        addressError.style.display = 'none';
+    }
+
+    addressInput.style.border = '1px solid #ff6900';
+
+    return true;
+}
   // --- GESTION DES ÉVÉNEMENTS ---
 
   // Clics sur la barre de navigation
@@ -1885,10 +1920,15 @@ document.addEventListener("DOMContentLoaded", function () {
       showPage("page-cart");
     }
     // Clic sur WhatsApp
-    if (target.closest("#confirm-whatsapp")) {
-      openWhatsAppContact();
-      return;
+    if (target.closest('#confirm-whatsapp')) {
+    if (!validateCustomerAddress()) {
+        showPage('page-cart');
+        return;
     }
+
+    openWhatsAppContact();
+    return;
+}
 
     // Clic sur un produit DANS un Pack
     if (target.closest(".pack-item-btn")) {
