@@ -1674,7 +1674,7 @@ function spinRewardRoulette() {
     }
 
     setTimeout(() => {
-        rouletteWon = Math.random() < 1 / 3;
+        rouletteWon = true;
         rouletteSpun = true;
 
         renderCart();
