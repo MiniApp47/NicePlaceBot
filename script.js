@@ -44,23 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       quality: "🍫 Hashish",
       image: "CategHash.png",
       products: [
-        {
-          id: "Alien cookies OG ",
-          flag: "🇪🇸",
-          name: "Alien cookies OG",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductACO.png",
-          video: "VideoACO.mov",
-          description:
-  "🇪🇸 Alien Cookies OG 🇪🇸\n\nUne sélection Dry 220/105u propre et bien travaillée, avec un profil aromatique gourmand et légèrement épicé. Texture agréable, visuel soigné et odeur qui ressort bien à l’ouverture.\n\n🍪 Notes cookies douces et terreuses\n✨ Texture propre et facile à travailler\n🏆 Une valeur sûre pour ceux qui aiment les sélections classiques avec du goût.",
-          tarifs: [
-            { weight: "5G", price: 60.0 },
-          ],
-        },
-        {
+         {
           id: "Forbidden fruit ",
           flag: "🇪🇸",
           name: "Forbidden fruit ⛔",
@@ -71,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
           image: "ProductFF.png",
           video: "VideoFF.mov",
           description:
-  "🇪🇸 Forbidden Fruit ⛔ 🇪🇸\n\nUne sélection VVS 220/105u au profil fruité et marqué. Belle texture, odeur sucrée et rendu premium, parfait pour ceux qui cherchent une sélection avec du caractère.\n\n🍓 Notes fruitées et gourmandes\n💎 Qualité VVS bien travaillée\n🔥 Produit sélectionné pour son goût, son visuel et sa finition propre.",
+          "🇪🇸 Forbidden Fruit ⛔ 🇪🇸\n\nUne sélection VVS 220/105u au profil fruité et marqué. Belle texture, odeur sucrée et rendu premium, parfait pour ceux qui cherchent une sélection avec du caractère.\n\n🍓 Notes fruitées et gourmandes\n💎 Qualité VVS bien travaillée\n🔥 Produit sélectionné pour son goût, son visuel et sa finition propre.",
           tarifs: [
             { weight: "5G", price: 70.0 },
             { weight: "10G", price: 130.0 },
@@ -88,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
           image: "ProductGNC.png",
           video: "VideoGNC.mov",
           description:
-  "🇪🇸 Grapes N Cream 🍦 🇪🇸\n\nStatic VVS 160/73u avec un profil crémeux et fruité. Une sélection bien finie, avec une texture premium et une odeur douce qui rappelle les notes raisin/crème.\n\n🍇 Arômes fruités type grape\n🍦 Notes crémeuses et sucrées\n💎 Sélection Static VVS pour les amateurs de produits bien travaillés.",
+          "🇪🇸 Grapes N Cream 🍦 🇪🇸\n\nStatic VVS 160/73u avec un profil crémeux et fruité. Une sélection bien finie, avec une texture premium et une odeur douce qui rappelle les notes raisin/crème.\n\n🍇 Arômes fruités type grape\n🍦 Notes crémeuses et sucrées\n💎 Sélection Static VVS pour les amateurs de produits bien travaillés.",
           tarifs: [
             { weight: "5G", price: 120.0 },
             { weight: "10G", price: 220.0 },
@@ -105,45 +89,30 @@ document.addEventListener("DOMContentLoaded", function () {
           image: "ProductLPC.png",
           video: "VideoLPC.mov",
           description:
-  "🇪🇸 London Pound Cake 🍰 🇪🇸\n\nPlasma Static au profil gourmand, doux et légèrement pâtissier. Texture propre, aspect premium et belle présence aromatique dès l’ouverture.\n\n🍰 Notes cake sucrées et crémeuses\n⚡ Qualité Plasma Static\n🏆 Une sélection haut de gamme pour ceux qui aiment les profils doux et travaillés.",
+          "🇪🇸 London Pound Cake 🍰 🇪🇸\n\nPlasma Static au profil gourmand, doux et légèrement pâtissier. Texture propre, aspect premium et belle présence aromatique dès l’ouverture.\n\n🍰 Notes cake sucrées et crémeuses\n⚡ Qualité Plasma Static\n🏆 Une sélection haut de gamme pour ceux qui aiment les profils doux et travaillés.",
           tarifs: [
             { weight: "5G", price: 120.0 },
             { weight: "10G", price: 200.0 },
           ],
         },
         {
-          id: "Honey Gas",
+          id: "Lemon Schocker x Tazmania 🍋",
           flag: "🇪🇸",
-          name: "Honey Gas 🍯",
-          farm: "Nice'Selection 🧞",
+          name: "Lemon Schocker x Tazmania 🍋",
+          farm: "💎 VVS TANGER 💎",
           promoEligible: true,
           type: "Hash",
           featured: true,
-          image: "ProductHG.png",
-          video: "VideoHG.mov",
+          image: "ProductLST.png",
+          video: "VideoLST.mov",
           description:
-  "🇪🇸 Honey Gas 🍯 🇪🇸\n\nDry 220/105u avec un profil sucré et gas. Une sélection équilibrée entre douceur mielleuse et notes plus lourdes, avec une texture propre et une belle odeur.\n\n🍯 Arômes doux et gourmands\n⛽ Notes gas bien présentes\n✨ Bon choix pour ceux qui veulent du goût et une belle finition.",
+          "🇪🇸 Lemon Schocker x Tazmania 🍋 🇪🇸\n\nFrozen Sift 160/90u avec un profil citronné, frais et bien marqué. Une sélection propre, aromatique et travaillée, avec une belle intensité au nez.\n\n🍋 Notes citronnées et fraîches\n❄️ Qualité Frozen Sift\n💎 Produit premium pour les amateurs de profils fruités/acides.",
           tarifs: [
-            { weight: "5G", price: 60.0 },
+            { weight: "5G", price: 90.0 },
+            { weight: "10G", price: 180.0 },
           ],
         },
-        {
-          id: "Muel Fuel",
-          flag: "🇪🇸",
-          name: "Muel Fuel ⛽",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductMF.png",
-          video: "VideoMF.mov",
-          description:
-  "🇪🇸 Muel Fuel ⛽ 🇪🇸\n\nDry 220/105u au profil plus gas et intense. Texture propre, odeur marquée et rendu visuel soigné, sélectionné pour ceux qui aiment les profils lourds.\n\n⛽ Notes gas dominantes\n🔥 Profil aromatique bien présent\n🏆 Produit simple, propre et efficace niveau goût.",
-          tarifs: [
-            { weight: "5G", price: 60.0 },
-          ],
-        },
-        {
+         {
           id: "Yellow melon",
           flag: "🇪🇸",
           name: "Yellow melon 🍈",
@@ -154,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
           image: "ProductYM.png",
           video: "VideoYM.mov",
           description:
-  "🇪🇸 Yellow Melon 🍈 🇪🇸\n\nDry 220/105u avec un profil fruité, doux et légèrement sucré. Une sélection agréable, propre et parfumée, parfaite pour ceux qui aiment les notes melon et fruit jaune.\n\n🍈 Arômes fruités et sucrés\n✨ Texture propre et régulière\n💛 Une sélection douce avec une belle présence aromatique.",
+          "🇪🇸 Yellow Melon 🍈 🇪🇸\n\nDry 220/105u avec un profil fruité, doux et légèrement sucré. Une sélection agréable, propre et parfumée, parfaite pour ceux qui aiment les notes melon et fruit jaune.\n\n🍈 Arômes fruités et sucrés\n✨ Texture propre et régulière\n💛 Une sélection douce avec une belle présence aromatique.",
           tarifs: [
             { weight: "5G", price: 60.0 },
           ],
@@ -170,26 +139,57 @@ document.addEventListener("DOMContentLoaded", function () {
           image: "ProductBM.png",
           video: "VideoBM.mov",
           description:
-  "🇪🇸 Banana Modified 🍌 🇪🇸\n\nDry 220/105u au profil gourmand, avec des notes banane et une touche plus crémeuse. Texture agréable, odeur douce et rendu bien travaillé.\n\n🍌 Notes banane sucrées\n🍯 Profil rond et gourmand\n🏆 Une sélection originale pour ceux qui veulent changer des classiques.",
+          "🇪🇸 Banana Modified 🍌 🇪🇸\n\nDry 220/105u au profil gourmand, avec des notes banane et une touche plus crémeuse. Texture agréable, odeur douce et rendu bien travaillé.\n\n🍌 Notes banane sucrées\n🍯 Profil rond et gourmand\n🏆 Une sélection originale pour ceux qui veulent changer des classiques.",
           tarifs: [
             { weight: "5G", price: 60.0 },
           ],
         },
         {
-          id: "Lemon Schocker x Tazmania 🍋",
+          id: "Alien cookies OG ",
           flag: "🇪🇸",
-          name: "Lemon Schocker x Tazmania 🍋",
-          farm: "💎 VVS TANGER 💎",
+          name: "Alien cookies OG",
+          farm: "Nice'Selection 🧞",
           promoEligible: true,
           type: "Hash",
           featured: true,
-          image: "ProductLST.png",
-          video: "VideoLST.mov",
+          image: "ProductACO.png",
+          video: "VideoACO.mov",
           description:
-  "🇪🇸 Lemon Schocker x Tazmania 🍋 🇪🇸\n\nFrozen Sift 160/90u avec un profil citronné, frais et bien marqué. Une sélection propre, aromatique et travaillée, avec une belle intensité au nez.\n\n🍋 Notes citronnées et fraîches\n❄️ Qualité Frozen Sift\n💎 Produit premium pour les amateurs de profils fruités/acides.",
+          "🇪🇸 Alien Cookies OG 🇪🇸\n\nUne sélection Dry 220/105u propre et bien travaillée, avec un profil aromatique gourmand et légèrement épicé. Texture agréable, visuel soigné et odeur qui ressort bien à l’ouverture.\n\n🍪 Notes cookies douces et terreuses\n✨ Texture propre et facile à travailler\n🏆 Une valeur sûre pour ceux qui aiment les sélections classiques avec du goût.",
           tarifs: [
-            { weight: "5G", price: 90.0 },
-            { weight: "10G", price: 180.0 },
+            { weight: "5G", price: 60.0 },
+          ],
+        },
+         {
+          id: "Honey Gas",
+          flag: "🇪🇸",
+          name: "Honey Gas 🍯",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "Hash",
+          featured: true,
+          image: "ProductHG.png",
+          video: "VideoHG.mov",
+          description:
+          "🇪🇸 Honey Gas 🍯 🇪🇸\n\nDry 220/105u avec un profil sucré et gas. Une sélection équilibrée entre douceur mielleuse et notes plus lourdes, avec une texture propre et une belle odeur.\n\n🍯 Arômes doux et gourmands\n⛽ Notes gas bien présentes\n✨ Bon choix pour ceux qui veulent du goût et une belle finition.",
+          tarifs: [
+            { weight: "5G", price: 60.0 },
+          ],
+        },
+          {
+          id: "Muel Fuel",
+          flag: "🇪🇸",
+          name: "Muel Fuel ⛽",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "Hash",
+          featured: true,
+          image: "ProductMF.png",
+          video: "VideoMF.mov",
+          description:
+          "🇪🇸 Muel Fuel ⛽ 🇪🇸\n\nDry 220/105u au profil plus gas et intense. Texture propre, odeur marquée et rendu visuel soigné, sélectionné pour ceux qui aiment les profils lourds.\n\n⛽ Notes gas dominantes\n🔥 Profil aromatique bien présent\n🏆 Produit simple, propre et efficace niveau goût.",
+          tarifs: [
+            { weight: "5G", price: 60.0 },
           ],
         },
         {
