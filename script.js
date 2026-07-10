@@ -1368,7 +1368,7 @@ return searchMatch && selectMatch;
     itemsList.insertAdjacentHTML("beforeend", `
         <div class="cart-item">
             <div class="item-details" style="background: linear-gradient(180deg, #111, #ffcc00); color: #000;">
-                <div><strong>🎰 Roulette +100€</strong></div>
+                <div><strong>🎰 Roulette pour les commandes a plus de 100€</strong></div>
                 <div>Résultat : ${roulettePrizeLabel}</div>
                 <div>Prix : 0.00€</div>
             </div>
@@ -1639,7 +1639,7 @@ function getRouletteHTML() {
     if (rouletteSpun) {
         return `
             <div class="roulette-box">
-                <h4>🎰 Roulette +100€</h4>
+                <h4>🎰 Roulette pour les commandes a plus de 100€</h4>
                 <div class="roulette-wheel">🎁</div>
 
                 <div class="roulette-result">
@@ -1802,7 +1802,7 @@ function spinRewardRoulette() {
     }
 
     if (rouletteWon) {
-    message += `*🎰 ROULETTE POUR LES COMMANDES A +100€*\n`;
+    message += `*🎰 ROULETTE \n`;
     message += `• Résultat: ${roulettePrizeLabel}\n`;
     message += `• Prix: 0.00€\n\n`;
 }
