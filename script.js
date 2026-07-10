@@ -44,13 +44,138 @@ document.addEventListener("DOMContentLoaded", function () {
       quality: "🍫 Hashish",
       image: "CategHash.png",
       products: [
+        {
+          id: "Papaya Sorbet 🍧",
+          flag: "🇪🇸",
+          name: "Papaya Sorbet 🍧",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "Hash",
+          selectionType: "Hash",
+          featured: true,
+          image: "ProductPS.png",
+          video: "VideoPS.mov",
+          description:
+            "🇪🇸 Papaya Sorbet 🇪🇸\n\nUne extraction premium au profil aromatique intensément fruité. Texture malléable et fondante, offrant une diffusion de saveurs exotiques douces et sucrées dès les premières notes.\n\n🍧 Arômes de fruits tropicaux et de papaye\n✨ Texture crémeuse et combustion propre\n🏆 Recommandé pour les connaisseurs à la recherche d'un profil terpénique exotique et marqué.",
+          tarifs: [
+            { weight: "5G", price: 50.0 },
+            { weight: "20G", price: 180.0 },
+            { weight: "50G", price: 400.0 },
+            { weight: "100G", price: 650.0 },
+          ],
+        },
+         {
+          id: "Mario 🍄",
+          flag: "🇪🇸",
+          name: "Mario 🍄",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "🧽 Jaune Mousseux 🧽",
+          selectionType: "🧽 Jaune Mousseux 🧽",
+          featured: true,
+          image: "ProductM.png",
+          video: "VideoM.Mov",
+          description:
+            "🇪🇸 Moula 🇪🇸\n\nUn produit propre, accessible et efficace, avec une texture agréable et une odeur bien présente. Idéal pour ceux qui cherchent une valeur sûre sans se ruiner.\n\n🍫 Goût classique, bonne tenue, qualité régulière.\n💰 Très bon choix pour les petits comme les gros formats.",
+          tarifs: [
+            { weight: "1OG", price: 50.0 },
+            { weight: "50G", price: 200.0 },
+            { weight: "100G", price: 350.0 },
+          ],
+        },
+         {
+          id: "Yellow melon",
+          flag: "🇪🇸",
+          name: "Yellow melon 🍈",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry 220/105u ⚛️",
+          featured: true,
+          image: "ProductYM.png",
+          video: "VideoYM.mov",
+          description:
+          "🇪🇸 Yellow Melon 🍈 🇪🇸\n\nDry 220/105u avec un profil fruité, doux et légèrement sucré. Une sélection agréable, propre et parfumée, parfaite pour ceux qui aiment les notes melon et fruit jaune.\n\n🍈 Arômes fruités et sucrés\n✨ Texture propre et régulière\n💛 Une sélection douce avec une belle présence aromatique.",
+          tarifs: [
+            { weight: "5G", price: 60.0 },
+          ],
+        },
+        {
+          id: "banana Modified",
+          flag: "🇪🇸",
+          name: "Banana Modified 🍌",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry 220/105u ⚛️",
+          featured: true,
+          image: "ProductBM.png",
+          video: "VideoBM.mov",
+          description:
+          "🇪🇸 Banana Modified 🍌 🇪🇸\n\nDry 220/105u au profil gourmand, avec des notes banane et une touche plus crémeuse. Texture agréable, odeur douce et rendu bien travaillé.\n\n🍌 Notes banane sucrées\n🍯 Profil rond et gourmand\n🏆 Une sélection originale pour ceux qui veulent changer des classiques.",
+          tarifs: [
+            { weight: "5G", price: 60.0 },
+          ],
+        },
+        {
+          id: "Alien cookies OG ",
+          flag: "🇪🇸",
+          name: "Alien cookies OG",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+           type: "⚛️ Dry 220/105u ⚛️",
+           selectionType: "⚛️ Dry 220/105u ⚛️",
+          featured: true,
+          image: "ProductACO.png",
+          video: "VideoACO.mov",
+          description:
+          "🇪🇸 Alien Cookies OG 🇪🇸\n\nUne sélection Dry 220/105u propre et bien travaillée, avec un profil aromatique gourmand et légèrement épicé. Texture agréable, visuel soigné et odeur qui ressort bien à l’ouverture.\n\n🍪 Notes cookies douces et terreuses\n✨ Texture propre et facile à travailler\n🏆 Une valeur sûre pour ceux qui aiment les sélections classiques avec du goût.",
+          tarifs: [
+            { weight: "5G", price: 60.0 },
+          ],
+        },
+         {
+          id: "Honey Gas",
+          flag: "🇪🇸",
+          name: "Honey Gas 🍯",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry 220/105u ⚛️",
+          featured: true,
+          image: "ProductHG.png",
+          video: "VideoHG.mov",
+          description:
+          "🇪🇸 Honey Gas 🍯 🇪🇸\n\nDry 220/105u avec un profil sucré et gas. Une sélection équilibrée entre douceur mielleuse et notes plus lourdes, avec une texture propre et une belle odeur.\n\n🍯 Arômes doux et gourmands\n⛽ Notes gas bien présentes\n✨ Bon choix pour ceux qui veulent du goût et une belle finition.",
+          tarifs: [
+            { weight: "5G", price: 60.0 },
+          ],
+        },
+          {
+          id: "Muel Fuel",
+          flag: "🇪🇸",
+          name: "Muel Fuel ⛽",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry 220/105u ⚛️",
+          featured: true,
+          image: "ProductMF.png",
+          video: "VideoMF.mov",
+          description:
+          "🇪🇸 Muel Fuel ⛽ 🇪🇸\n\nDry 220/105u au profil plus gas et intense. Texture propre, odeur marquée et rendu visuel soigné, sélectionné pour ceux qui aiment les profils lourds.\n\n⛽ Notes gas dominantes\n🔥 Profil aromatique bien présent\n🏆 Produit simple, propre et efficace niveau goût.",
+          tarifs: [
+            { weight: "5G", price: 60.0 },
+          ],
+        },
          {
           id: "Forbidden fruit ",
           flag: "🇪🇸",
           name: "Forbidden fruit ⛔",
           farm: "💎 VVS TANGER 💎",
           promoEligible: true,
-          type: "Hash",
+          type: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry 220/105u ⚛️",
           featured: true,
           image: "ProductFF.png",
           video: "VideoFF.mov",
@@ -61,13 +186,32 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "10G", price: 130.0 },
           ],
         },
+         {
+          id: "Lemon Schocker x Tazmania 🍋",
+          flag: "🇪🇸",
+          name: "Lemon Schocker x Tazmania 🍋",
+          farm: "💎 VVS TANGER 💎",
+          promoEligible: true,
+          type: "⚡ Frozen Sift ⚡",
+          selectionType: "⚡ Frozen Sift ⚡",
+          featured: true,
+          image: "ProductLST.png",
+          video: "VideoLST.mov",
+          description:
+          "🇪🇸 Lemon Schocker x Tazmania 🍋 🇪🇸\n\nFrozen Sift 160/90u avec un profil citronné, frais et bien marqué. Une sélection propre, aromatique et travaillée, avec une belle intensité au nez.\n\n🍋 Notes citronnées et fraîches\n❄️ Qualité Frozen Sift\n💎 Produit premium pour les amateurs de profils fruités/acides.",
+          tarifs: [
+            { weight: "5G", price: 90.0 },
+            { weight: "10G", price: 180.0 },
+          ],
+        },
         {
           id: "GRAPES N CREAM",
           flag: "🇪🇸",
           name: "GRAPES N CREAM 🍦",
           farm: "💎 VVS TANGER 💎",
           promoEligible: true,
-          type: "Hash",
+          type: "💎 Static VVS 💎",
+          selectionType: "💎 Static VVS 💎",
           featured: true,
           image: "ProductGNC.png",
           video: "VideoGNC.mov",
@@ -84,7 +228,8 @@ document.addEventListener("DOMContentLoaded", function () {
           name: "London Pound Cake 🍰",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
-          type: "Hash",
+          type: "🔮 Plasma Static 🔮",
+          selectionType: "🔮 Plasma Static 🔮",
           featured: true,
           image: "ProductLPC.png",
           video: "VideoLPC.mov",
@@ -93,140 +238,6 @@ document.addEventListener("DOMContentLoaded", function () {
           tarifs: [
             { weight: "5G", price: 120.0 },
             { weight: "10G", price: 200.0 },
-          ],
-        },
-        {
-          id: "Lemon Schocker x Tazmania 🍋",
-          flag: "🇪🇸",
-          name: "Lemon Schocker x Tazmania 🍋",
-          farm: "💎 VVS TANGER 💎",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductLST.png",
-          video: "VideoLST.mov",
-          description:
-          "🇪🇸 Lemon Schocker x Tazmania 🍋 🇪🇸\n\nFrozen Sift 160/90u avec un profil citronné, frais et bien marqué. Une sélection propre, aromatique et travaillée, avec une belle intensité au nez.\n\n🍋 Notes citronnées et fraîches\n❄️ Qualité Frozen Sift\n💎 Produit premium pour les amateurs de profils fruités/acides.",
-          tarifs: [
-            { weight: "5G", price: 90.0 },
-            { weight: "10G", price: 180.0 },
-          ],
-        },
-         {
-          id: "Yellow melon",
-          flag: "🇪🇸",
-          name: "Yellow melon 🍈",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductYM.png",
-          video: "VideoYM.mov",
-          description:
-          "🇪🇸 Yellow Melon 🍈 🇪🇸\n\nDry 220/105u avec un profil fruité, doux et légèrement sucré. Une sélection agréable, propre et parfumée, parfaite pour ceux qui aiment les notes melon et fruit jaune.\n\n🍈 Arômes fruités et sucrés\n✨ Texture propre et régulière\n💛 Une sélection douce avec une belle présence aromatique.",
-          tarifs: [
-            { weight: "5G", price: 60.0 },
-          ],
-        },
-        {
-          id: "banana Modified",
-          flag: "🇪🇸",
-          name: "Banana Modified 🍌",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductBM.png",
-          video: "VideoBM.mov",
-          description:
-          "🇪🇸 Banana Modified 🍌 🇪🇸\n\nDry 220/105u au profil gourmand, avec des notes banane et une touche plus crémeuse. Texture agréable, odeur douce et rendu bien travaillé.\n\n🍌 Notes banane sucrées\n🍯 Profil rond et gourmand\n🏆 Une sélection originale pour ceux qui veulent changer des classiques.",
-          tarifs: [
-            { weight: "5G", price: 60.0 },
-          ],
-        },
-        {
-          id: "Alien cookies OG ",
-          flag: "🇪🇸",
-          name: "Alien cookies OG",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductACO.png",
-          video: "VideoACO.mov",
-          description:
-          "🇪🇸 Alien Cookies OG 🇪🇸\n\nUne sélection Dry 220/105u propre et bien travaillée, avec un profil aromatique gourmand et légèrement épicé. Texture agréable, visuel soigné et odeur qui ressort bien à l’ouverture.\n\n🍪 Notes cookies douces et terreuses\n✨ Texture propre et facile à travailler\n🏆 Une valeur sûre pour ceux qui aiment les sélections classiques avec du goût.",
-          tarifs: [
-            { weight: "5G", price: 60.0 },
-          ],
-        },
-         {
-          id: "Honey Gas",
-          flag: "🇪🇸",
-          name: "Honey Gas 🍯",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductHG.png",
-          video: "VideoHG.mov",
-          description:
-          "🇪🇸 Honey Gas 🍯 🇪🇸\n\nDry 220/105u avec un profil sucré et gas. Une sélection équilibrée entre douceur mielleuse et notes plus lourdes, avec une texture propre et une belle odeur.\n\n🍯 Arômes doux et gourmands\n⛽ Notes gas bien présentes\n✨ Bon choix pour ceux qui veulent du goût et une belle finition.",
-          tarifs: [
-            { weight: "5G", price: 60.0 },
-          ],
-        },
-          {
-          id: "Muel Fuel",
-          flag: "🇪🇸",
-          name: "Muel Fuel ⛽",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductMF.png",
-          video: "VideoMF.mov",
-          description:
-          "🇪🇸 Muel Fuel ⛽ 🇪🇸\n\nDry 220/105u au profil plus gas et intense. Texture propre, odeur marquée et rendu visuel soigné, sélectionné pour ceux qui aiment les profils lourds.\n\n⛽ Notes gas dominantes\n🔥 Profil aromatique bien présent\n🏆 Produit simple, propre et efficace niveau goût.",
-          tarifs: [
-            { weight: "5G", price: 60.0 },
-          ],
-        },
-        {
-          id: "Papaya Sorbet 🍧",
-          flag: "🇪🇸",
-          name: "Papaya Sorbet 🍧",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductPS.png",
-          video: "VideoPS.mov",
-          description:
-            "🇪🇸 Papaya Sorbet 🇪🇸\n\nUne extraction premium au profil aromatique intensément fruité. Texture malléable et fondante, offrant une diffusion de saveurs exotiques douces et sucrées dès les premières notes.\n\n🍧 Arômes de fruits tropicaux et de papaye\n✨ Texture crémeuse et combustion propre\n🏆 Recommandé pour les connaisseurs à la recherche d'un profil terpénique exotique et marqué.",
-          tarifs: [
-            { weight: "5G", price: 50.0 },
-            { weight: "20G", price: 180.0 },
-            { weight: "50G", price: 400.0 },
-            { weight: "100G", price: 650.0 },
-          ],
-        },
-        {
-          id: "Mario 🍄",
-          flag: "🇪🇸",
-          name: "Mario 🍄",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Hash",
-          featured: true,
-          image: "ProductM.png",
-          video: "VideoM.Mov",
-          description:
-            "🇪🇸 Moula 🇪🇸\n\nUn produit propre, accessible et efficace, avec une texture agréable et une odeur bien présente. Idéal pour ceux qui cherchent une valeur sûre sans se ruiner.\n\n🍫 Goût classique, bonne tenue, qualité régulière.\n💰 Très bon choix pour les petits comme les gros formats.",
-          tarifs: [
-            { weight: "1OG", price: 50.0 },
-            { weight: "50G", price: 200.0 },
-            { weight: "100G", price: 350.0 },
           ],
         },
         /*  {
@@ -254,7 +265,8 @@ document.addEventListener("DOMContentLoaded", function () {
           name: "🥭 Forbidden Fruit 🍓",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
-          type: "Hash",
+          type: "🪬 Static 🪬",
+          selectionType: "🪬 Static 🪬",
           featured: true,
           image: "ProductO.png",
           video: "VideoO.mov",
@@ -269,7 +281,8 @@ document.addEventListener("DOMContentLoaded", function () {
           farm: "Nice'Selection 🧞",
           promoEligible: true,
           featured: true,
-          type: "Hash",
+          type: "❄️ Frozen ❄️",
+          selectionType: "❄️ Frozen ❄️",
           image: "ProductFB1.png",
           video: "VideoFB1.mp4",
           /* image: 'ProductSift.jpg',
@@ -281,7 +294,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 'VideoSift2.mov'  // Ta 2ème vidéo
                             ], */
           description:
-            "🇹🇭🇺🇸 Frozen Buffy 🇹🇭🇺🇸\n\nUne sélection frozen haut de gamme avec plusieurs saveurs disponibles. Produit très parfumé, texture premium et profil aromatique bien travaillé.\n\n🔥 Une gamme lourde pour ceux qui veulent du choix, du goût et une vraie qualité.",
+            "🇹🇭🇺🇸 Frozen Buffy 🇹🇭🇺🇸\n\n Une sélection frozen haut de gamme avec plusieurs saveurs disponibles. Produit très parfumé, texture premium et profil aromatique bien travaillé.\n\n🔥 Une gamme lourde pour ceux qui veulent du choix, du goût et une vraie qualité.",
           // 👇 NOUVELLE STRUCTURE
           variantTitle: "Saveurs Frozen ❄️ :",
           jars: [
@@ -315,31 +328,14 @@ document.addEventListener("DOMContentLoaded", function () {
       quality: "🌿 Fleurs",
       image: "CategWeed.png",
       products: [
-        {
-          id: "Gold Dream Runtz🇺🇸🇹🇭",
-          flag: "🇺🇸",
-          name: "Gold Dream Runtz🇺🇸🇹🇭",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          type: "Weed",
-          featured: true,
-          image: "ProductGDR.png",
-          video: "VideoGDR.mov",
-          description:
-  "🇺🇸🇹🇭 Gold Dream Runtz 🇺🇸🇹🇭\n\nUne fleur au profil gourmand et fruité, avec une belle présence visuelle et une odeur douce dès l’ouverture. Sélection propre, bien manucurée et agréable pour ceux qui aiment les profils sucrés.\n\n💛 Notes fruitées et candy\n🌿 Fleurs soignées avec belle structure\n🏆 Une sélection premium au rendu propre et parfumé.",
-          tarifs: [
-            { weight: "4.5G", price: 50.0 },
-            { weight: "50G", price: 450.0 },
-            { weight: "100G", price: 800.0 },
-          ],
-        },
-        {
+         {
           id: "Amnesia hollandaise 🇳🇱",
           flag: "🇳🇱",
           name: "Amnesia hollandaise 🇳🇱",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
-          type: "Weed",
+          type: "🌿 Weed 🌿",
+          selectionType: "🌿 Weed 🌿",
           featured: true,
           image: "ProductHO.png",
           video: "VideoHO.mov",
@@ -349,6 +345,25 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "6G", price: 50.0 },
             { weight: "50G", price: 350.0 },
             { weight: "100G", price: 600.0 },
+          ],
+        },
+        {
+          id: "Gold Dream Runtz🇺🇸🇹🇭",
+          flag: "🇺🇸",
+          name: "Gold Dream Runtz🇺🇸🇹🇭",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "🌿 Weed 🌿",
+          selectionType: "🌿 Weed 🌿",
+          featured: true,
+          image: "ProductGDR.png",
+          video: "VideoGDR.mov",
+          description:
+  "🇺🇸🇹🇭 Gold Dream Runtz 🇺🇸🇹🇭\n\nUne fleur au profil gourmand et fruité, avec une belle présence visuelle et une odeur douce dès l’ouverture. Sélection propre, bien manucurée et agréable pour ceux qui aiment les profils sucrés.\n\n💛 Notes fruitées et candy\n🌿 Fleurs soignées avec belle structure\n🏆 Une sélection premium au rendu propre et parfumé.",
+          tarifs: [
+            { weight: "4.5G", price: 50.0 },
+            { weight: "50G", price: 450.0 },
+            { weight: "100G", price: 800.0 },
           ],
         },
         /*   {
@@ -808,21 +823,17 @@ const roulettePrizeLabel = "🎁 Cadeau offert"; // Lot affiché si le client ga
 
           let selectMatch = true;
 
-          // Sélection du chef = uniquement les produits avec featured: true
-          if (currentFilters.quality === "chef") {
-            selectMatch = product.featured === true;
-          }
+// Sélection du chef = tous les produits mis en avant
+if (currentFilters.quality === "chef") {
+  selectMatch = product.featured === true;
+}
 
-          // Si on choisit un produit précis dans le select
-          else if (currentFilters.quality.startsWith("product:")) {
-            const selectedProductId = currentFilters.quality.replace(
-              "product:",
-              "",
-            );
-            selectMatch = product.id === selectedProductId;
-          }
+// Filtre par type : Dry, VVS, Static VVS, Frozen Sift, Fleurs...
+else if (currentFilters.quality !== "all") {
+  selectMatch = product.selectionType === currentFilters.quality;
+}
 
-          return searchMatch && selectMatch;
+return searchMatch && selectMatch;
         },
       );
 
@@ -1475,16 +1486,26 @@ const roulettePrizeLabel = "🎁 Cadeau offert"; // Lot affiché si le client ga
       }
     });
 
-    const productOptions = allNestedProducts
-      .map((product) => {
-        return `<option value="product:${product.id}">${product.name}</option>`;
-      })
-      .join("");
+    const selectionTypes = [
+  ...new Set(
+    allNestedProducts
+      .map((product) => product.selectionType)
+      .filter((type) => type && type.trim() !== "")
+  ),
+];
 
-    qualityFilter.innerHTML = `
-    <option value="all">⭐ SELECTION DU CHEF</option>
-    ${productOptions}
+const typeOptions = selectionTypes
+  .map((type) => {
+    return `<option value="${type}">${type}</option>`;
+  })
+  .join("");
+
+qualityFilter.innerHTML = `
+    <option value="all">⭐ TOUT VOIR</option>
+    <option value="chef">🔥 SÉLECTION DU CHEF</option>
+    ${typeOptions}
 `;
+
     // 3. On remplit le filtre FARM (Pour la page produits)
     // On récupère la propriété 'farm' de chaque produit
     const productFarms = allNestedProducts.map((p) => p.farm).filter((f) => f); // Garde seulement si une farm est définie
