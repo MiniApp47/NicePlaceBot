@@ -1721,6 +1721,84 @@
     font-weight: 700;
     border: 1px solid #ff6900;
 }
+
+/* --- ROULETTE +100€ --- */
+.roulette-box {
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 18px;
+    background: linear-gradient(180deg, #141414, #ff6900);
+    color: white;
+    text-align: center;
+    border: 2px solid #ffcc00;
+    box-shadow: 0 0 15px rgba(255, 166, 0, 0.75);
+}
+
+.roulette-box h4 {
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
+    color: #ffcc00;
+}
+
+.roulette-box p {
+    margin: 8px 0;
+    font-weight: 700;
+}
+
+.roulette-wheel {
+    width: 95px;
+    height: 95px;
+    margin: 14px auto;
+    border-radius: 50%;
+    background: conic-gradient(#ffcc00 0deg 120deg, #111 120deg 240deg, #ff6900 240deg 360deg);
+    border: 4px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 0 18px rgba(255,255,255,0.5);
+}
+
+.roulette-wheel.spin {
+    animation: rouletteSpin 1s ease-out;
+}
+
+@keyframes rouletteSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    100% { transform: rotate(1080deg) scale(1.05); }
+}
+
+.roulette-btn {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    background: #ffcc00;
+    color: #000;
+    font-weight: 900;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+}
+
+.roulette-result {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.55);
+    font-weight: 900;
+}
+
+.roulette-alert {
+    margin-top: 18px;
+    padding: 12px;
+    border-radius: 12px;
+    background: rgba(44, 44, 46, 0.85);
+    color: #ffcc00;
+    text-align: center;
+    font-weight: 700;
+    border: 1px solid #ff6900;
+}
     </style>
 </head>
 

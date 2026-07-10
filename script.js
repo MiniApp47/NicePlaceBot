@@ -573,6 +573,9 @@ document.addEventListener("DOMContentLoaded", function () {
   let paymentMethod = "Espèce"; // Méthode de paiement par défaut
   let notificationTimeout = null; // Timer pour la notification panier
   let selectedFreeGift = ""; // Poche offerte choisie par le client
+  let rouletteSpun = false; // Est-ce que la roulette a déjà été jouée
+let rouletteWon = false; // Résultat de la roulette
+const roulettePrizeLabel = "🎁 Cadeau offert"; // Lot affiché si le client gagne
 
   // --- DÉFINIS TES CODES PROMO ICI ---
   const validPromoCodes = {
@@ -1276,6 +1279,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .join("");
 
     cartContainer.insertAdjacentHTML("beforeend", getFreeGiftHTML());
+    cartContainer.insertAdjacentHTML("beforeend", getRouletteHTML());
 
     const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
     document.getElementById("cart-total-price").innerText =
@@ -1348,6 +1352,18 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
         </div>
     `);
+
+    if (rouletteWon) {
+    itemsList.insertAdjacentHTML("beforeend", `
+        <div class="cart-item">
+            <div class="item-details" style="background: linear-gradient(180deg, #111, #ffcc00); color: #000;">
+                <div><strong>🎰 Roulette +100€</strong></div>
+                <div>Résultat : ${roulettePrizeLabel}</div>
+                <div>Prix : 0.00€</div>
+            </div>
+        </div>
+    `);
+}
 }
 
     // UI Promo
@@ -1574,6 +1590,84 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   }
 
+  function getCartTotal() {
+    return cart.reduce((sum, item) => sum + item.totalPrice, 0);
+}
+
+function canShowRoulette() {
+    return getCartTotal() >= 100;
+}
+
+function getRouletteHTML() {
+    const total = getCartTotal();
+
+    if (total < 100) {
+        const missing = 100 - total;
+
+        rouletteSpun = false;
+        rouletteWon = false;
+
+        return `
+            <div class="roulette-alert">
+                🎰 Roulette débloquée dès 100€ d'achat.<br>
+                Il manque encore ${missing.toFixed(2)}€.
+            </div>
+        `;
+    }
+
+    if (rouletteSpun) {
+        return `
+            <div class="roulette-box">
+                <h4>🎰 Roulette +100€</h4>
+                <div class="roulette-wheel">🎁</div>
+
+                <div class="roulette-result">
+                    ${rouletteWon 
+                        ? `✅ Bravo, tu as gagné :<br>${roulettePrizeLabel}` 
+                        : `❌ Dommage, pas gagné cette fois.`}
+                </div>
+            </div>
+        `;
+    }
+
+    return `
+        <div class="roulette-box">
+            <h4>🎰 Roulette débloquée</h4>
+            <p>1 chance sur 3 de gagner un cadeau offert</p>
+
+            <div id="roulette-wheel" class="roulette-wheel">🎁</div>
+
+            <button id="roulette-spin-btn" class="roulette-btn" type="button">
+                Lancer la roulette
+            </button>
+        </div>
+    `;
+}
+
+function spinRewardRoulette() {
+    if (!canShowRoulette() || rouletteSpun) return;
+
+    const wheel = document.getElementById("roulette-wheel");
+    if (wheel) {
+        wheel.classList.add("spin");
+    }
+
+    setTimeout(() => {
+        rouletteWon = Math.random() < 1 / 3;
+        rouletteSpun = true;
+
+        renderCart();
+
+        if (rouletteWon) {
+            showNotification("🎁 Bravo, tu as gagné un cadeau offert !");
+            tg.HapticFeedback.notificationOccurred("success");
+        } else {
+            showNotification("🎰 Dommage, pas gagné cette fois.");
+            tg.HapticFeedback.notificationOccurred("warning");
+        }
+    }, 1000);
+}
+
   // --- LOGIQUE DU PANIER ---
 
   // Ajoute le paramètre 'variant' à la fin
@@ -1685,6 +1779,12 @@ document.addEventListener("DOMContentLoaded", function () {
     message += `• Choix: ${selectedFreeGift}\n`;
     message += `• Prix: 0.00€\n\n`;
     }
+
+    if (rouletteWon) {
+    message += `*🎰 ROULETTE +100€*\n`;
+    message += `• Résultat: ${roulettePrizeLabel}\n`;
+    message += `• Prix: 0.00€\n\n`;
+}
 
     // Résumé financier
     // Si promo, on affiche le détail, sinon juste le total
@@ -1872,6 +1972,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Clics sur le reste de la page
   document.body.addEventListener("click", async function (e) {
     const target = e.target;
+
+    const rouletteBtn = target.closest("#roulette-spin-btn");
+if (rouletteBtn) {
+    spinRewardRoulette();
+    return;
+}
 
     // Gère l'accordéon sur la page contact
     const accordionHeader = target.closest(".accordion-header");
