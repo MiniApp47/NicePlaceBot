@@ -590,7 +590,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let selectedFreeGift = ""; // Poche offerte choisie par le client
   let rouletteSpun = false; // Est-ce que la roulette a déjà été jouée
 let rouletteWon = false; // Résultat de la roulette
-const roulettePrizeLabel = "🎁 Cadeau offert"; // Lot affiché si le client gagne
+const roulettePrizeLabel = "🎁 Packet Philip Moris Offert"; // Lot affiché si le client gagne
 
   // --- DÉFINIS TES CODES PROMO ICI ---
   const validPromoCodes = {
@@ -1680,7 +1680,7 @@ function spinRewardRoulette() {
         renderCart();
 
         if (rouletteWon) {
-            showNotification("🎁 Bravo, tu as gagné un cadeau offert !");
+            showNotification("🎁 Bravo, tu as gagné un packet de cigarette  !");
             tg.HapticFeedback.notificationOccurred("success");
         } else {
             showNotification("🎰 Dommage, pas gagné cette fois.");
@@ -1802,7 +1802,7 @@ function spinRewardRoulette() {
     }
 
     if (rouletteWon) {
-    message += `*🎰 ROULETTE +100€*\n`;
+    message += `*🎰 ROULETTE POUR LES COMMANDES A +100€*\n`;
     message += `• Résultat: ${roulettePrizeLabel}\n`;
     message += `• Prix: 0.00€\n\n`;
 }
