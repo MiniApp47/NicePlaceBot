@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       quality: "🍫 Hashish",
       image: "CategHash.png",
       products: [
-        {
+        /* {
           id: "Papaya Sorbet 🍧",
           flag: "🇪🇸",
           name: "Papaya Sorbet 🍧",
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "50G", price: 400.0 },
             { weight: "100G", price: 650.0 },
           ],
-        },
+        }, */
          {
           id: "Mario 🍄",
           flag: "🇪🇸",
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
           farm: "Nice'Selection 🧞",
           promoEligible: true,
           type: "⚛️ Dry 220/105u ⚛️",
-          selectionType: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry ⚛️",
           featured: true,
           image: "ProductYM.png",
           video: "VideoYM.mov",
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
           farm: "Nice'Selection 🧞",
           promoEligible: true,
           type: "⚛️ Dry 220/105u ⚛️",
-          selectionType: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry ⚛️",
           featured: true,
           image: "ProductBM.png",
           video: "VideoBM.mov",
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
           farm: "Nice'Selection 🧞",
           promoEligible: true,
            type: "⚛️ Dry 220/105u ⚛️",
-           selectionType: "⚛️ Dry 220/105u ⚛️",
+           selectionType: "⚛️ Dry ⚛️",
           featured: true,
           image: "ProductACO.png",
           video: "VideoACO.mov",
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
           farm: "Nice'Selection 🧞",
           promoEligible: true,
           type: "⚛️ Dry 220/105u ⚛️",
-          selectionType: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry ⚛️",
           featured: true,
           image: "ProductHG.png",
           video: "VideoHG.mov",
@@ -158,7 +158,7 @@ document.addEventListener("DOMContentLoaded", function () {
           farm: "Nice'Selection 🧞",
           promoEligible: true,
           type: "⚛️ Dry 220/105u ⚛️",
-          selectionType: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry ⚛️",
           featured: true,
           image: "ProductMF.png",
           video: "VideoMF.mov",
@@ -168,6 +168,24 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "5G", price: 60.0 },
           ],
         },
+        {
+          id: "Dry Horchata x grappe gaz",
+          flag: "🇪🇸",
+          name: "Horchata x grappe gaz 🍇",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "Hash",
+          selectionType: "⚛️ Dry ⚛️",
+          featured: true,
+          image: "ProductHGG.png",
+          video: "VideoHGG.mov",
+          description:
+  "🇪🇸 Horchata x Grape Gas 🍇 🇪🇸\n\nUne sélection Dry au profil gourmand et fruité, avec des notes douces type horchata mélangées à un côté grape plus marqué. Texture propre, odeur agréable et rendu bien travaillé.\n\n🍇 Notes raisin et fruits sucrés\n🥛 Profil crémeux et gourmand\n🏆 Une sélection originale pour ceux qui aiment les goûts doux avec une belle présence aromatique.",
+          tarifs: [
+            { weight: "5G", price: 70.0 },
+            { weight: "10G", price: 130.0 },
+          ],
+        },
          {
           id: "Forbidden fruit ",
           flag: "🇪🇸",
@@ -175,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
           farm: "💎 VVS TANGER 💎",
           promoEligible: true,
           type: "⚛️ Dry 220/105u ⚛️",
-          selectionType: "⚛️ Dry 220/105u ⚛️",
+          selectionType: "⚛️ Dry ⚛️",
           featured: true,
           image: "ProductFF.png",
           video: "VideoFF.mov",
@@ -202,6 +220,24 @@ document.addEventListener("DOMContentLoaded", function () {
           tarifs: [
             { weight: "5G", price: 90.0 },
             { weight: "10G", price: 180.0 },
+          ],
+        },
+         {
+          id: "Panna cotta ",
+          flag: "🇪🇸",
+          name: "Panna cotta 🍮",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "Hash",
+          selectionType: "🔮 Plasma Static 🔮",
+          featured: true,
+          image: "ProductPNC.png",
+          video: "VideoPNC.mov",
+          description:
+              "🇪🇸 Panna Cotta 🍮 🇪🇸\n\nPlasma Static au profil doux, crémeux et gourmand. Une sélection premium avec une belle texture et une odeur sucrée qui rappelle les desserts vanillés.\n\n🍮 Notes dessert et crème\n🔮 Qualité Plasma Static\n✨ Produit bien fini, idéal pour les amateurs de profils doux et travaillés.",
+          tarifs: [
+            { weight: "5G", price: 120.0 },
+            { weight: "10G", price: 220.0 },
           ],
         },
         {
@@ -329,6 +365,40 @@ document.addEventListener("DOMContentLoaded", function () {
       image: "CategWeed.png",
       products: [
          {
+          id: "biscotti banana",
+          flag: "🇳🇱",
+          name: "Biscotti banana 🍌",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "🌿 Weed 🌿",
+          selectionType: "🌿 Weed 🌿",
+          featured: true,
+          image: "ProductBB.png",
+          video: "VideoBB.mov",
+          description:
+              "🇳🇱 Biscotti Banana 🍌 🇳🇱\n\nUne fleur au profil gourmand, entre notes biscuitées et touche banane sucrée. Belle présentation, odeur douce à l’ouverture et sélection agréable pour ceux qui aiment les profils fruités.\n\n🍌 Notes banane et biscuit\n🌿 Fleurs propres et bien présentées\n✨ Une sélection douce avec un bon rendu aromatique.",
+          tarifs: [
+            { weight: "4,5G", price: 50.0 },
+          ],
+        },
+         {
+          id: "raimbow sherbet 11",
+          flag: "🇳🇱",
+          name: "Raimbow sherbet 11 🪖",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "🌿 Weed 🌿",
+          selectionType: "🌿 Weed 🌿",
+          featured: true,
+          image: "ProductRS1.png",
+          video: "VideoRS1.mov",
+          description:
+              "🇳🇱 Rainbow Sherbet 11 🪖 🇳🇱\n\nUne fleur au profil fruité et sucré, inspirée des notes sherbet. Belle structure, odeur fraîche et rendu visuel propre.\n\n🌈 Notes fruitées et légèrement acidulées\n🍬 Profil sucré et agréable\n🏆 Une sélection sympa pour ceux qui aiment les goûts doux et parfumés.",
+          tarifs: [
+            { weight: "4,5G", price: 50.0 },
+          ],
+        },
+         {
           id: "Amnesia hollandaise 🇳🇱",
           flag: "🇳🇱",
           name: "Amnesia hollandaise 🇳🇱",
@@ -347,7 +417,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "100G", price: 600.0 },
           ],
         },
-        {
+       /*  {
           id: "Gold Dream Runtz🇺🇸🇹🇭",
           flag: "🇺🇸",
           name: "Gold Dream Runtz🇺🇸🇹🇭",
@@ -365,7 +435,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "50G", price: 450.0 },
             { weight: "100G", price: 800.0 },
           ],
-        },
+        }, */
         /*   {
                             id: 'Sunset Shark 🦈',
                             flag: '🇺🇸',
@@ -654,6 +724,10 @@ const roulettePrizeLabel = "🎁 Packet Philip Moris Offert"; // Lot affiché si
 
   // --- NAVIGATION ---
   function showPage(pageId) {
+     document.querySelectorAll('video').forEach(video => {
+            video.pause();
+        });
+
     pages.forEach((p) => p.classList.remove("active"));
     // S'assure que la page existe avant de l'activer
     const page = document.getElementById(pageId);
@@ -779,129 +853,167 @@ const roulettePrizeLabel = "🎁 Packet Philip Moris Offert"; // Lot affiché si
     }
   }
 
-  function renderCategoryList() {
+function renderCategoryList() {
     productListContainer.innerHTML = "";
 
     const searchTerm = currentFilters.searchTerm.toLowerCase().trim();
     let hasResults = false;
 
-    appData.forEach((category) => {
-      let productsInCategory = [];
-
-      // Cas catégorie simple avec products directement
-      if (category.products) {
-        productsInCategory = category.products.map((product) => ({
-          product,
-          category,
-        }));
-      }
-
-      // Cas ancien système avec farms
-      if (category.farms) {
-        category.farms.forEach((farm) => {
-          farm.products.forEach((product) => {
-            productsInCategory.push({
-              product,
-              category,
-              farm,
-            });
-          });
-        });
-      }
-
-      const filteredProducts = productsInCategory.filter(
-        ({ product, category }) => {
-          const productName = product.name ? product.name.toLowerCase() : "";
-          const productFarm = product.farm ? product.farm.toLowerCase() : "";
-          const categoryName = category.name ? category.name.toLowerCase() : "";
-
-          const searchMatch =
-            searchTerm === "" ||
-            productName.includes(searchTerm) ||
-            productFarm.includes(searchTerm) ||
-            categoryName.includes(searchTerm);
-
-          let selectMatch = true;
-
-// Sélection du chef = tous les produits mis en avant
-if (currentFilters.quality === "chef") {
-  selectMatch = product.featured === true;
-}
-
-// Filtre par type : Dry, VVS, Static VVS, Frozen Sift, Fleurs...
-else if (currentFilters.quality !== "all") {
-  selectMatch = product.selectionType === currentFilters.quality;
-}
-
-return searchMatch && selectMatch;
-        },
-      );
-
-      if (filteredProducts.length === 0) return;
-
-      hasResults = true;
-
-      const section = document.createElement("section");
-      section.className = `home-category-section category-${category.id}`;
-
-      section.innerHTML = `
-            <h2 class="home-category-title">${category.name}</h2>
-            <div class="home-products-grid"></div>
-        `;
-
-      const grid = section.querySelector(".home-products-grid");
-
-      filteredProducts.forEach(({ product }) => {
+    function createProductCard(product) {
         const card = document.createElement("div");
         card.className = "product-card product-item-card";
         card.dataset.productId = product.id;
 
         if (product.type === "Pack" || product.id === "PackNoel2025") {
-          card.classList.add("full-width");
+            card.classList.add("full-width");
         }
 
         if (product.clickable === false) {
-          card.classList.add("unclickable");
+            card.classList.add("unclickable");
         }
 
         const flagHTML = product.flag
-          ? `<span class="product-flag">${product.flag}</span>`
-          : "";
-
-        let imgHTML = "";
-        if (product.image && product.image !== "") {
-          imgHTML = `<img src="${product.image}" alt="${product.name}">`;
-        }
-
-        const firstPrice =
-          product.tarifs && product.tarifs.length > 0
-            ? product.tarifs[0].price.toFixed(2)
-            : "0.00";
+            ? `<span class="product-flag">${product.flag}</span>`
+            : "";
 
         const mediaHTML = product.image
-          ? `<div class="product-media"><img src="${product.image}" alt="${product.name}"></div>`
-          : `<div class="product-media product-media-empty"></div>`;
+            ? `<div class="product-media"><img src="${product.image}" alt="${product.name}"></div>`
+            : `<div class="product-media product-media-empty"></div>`;
+
+        const firstTarif = product.tarifs && product.tarifs.length > 0
+            ? product.tarifs[0]
+            : null;
+
+        const priceHTML = firstTarif && typeof firstTarif.price === "number"
+            ? firstTarif.price.toFixed(2) + "€"
+            : "";
 
         card.innerHTML = `
-    ${mediaHTML}
-    <div class="info">
-        <div class="name">${product.name} ${flagHTML}</div>
-        <div class="farm">${product.farm}</div>
-        <div class="price">${typeof product.tarifs[0].price === "number" ? product.tarifs[0].price.toFixed(2) + "€" : product.tarifs[0].price}</div>
-    </div>
-`;
+            ${mediaHTML}
+            <div class="info">
+                <div class="name">${product.name} ${flagHTML}</div>
+                <div class="farm">${product.farm}</div>
+                <div class="price">${priceHTML}</div>
+            </div>
+        `;
 
-        grid.appendChild(card);
-      });
+        return card;
+    }
 
-      productListContainer.appendChild(section);
+    appData.forEach((category) => {
+        let productsInCategory = [];
+
+        if (category.products) {
+            productsInCategory = category.products.map((product) => ({
+                product,
+                category,
+            }));
+        }
+
+        if (category.farms) {
+            category.farms.forEach((farm) => {
+                farm.products.forEach((product) => {
+                    productsInCategory.push({
+                        product,
+                        category,
+                        farm,
+                    });
+                });
+            });
+        }
+
+        const filteredProducts = productsInCategory.filter(({ product, category }) => {
+            const productName = product.name ? product.name.toLowerCase() : "";
+            const productFarm = product.farm ? product.farm.toLowerCase() : "";
+            const categoryName = category.name ? category.name.toLowerCase() : "";
+            const selectionType = product.selectionType ? product.selectionType.toLowerCase() : "";
+
+            const searchMatch =
+                searchTerm === "" ||
+                productName.includes(searchTerm) ||
+                productFarm.includes(searchTerm) ||
+                categoryName.includes(searchTerm) ||
+                selectionType.includes(searchTerm);
+
+            let selectMatch = true;
+
+            if (currentFilters.quality === "chef") {
+                selectMatch = product.featured === true;
+            } else if (currentFilters.quality !== "all") {
+                selectMatch = product.selectionType === currentFilters.quality;
+            }
+
+            return searchMatch && selectMatch;
+        });
+
+        if (filteredProducts.length === 0) return;
+
+        hasResults = true;
+
+        const section = document.createElement("section");
+        section.className = `home-category-section category-${category.id}`;
+
+        // ✅ BEUH + BLANCHE/CC : affichage normal sans séparation
+        if (category.id !== "HASH") {
+            section.innerHTML = `
+                <h2 class="home-category-title">${category.name}</h2>
+                <div class="home-products-grid"></div>
+            `;
+
+            const grid = section.querySelector(".home-products-grid");
+
+            filteredProducts.forEach(({ product }) => {
+                grid.appendChild(createProductCard(product));
+            });
+
+            productListContainer.appendChild(section);
+            return;
+        }
+
+        // ✅ HASH uniquement : affichage séparé par selectionType
+        section.innerHTML = `
+            <h2 class="home-category-title">${category.name}</h2>
+            <div class="home-selection-groups"></div>
+        `;
+
+        const groupsContainer = section.querySelector(".home-selection-groups");
+        const groupedProducts = {};
+
+        filteredProducts.forEach(({ product }) => {
+            const groupName = product.selectionType || product.type || "Autres";
+
+            if (!groupedProducts[groupName]) {
+                groupedProducts[groupName] = [];
+            }
+
+            groupedProducts[groupName].push(product);
+        });
+
+        Object.keys(groupedProducts).forEach((groupName) => {
+            const groupBlock = document.createElement("div");
+            groupBlock.className = "selection-group-block";
+
+            groupBlock.innerHTML = `
+                <h3 class="selection-group-title">${groupName}</h3>
+                <div class="home-products-grid"></div>
+            `;
+
+            const grid = groupBlock.querySelector(".home-products-grid");
+
+            groupedProducts[groupName].forEach((product) => {
+                grid.appendChild(createProductCard(product));
+            });
+
+            groupsContainer.appendChild(groupBlock);
+        });
+
+        productListContainer.appendChild(section);
     });
 
     if (!hasResults) {
-      productListContainer.innerHTML =
-        '<p class="no-results">Aucun produit trouvé.</p>';
+        productListContainer.innerHTML = '<p class="no-results">Aucun produit trouvé.</p>';
     }
-  }
+}
   // --- NOUVELLE FONCTION ---
   // Affiche la liste des FARMS pour une catégorie
   // --- FONCTION MODIFIÉE : Affichage liste bouton ---
