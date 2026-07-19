@@ -366,34 +366,34 @@ document.addEventListener("DOMContentLoaded", function () {
       products: [
          {
           id: "biscotti banana",
-          flag: "🇳🇱",
+          flag: "🇺🇸",
           name: "Biscotti banana 🍌",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
-          type: "🌿 Weed 🌿",
-          selectionType: "🌿 Weed 🌿",
+                    type: "🌿 Weed 🌿",
+          selectionType: "🌴 CALI 🌴",
           featured: true,
           image: "ProductBB.png",
           video: "VideoBB.mov",
           description:
-              "🇳🇱 Biscotti Banana 🍌 🇳🇱\n\nUne fleur au profil gourmand, entre notes biscuitées et touche banane sucrée. Belle présentation, odeur douce à l’ouverture et sélection agréable pour ceux qui aiment les profils fruités.\n\n🍌 Notes banane et biscuit\n🌿 Fleurs propres et bien présentées\n✨ Une sélection douce avec un bon rendu aromatique.",
+              "🇺🇸 Biscotti Banana 🍌 🇺🇸\n\nUne fleur au profil gourmand, entre notes biscuitées et touche banane sucrée. Belle présentation, odeur douce à l’ouverture et sélection agréable pour ceux qui aiment les profils fruités.\n\n🍌 Notes banane et biscuit\n🌿 Fleurs propres et bien présentées\n✨ Une sélection douce avec un bon rendu aromatique.",
           tarifs: [
             { weight: "4,5G", price: 50.0 },
           ],
         },
          {
           id: "raimbow sherbet 11",
-          flag: "🇳🇱",
+          flag: "🇺🇸",
           name: "Raimbow sherbet 11 🪖",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
-          type: "🌿 Weed 🌿",
-          selectionType: "🌿 Weed 🌿",
+                    type: "🌿 Weed 🌿",
+          selectionType: "🌴 CALI 🌴",
           featured: true,
           image: "ProductRS1.png",
           video: "VideoRS1.mov",
           description:
-              "🇳🇱 Rainbow Sherbet 11 🪖 🇳🇱\n\nUne fleur au profil fruité et sucré, inspirée des notes sherbet. Belle structure, odeur fraîche et rendu visuel propre.\n\n🌈 Notes fruitées et légèrement acidulées\n🍬 Profil sucré et agréable\n🏆 Une sélection sympa pour ceux qui aiment les goûts doux et parfumés.",
+              "🇺🇸 Rainbow Sherbet 11 🪖 🇺🇸\n\nUne fleur au profil fruité et sucré, inspirée des notes sherbet. Belle structure, odeur fraîche et rendu visuel propre.\n\n🌈 Notes fruitées et légèrement acidulées\n🍬 Profil sucré et agréable\n🏆 Une sélection sympa pour ceux qui aiment les goûts doux et parfumés.",
           tarifs: [
             { weight: "4,5G", price: 50.0 },
           ],
@@ -953,8 +953,8 @@ function renderCategoryList() {
         const section = document.createElement("section");
         section.className = `home-category-section category-${category.id}`;
 
-        // ✅ BEUH + BLANCHE/CC : affichage normal sans séparation
-        if (category.id !== "HASH") {
+        // ✅ BLANCHE / CC uniquement : affichage normal sans séparation
+          if (category.id !== "HASH" && category.id !== "BEUH") {
             section.innerHTML = `
                 <h2 class="home-category-title">${category.name}</h2>
                 <div class="home-products-grid"></div>
@@ -970,7 +970,7 @@ function renderCategoryList() {
             return;
         }
 
-        // ✅ HASH uniquement : affichage séparé par selectionType
+        // ✅ HASH et BEUH : affichage séparé par selectionType
         section.innerHTML = `
             <h2 class="home-category-title">${category.name}</h2>
             <div class="home-selection-groups"></div>
@@ -990,13 +990,23 @@ function renderCategoryList() {
         });
 
         Object.keys(groupedProducts).forEach((groupName) => {
-            const groupBlock = document.createElement("div");
-            groupBlock.className = "selection-group-block";
+    const groupBlock = document.createElement("div");
+    groupBlock.className = "selection-group-block";
 
-            groupBlock.innerHTML = `
-                <h3 class="selection-group-title">${groupName}</h3>
-                <div class="home-products-grid"></div>
-            `;
+    // Transforme le nom de la séparation en classe CSS propre
+    const groupClass = groupName
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+
+    groupBlock.classList.add(`group-${groupClass}`);
+
+    groupBlock.innerHTML = `
+        <h3 class="selection-group-title">${groupName}</h3>
+        <div class="home-products-grid"></div>
+    `;
 
             const grid = groupBlock.querySelector(".home-products-grid");
 
