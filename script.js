@@ -224,10 +224,11 @@ document.addEventListener("DOMContentLoaded", function () {
         },
          {
           id: "Panna cotta ",
-          flag: "🇪🇸",
+          
           name: "Panna cotta 🍮",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
+          customerFavorite: true,
           type: "Hash",
           selectionType: "🔮 Plasma Static 🔮",
           featured: true,
@@ -295,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 { weight: '100G', price: 800.00 },
                             ]
                     }, */
-        {
+       /*  {
           id: "Olivette 🫒",
           flag: "🇺🇸",
           name: "🥭 Forbidden Fruit 🍓",
@@ -309,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
           description:
             "Olivette 🫒 \n 🪬 Static 🪬\n\nUne texture fraîche et travaillée, avec un rendu propre et une belle intensité aromatique. Produit sélectionné pour son aspect premium et son côté bien parfumé.\n\n❄️ Qualité Static\n🫒 Texture soignée\n🏆 Idéal pour ceux qui aiment les produits rares et bien finis.",
           tarifs: [{ weight: "1OG", price: 180.0 }],
-        },
+        }, */
         {
           id: "Frozen buffy 🇹🇭🇺🇸",
           flag: "🇺🇸",
@@ -888,14 +889,20 @@ function renderCategoryList() {
             ? firstTarif.price.toFixed(2) + "€"
             : "";
 
+            const favoriteBadgeHTML = product.customerFavorite === true
+    ? `<div class="customer-favorite-badge">❤️ PRÉFÉRÉ DES CLIENTS</div>`
+    : "";
+
         card.innerHTML = `
-            ${mediaHTML}
-            <div class="info">
-                <div class="name">${product.name} ${flagHTML}</div>
-                <div class="farm">${product.farm}</div>
-                <div class="price">${priceHTML}</div>
-            </div>
-        `;
+    ${mediaHTML}
+    ${favoriteBadgeHTML}
+
+    <div class="info">
+        <div class="name">${product.name} ${flagHTML}</div>
+        <div class="farm">${product.farm}</div>
+        <div class="price">${priceHTML}</div>
+    </div>
+`;
 
         return card;
     }
