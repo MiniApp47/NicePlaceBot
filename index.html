@@ -1802,6 +1802,30 @@
     border: 1px solid #ff6900;
 }
 
+.roulette-disabled {
+    opacity: 0.75;
+    filter: grayscale(0.45);
+}
+
+.roulette-wheel-disabled {
+    background: linear-gradient(135deg, #4a4a4a, #1f1f1f);
+    animation: none !important;
+    box-shadow: none;
+}
+
+.roulette-disabled .roulette-btn {
+    background: #555;
+    color: #bdbdbd;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.roulette-disabled-text {
+    color: #d0d0d0;
+    font-size: 0.85rem;
+    margin: 10px 0;
+}
+
 .home-selection-groups {
     display: flex;
     flex-direction: column;

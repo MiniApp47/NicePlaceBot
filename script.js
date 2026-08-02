@@ -1749,52 +1749,35 @@ function canShowRoulette() {
 }
 
 function getRouletteHTML() {
-    const total = getCartTotal();
-
-    if (total < 100) {
-        const missing = 100 - total;
-
-        rouletteSpun = false;
-        rouletteWon = false;
-
-        return `
-            <div class="roulette-alert">
-                🎰 Roulette débloquée dès 100€ d'achat.<br>
-                Il manque encore ${missing.toFixed(2)}€.
-            </div>
-        `;
-    }
-
-    if (rouletteSpun) {
-        return `
-            <div class="roulette-box">
-                <h4>🎰 Roulette pour les commandes a plus de 100€</h4>
-                <div class="roulette-wheel">🎁</div>
-
-                <div class="roulette-result">
-                    ${rouletteWon 
-                        ? `✅ Bravo, tu as gagné :<br>${roulettePrizeLabel}` 
-                        : `❌ Dommage, pas gagné cette fois.`}
-                </div>
-            </div>
-        `;
-    }
-
     return `
-        <div class="roulette-box">
-            <h4>🎰 Roulette débloquée</h4>
-            <p>1 chance sur 3 de gagner un cadeau offert</p>
+        <div class="roulette-box roulette-disabled">
+            <h4>🎰 Roulette cadeau</h4>
 
-            <div id="roulette-wheel" class="roulette-wheel">🎁</div>
+            <div class="roulette-wheel roulette-wheel-disabled">
+                🔒
+            </div>
 
-            <button id="roulette-spin-btn" class="roulette-btn" type="button">
-                Lancer la roulette
+            <div class="roulette-result">
+                Roulette indisponible pour le moment
+            </div>
+
+            <p class="roulette-disabled-text">
+                Elle sera bientôt de retour 🎁
+            </p>
+
+            <button class="roulette-btn" type="button" disabled>
+                Indisponible
             </button>
         </div>
     `;
 }
 
+
 function spinRewardRoulette() {
+    showNotification("🔒 Roulette indisponible pour le moment.");
+}
+
+/* function spinRewardRoulette() {
     if (!canShowRoulette() || rouletteSpun) return;
 
     const wheel = document.getElementById("roulette-wheel");
@@ -1816,7 +1799,7 @@ function spinRewardRoulette() {
             tg.HapticFeedback.notificationOccurred("warning");
         }
     }, 1000);
-}
+} */
 
   // --- LOGIQUE DU PANIER ---
 
