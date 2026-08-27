@@ -365,7 +365,24 @@ document.addEventListener("DOMContentLoaded", function () {
       quality: "🌿 Fleurs",
       image: "CategWeed.png",
       products: [
-         {
+        {
+          id: "pink runtz",
+          flag: "🇺🇸",
+          name: "🎀 Pink Runtz 🎀",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+                    type: "🌿 Weed 🌿",
+          selectionType: "🌴 CALI 🌴",
+          featured: true,
+          image: "ProductPR.png",
+          video: "VideoPR.mov",
+          description:
+               "🇺🇸 Pink Runtz 🎀 🇺🇸\n\nUne Cali au profil gourmand, fruité et sucré, avec une belle présence aromatique dès l’ouverture. Une sélection soignée qui mélange des notes candy et fruitées dans un profil doux et agréable.\n\n🎀 Notes fruitées et sucrées\n🍬 Profil candy et gourmand\n🌿 Fleurs bien présentées et sélectionnées avec soin\n✨ Une Cali idéale pour les amateurs de profils doux, parfumés et travaillés.",
+          tarifs: [
+            { weight: "4,5G", price: 50.0 },
+          ],
+        },
+         /* {
           id: "biscotti banana",
           flag: "🇺🇸",
           name: "Biscotti banana 🍌",
@@ -398,7 +415,7 @@ document.addEventListener("DOMContentLoaded", function () {
           tarifs: [
             { weight: "4,5G", price: 50.0 },
           ],
-        },
+        }, */
          {
           id: "Amnesia hollandaise 🇳🇱",
           flag: "🇳🇱",
