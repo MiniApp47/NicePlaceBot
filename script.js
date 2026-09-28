@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "100G", price: 350.0 },
           ],
         },
-         {
+         /* {
           id: "Yellow melon",
           flag: "🇪🇸",
           name: "Yellow melon 🍈",
@@ -203,8 +203,8 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "5G", price: 70.0 },
             { weight: "10G", price: 130.0 },
           ],
-        },
-         {
+        }, */
+         /* {
           id: "Lemon Schocker x Tazmania 🍋",
           flag: "🇪🇸",
           name: "Lemon Schocker x Tazmania 🍋",
@@ -221,10 +221,27 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "5G", price: 90.0 },
             { weight: "10G", price: 180.0 },
           ],
+        }, */
+         {
+          id: "Fresh Frozen X 24K 🧊",
+          flag: "🇪🇸",
+          name: "Fresh Frozen X 24K 🧊",
+          farm: "💎 VVS TANGER 💎",
+          promoEligible: true,
+          type: "🍯 Frozen 160/73u 🍯",
+          selectionType: "🍯 Frozen 160/73u 🍯",
+          featured: true,
+          image: "ProductF24.png",
+          video: "VideoF24.mov",
+          description:
+          "",
+          tarifs: [
+            { weight: "5G", price: 80.0 },
+            { weight: "10G", price: 150.0 },
+          ],
         },
          {
           id: "Panna cotta ",
-          
           name: "Panna cotta 🍮",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
@@ -241,7 +258,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "10G", price: 220.0 },
           ],
         },
-        {
+       /*  {
           id: "GRAPES N CREAM",
           flag: "🇪🇸",
           name: "GRAPES N CREAM 🍦",
@@ -258,8 +275,8 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "5G", price: 120.0 },
             { weight: "10G", price: 220.0 },
           ],
-        },
-        {
+        }, */
+       /*  {
           id: "London Pound Cake",
           flag: "🇪🇸",
           name: "London Pound Cake 🍰",
@@ -276,7 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "5G", price: 120.0 },
             { weight: "10G", price: 200.0 },
           ],
-        },
+        }, */
         /*  {
                             id: 'Honey Gas',
                             flag: '🇪🇸',
@@ -311,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "Olivette 🫒 \n 🪬 Static 🪬\n\nUne texture fraîche et travaillée, avec un rendu propre et une belle intensité aromatique. Produit sélectionné pour son aspect premium et son côté bien parfumé.\n\n❄️ Qualité Static\n🫒 Texture soignée\n🏆 Idéal pour ceux qui aiment les produits rares et bien finis.",
           tarifs: [{ weight: "1OG", price: 180.0 }],
         }, */
-        {
+       /*  {
           id: "Frozen buffy 🇹🇭🇺🇸",
           flag: "🇺🇸",
           name: "Frozen buffy 🇹🇭🇺🇸",
@@ -321,7 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
           type: "❄️ Frozen ❄️",
           selectionType: "❄️ Frozen ❄️",
           image: "ProductFB1.png",
-          video: "VideoFB1.mp4",
+          video: "VideoFB1.mp4", */
           /* image: 'ProductSift.jpg',
                             images: ['ProductSift.jpg','ProductTangier.jpg','ProductGrappe.jpg'],
                             videos: [
@@ -330,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                 'VideoSift.mov', // Ta 1ère vidéo
                                 'VideoSift2.mov'  // Ta 2ème vidéo
                             ], */
-          description:
+         /*  description:
             "🇹🇭🇺🇸 Frozen Buffy 🇹🇭🇺🇸\n\n Une sélection frozen haut de gamme avec plusieurs saveurs disponibles. Produit très parfumé, texture premium et profil aromatique bien travaillé.\n\n🔥 Une gamme lourde pour ceux qui veulent du choix, du goût et une vraie qualité.",
           // 👇 NOUVELLE STRUCTURE
           variantTitle: "Saveurs Frozen ❄️ :",
@@ -352,7 +369,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "50G", price: 700.0 },
             { weight: "100G", price: 1300.0 },
           ],
-        },
+        }, */
       ],
     },
     // ============================================================
