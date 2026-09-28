@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
           id: "Fresh Frozen X 24K 🧊",
           flag: "🇪🇸",
           name: "Fresh Frozen X 24K 🧊",
-          farm: "💎 VVS TANGER 💎",
+          farm: "Nice'Selection 🧞",
           promoEligible: true,
           type: "🍯 Frozen 160/73u 🍯",
           selectionType: "🍯 Frozen 160/73u 🍯",
