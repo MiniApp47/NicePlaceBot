@@ -83,6 +83,24 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "100G", price: 350.0 },
           ],
         },
+        {
+          id: "Forbiden fruit X Honey banana🍌 ",
+          flag: "🇪🇸",
+          name: "Forbiden fruit X Honey banana🍌",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "⚛️ Dry Sift ⚛️",
+          selectionType: "⚛️ Dry ⚛️",
+          featured: true,
+          image: "ProductFFH.png",
+          video: "VideoFFH.mov",
+          description:
+          "🇪🇸 Forbidden Fruit X Honey banana🍌 \n\nUne sélection au profil fruité et marqué. Belle texture, odeur sucrée et rendu premium, parfait pour ceux qui cherchent une sélection avec du caractère.\n\n🍓 Notes fruitées et gourmandes\n💎 Qualité bien travaillée\n🔥 Produit sélectionné pour son goût, son visuel et sa finition propre.",
+          tarifs: [
+            { weight: "5G", price: 50.0 },
+            { weight: "25G", price: 200.0 },
+          ],
+        },
          /* {
           id: "Yellow melon",
           flag: "🇪🇸",
