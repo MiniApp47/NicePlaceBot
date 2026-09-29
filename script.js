@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
           description:
           "🇪🇸 Forbidden Fruit X Honey banana🍌 \n\nUne sélection au profil fruité et marqué. Belle texture, odeur sucrée et rendu premium, parfait pour ceux qui cherchent une sélection avec du caractère.\n\n🍓 Notes fruitées et gourmandes\n💎 Qualité bien travaillée\n🔥 Produit sélectionné pour son goût, son visuel et sa finition propre.",
           tarifs: [
-            { weight: "5G", price: 50.0 },
+            { weight: "5G", price: 60.0 },
             { weight: "25G", price: 200.0 },
           ],
         },
