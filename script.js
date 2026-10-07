@@ -401,6 +401,23 @@ document.addEventListener("DOMContentLoaded", function () {
       image: "CategWeed.png",
       products: [
         {
+          id: "Dark pineapple",
+          flag: "🇺🇸",
+          name: "Dark pineapple 🍍",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+                    type: "🌿 Weed 🌿",
+          selectionType: "🌴 CALI 🌴",
+          featured: true,
+          image: "ProductDP.png",
+          video: "VideoDP.mov",
+          description:
+               "🍍🌴 DARK PINEAPPLE — NICE'SELECTION 🌴🍍\n\nUne sélection Cali au profil fruité, tropical et gourmand. Dark Pineapple se distingue par une belle intensité aromatique, mêlant la douceur de l’ananas mûr à une touche plus profonde et légèrement crémeuse, pour un rendu moderne et très agréable. 🇺🇸🔥\n\n👃 Profil aromatique :\n🍍 Ananas sucré et tropical\n🍬 Notes candy fruitées\n🍦 Fond doux et légèrement crémeux\n🌿 Nuance végétale propre\n🌙 Petite finition plus sombre et résineuse\n\n👅 Goût :\nEn bouche, Dark Pineapple développe une attaque fruitée et sucrée, avec une vraie présence tropicale. Le profil devient ensuite plus rond et gourmand, avec une finale propre, douce et légèrement résineuse qui reste bien en bouche. 😮‍💨🍍\n\n🌿 Qualité & sélection :\n💎 Sélection Cali premium\n✨ Profil fruité bien marqué\n☁️ Dégustation douce et parfumée\n🔥 Belle rondeur aromatique\n🧞 Sélection signée Nice'Selection\n\n🏆 Le verdict :\nUne variété parfaite pour les amateurs de profils tropicaux, sucrés et modernes. Dark Pineapple combine fraîcheur fruitée, rondeur gourmande et finition premium dans une sélection originale et très propre. 🍍🌴🔥",
+          tarifs: [
+            { weight: "4,5G", price: 50.0 },
+          ],
+        },
+        {
           id: "pink runtz",
           flag: "🇺🇸",
           name: "🎀 Pink Runtz 🎀",
