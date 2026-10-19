@@ -44,6 +44,25 @@ document.addEventListener("DOMContentLoaded", function () {
       quality: "🍫 Hashish",
       image: "CategHash.png",
       products: [
+         {
+          id: "French Toast 🍞",
+          flag: "🇪🇸",
+          name: "French Toast 🍞",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "🧽 Jaune Mousseux 🧽",
+          selectionType: "🧽 Jaune Mousseux 🧽",
+          featured: true,
+          image: "ProductFT.png",
+          video: "VideoFT.mov",
+          description:
+           "🇪🇸 FRENCH TOAST 🍞 🇪🇸\n\nUne sélection Jaune Mousseux au nom gourmand, inspiré du célèbre pain perdu. Un univers aromatique qui évoque les notes toastées, la douceur vanillée et une touche de caramel.\n\n🍞 Inspiration pain grillé et pâtisserie\n🍯 Notes gourmandes de miel et caramel\n✨ Univers doux, sucré et réconfortant\n🧽 Catégorie Jaune Mousseux\n\n🏆 Nice'Selection 🧞 — Une identité gourmande et originale pour les amateurs de profils pâtissiers.",
+          tarifs: [
+            { weight: "1OG", price: 50.0 },
+            { weight: "50G", price: 200.0 },
+            { weight: "100G", price: 350.0 },
+          ],
+        },
         /* {
           id: "Papaya Sorbet 🍧",
           flag: "🇪🇸",
