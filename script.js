@@ -540,7 +540,34 @@ document.addEventListener("DOMContentLoaded", function () {
                     }, */
       ],
     },
- 
+  {
+      id: "BLANCHE",
+      name: "🔌 BLANCHE ☣️",
+      type: "Blanche",
+      quality: "🤍 Spécial",
+      image: "CategBlanche.png",
+      products: [
+        {
+          id: "Cc 🇨🇴",
+          flag: "🇨🇴",
+          name: "Cc 🇨🇴",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          featured: true,
+          type: "Hash",
+          image: "ProductC.png",
+          video: "VideoC.mov",
+          description:
+            "Produit spécial disponible selon arrivage.\n\n📲 Pour plus d’informations, passe en privé.",
+          tarifs: [
+            { weight: "1c", price: 60.0 },
+            { weight: "3c", price: 160.0 },
+            { weight: "5c", price: 250.0 },
+            { weight: "11c", price: 500.0 },
+          ],
+        },
+      ], // Les produits s'insèrent directement ici
+    },
   ];
 
   /* {
@@ -788,6 +815,14 @@ const roulettePrizeLabel = "🎁 Packet Philip Moris Offert"; // Lot affiché si
     const avisNav = document.getElementById("nav-avis"); // <-- AJOUT ICI
     const cartNav = document.getElementById("nav-cart");
 
+    const referralHomeCard = document.getElementById("open-referral-page");
+
+if (referralHomeCard) {
+    referralHomeCard.addEventListener("click", () => {
+        showPage("page-referral");
+    });
+}
+
     // On reset tout
     homeNav.classList.remove("active");
     infoNav.classList.remove("active");
@@ -810,6 +845,38 @@ const roulettePrizeLabel = "🎁 Packet Philip Moris Offert"; // Lot affiché si
   }
 
   // --- LOGIQUE D'AFFICHAGE ---
+
+  function copyTextToClipboard(text, successMessage = "Texte copié !") {
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            if (typeof showNotification === "function") {
+                showNotification(successMessage);
+            } else {
+                alert(successMessage);
+            }
+        })
+        .catch(() => {
+            if (typeof showNotification === "function") {
+                showNotification("Impossible de copier le texte.");
+            } else {
+                alert("Impossible de copier le texte.");
+            }
+        });
+}
+
+const copyParrainageBtn = document.getElementById("copy-parrainage-command");
+if (copyParrainageBtn) {
+    copyParrainageBtn.addEventListener("click", () => {
+        copyTextToClipboard("/parrainage", "✅ /parrainage copié");
+    });
+}
+
+const copyMesbonusBtn = document.getElementById("copy-mesbonus-command");
+if (copyMesbonusBtn) {
+    copyMesbonusBtn.addEventListener("click", () => {
+        copyTextToClipboard("/mesbonus", "✅ /mesbonus copié");
+    });
+}
 
   // --- MODIFIÉ : renderHomePage ---
 
