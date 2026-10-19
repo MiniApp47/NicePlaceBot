@@ -540,34 +540,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }, */
       ],
     },
-  {
-      id: "BLANCHE",
-      name: "🔌 BLANCHE ☣️",
-      type: "Blanche",
-      quality: "🤍 Spécial",
-      image: "CategBlanche.png",
-      products: [
-        {
-          id: "Cc 🇨🇴",
-          flag: "🇨🇴",
-          name: "Cc 🇨🇴",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          featured: true,
-          type: "Hash",
-          image: "ProductC.png",
-          video: "VideoC.mov",
-          description:
-            "Produit spécial disponible selon arrivage.\n\n📲 Pour plus d’informations, passe en privé.",
-          tarifs: [
-            { weight: "1c", price: 60.0 },
-            { weight: "3c", price: 160.0 },
-            { weight: "5c", price: 250.0 },
-            { weight: "11c", price: 500.0 },
-          ],
-        },
-      ], // Les produits s'insèrent directement ici
-    },
+ 
   ];
 
   /* {
@@ -1930,6 +1903,18 @@ function spinRewardRoulette() {
     renderCart();
   }
 
+  // --- SUIVI PARRAINAGE (code opaque attribué par Telegram /start) ---
+  const npClientCode = new URLSearchParams(window.location.search).get('np_client') || '';
+  const npClientValid = /^NC-[A-Za-z0-9_-]{18,48}$/.test(npClientCode);
+  let npOrderReference = null;
+  function getNpOrderReference() {
+    if (npOrderReference) return npOrderReference;
+    const bytes = new Uint8Array(6);
+    window.crypto.getRandomValues(bytes);
+    npOrderReference = 'NP-' + Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+    return npOrderReference;
+  }
+
   // --- FORMATAGE DU MESSAGE WHATSAPP (STYLE PRO & EMOJIS) ---
   function formatOrderMessage() {
     // --- 1. CALCULS (Inchangés) ---
@@ -2011,6 +1996,15 @@ function spinRewardRoulette() {
 
     message += `\n📍 Adresse : ${customerAddress}\n`;
     message += `💳 Paiement : ${paymentMethod}`;
+
+    // Code pour relier manuellement une commande WhatsApp à son compte.
+    message += `\n\n🧾 Référence commande : ${getNpOrderReference()}`;
+    if (npClientValid) {
+      message += `\n🔖 Code client Nice Place : ${npClientCode}`;
+    } else {
+      message += '\n⚠️ Suivi parrainage inactif : ouvrir le Shop via /start du bot.';
+    }
+    message += '\nℹ️ Parrainage validé uniquement après confirmation de commande.';
 
     return message;
   }
@@ -2375,6 +2369,8 @@ if (rouletteBtn) {
         return;
       }
 
+      // Nouvelle tentative de commande : une nouvelle référence unique est créée.
+      npOrderReference = null;
       renderConfirmation();
     }
 
