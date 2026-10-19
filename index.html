@@ -1991,7 +1991,20 @@
 #reviews-form select,#reviews-form textarea{width:100%;box-sizing:border-box;border-radius:8px;padding:10px;background:#353535;color:white;border:1px solid #777;font:inherit}
 .review-send-hint{font-size:12px;line-height:1.5;color:#c7c7c7;margin:0}#reviews-form textarea{min-height:85px;resize:vertical}#reviews-form button{padding:12px;border:0;border-radius:9px;background:linear-gradient(90deg,#ffc550,#ed8b1e);font-weight:800;cursor:pointer}
 
-    </style>
+    
+/* Avis dynamiques + avis produits */
+.review-tabs {display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:10px 0;}
+.review-tab {padding:11px 5px;border:1px solid #a97732;border-radius:10px;background:#323034;color:#fff;font-weight:700;cursor:pointer;}
+.review-tab.active{background:linear-gradient(110deg,#f6b344,#ec7f13);color:#211406;}
+.review-filter-wrap{margin:12px 0;}
+.review-filter-wrap select{display:block;width:100%;padding:10px;background:#333;color:white;border:1px solid #ad813c;border-radius:8px;}
+.product-review-box{width:100%;box-sizing:border-box;margin:16px 0 8px;text-align:center;background:#2b292c;border:1px solid #bd853d;border-radius:12px;padding:12px;}
+.product-review-box button{background:#e7a42c;border:0;color:#251405;border-radius:9px;font-weight:800;padding:11px;margin:6px;cursor:pointer;}
+.product-review-snippet{font-size:0.84rem;color:#ddd;white-space:pre-wrap;overflow-wrap:anywhere;}
+.review-error{color:#ffbaba;}
+.referral-home{margin:6px 16px 14px;text-align:center;}
+.referral-home a{font-weight:700;color:#ffd475;font-size:0.85rem;}
+</style>
 </head>
 
 <body>
@@ -2205,6 +2218,7 @@
             </button>
         </div>
 
+        <div class="referral-home"><a id="referral-link" href="#" role="button">🎁 Mon lien de parrainage</a></div>
         <div class="filters">
             <div class="filter-input-wrapper" style="display:none ;">
                 <svg width="20" height="20">
@@ -2453,23 +2467,35 @@
     <div id="reviews-modal" class="reviews-modal" hidden>
       <div class="reviews-panel" role="dialog" aria-modal="true" aria-labelledby="reviews-heading">
         <button type="button" id="reviews-close" class="reviews-close" aria-label="Fermer">×</button>
-        <h2 id="reviews-heading">⭐ Avis clients</h2>
+        <h2 id="reviews-heading">⭐ Avis Nice Place</h2>
+        <div class="review-tabs">
+          <button type="button" id="reviews-tab-shop" class="review-tab active">🏪 Avis clients</button>
+          <button type="button" id="reviews-tab-product" class="review-tab">📦 Avis produits</button>
+        </div>
+        <div id="review-filter-wrap" class="review-filter-wrap" hidden>
+          <label for="reviews-product-select">Choisir un produit</label>
+          <select id="reviews-product-select"></select>
+        </div>
         <div id="reviews-summary" class="reviews-summary">Chargement…</div>
         <div id="reviews-list" class="reviews-list"></div>
         <form id="reviews-form">
-          <h3>Donner mon avis</h3>
+          <h3 id="reviews-form-title">Donner mon avis sur le shop</h3>
           <label for="review-rating">Votre note</label>
-          <select id="review-rating" required><option value="5">⭐⭐⭐⭐⭐ (5/5)</option><option value="4">⭐⭐⭐⭐ (4/5)</option><option value="3">⭐⭐⭐ (3/5)</option><option value="2">⭐⭐ (2/5)</option><option value="1">⭐ (1/5)</option></select>
+          <select id="review-rating" required>
+            <option value="5">⭐⭐⭐⭐⭐ (5/5)</option><option value="4">⭐⭐⭐⭐ (4/5)</option>
+            <option value="3">⭐⭐⭐ (3/5)</option><option value="2">⭐⭐ (2/5)</option>
+            <option value="1">⭐ (1/5)</option>
+          </select>
           <label for="review-comment">Votre commentaire</label>
           <textarea id="review-comment" maxlength="700" minlength="10" required placeholder="Votre expérience (10 caractères minimum)"></textarea>
           <button type="submit" id="review-send">Envoyer pour validation</button>
-          <p class="review-send-hint">ℹ️ Pour envoyer un avis, ouvre le bot, tape /start puis utilise le bouton « 🥷🏼 Ouvrir le Shop » du clavier Telegram. L’envoi fermera la mini-app.</p>
+          <p class="review-send-hint">Ton avis sera publié après validation par l'équipe. L'envoi est possible depuis Telegram.</p>
           <p id="review-status" role="status"></p>
         </form>
       </div>
     </div>
     <div id="notification-toast"></div>
-    <script src="script.js?v=avis-fix-20261019-2"></script>
+    <script src="script.js?v=auto-api-20261019-1"></script>
 </body>
 
 </html>

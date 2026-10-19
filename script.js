@@ -540,7 +540,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }, */
       ],
     },
- {
+  {
       id: "BLANCHE",
       name: "🔌 BLANCHE ☣️",
       type: "Blanche",
@@ -1404,6 +1404,11 @@ function renderCategoryList() {
 
             <div class="name" style="margin-top: ${hasMedia ? "0" : "20px"}">${product.name}</div>
             <div class="farm">${product.farm}</div>
+            <div class="product-review-box">
+              <div id="product-reviews-average">⭐ Chargement des avis…</div>
+              <div id="product-reviews-snippet" class="product-review-snippet"></div>
+              <button type="button" id="product-reviews-open">⭐ Voir / donner un avis</button>
+            </div>
             ${packLinksHTML} ${descriptionHTML}
                         ${variantsHTML}
             <h4 class="tarifs-title">💰 Tarifs disponibles :</h4>
@@ -1411,6 +1416,8 @@ function renderCategoryList() {
         `;
 
     showPage("page-product");
+    document.getElementById('product-reviews-open').addEventListener('click', () => openReviews('product', product.id));
+    refreshProductReviewBox(product);
 
     // Réattache les événements (pour les variantes de couleurs)
     if (product.jars && product.jars.length > 0) {
@@ -2414,106 +2421,196 @@ if (rouletteBtn) {
     }, 3000);
   }
 
-  // Avis : Telegram envoie directement les commentaires au bot (aucune API).
-  const reviewsModal = document.getElementById("reviews-modal");
-  const reviewsList = document.getElementById("reviews-list");
-  const reviewsSummary = document.getElementById("reviews-summary");
-  const reviewStatus = document.getElementById("review-status");
-  const reviewForm = document.getElementById("reviews-form");
+  // AVIS AUTOMATIQUES : SQLite sur VPS, lecture HTTPS, modération Telegram.
+  // Les trois faux commentaires de démonstration sont volontairement retirés.
+  const REVIEWS_API_URL = "https://api.niiceplaace.pro";
+  const reviewsModal = document.getElementById('reviews-modal');
+  const reviewsList = document.getElementById('reviews-list');
+  const reviewsSummary = document.getElementById('reviews-summary');
+  const reviewStatus = document.getElementById('review-status');
+  const reviewForm = document.getElementById('reviews-form');
+  const productSelect = document.getElementById('reviews-product-select');
+  let activeReviewType = 'shop';
+
   function reviewEl(tag, className, value) {
     const el = document.createElement(tag);
     if (className) el.className = className;
-    if (value !== undefined) el.textContent = value;
+    if (value !== undefined && value !== null) el.textContent = String(value);
     return el;
   }
-  // ============================================================
-  // AVIS PUBLIÉS MANUELLEMENT — AJOUTE TES AVIS ICI
-  // Seuls les avis réels, reçus et approuvés doivent être ajoutés.
-  // Chaque nouvel avis doit être placé entre { } et séparé par une virgule.
-  // ============================================================
- const avisManuels = [
-  {
-    pseudo: "Alex_91",
-    note: 5,
-    commentaire: "Première expérience, communication rapide et tout s'est bien passé. Merci à l'équipe 👌",
-    date: "15/10/2026"
-  },
-  {
-    pseudo: "Momo75",
-    note: 4,
-    commentaire: "Rien à dire tjr au top 👍",
-    date: "17/10/2026"
-  },
-  {
-    pseudo: "Sarah92",
-    note: 5,
-    commentaire: "Super réactifs, réponses claires et sympa 😊",
-    date: "19/10/2026"
+  function getAllReviewableProducts() {
+    const result = new Map();
+    appData.forEach(cat => {
+      (cat.products || []).forEach(product => result.set(product.id, product));
+      (cat.farms || []).forEach(farm =>
+        (farm.products || []).forEach(product => result.set(product.id, product)));
+    });
+    return Array.from(result.values());
   }
-];
+  // Les identifiants correspondent exactement aux IDs de appData.
+  productSelect.append(new Option('Tous les produits', ''));
+  getAllReviewableProducts().forEach(product =>
+    productSelect.append(new Option(product.name, product.id)));
 
-  function loadReviews() {
-    const avisValides = avisManuels.filter(a =>
-      a && typeof a.pseudo === "string" && a.pseudo.trim() &&
-      Number.isInteger(a.note) && a.note >= 1 && a.note <= 5 &&
-      typeof a.commentaire === "string" && a.commentaire.trim()
-    );
-    const count = avisValides.length;
-    const average = count ? avisValides.reduce((sum, a) => sum + a.note, 0) / count : 0;
-    document.getElementById("reviews-average").textContent = count ? `${average.toFixed(1)}/5` : "—";
-    reviewsSummary.textContent = count ? `${average.toFixed(1)}/5 · ${count} avis publiés` : "Aucun avis publié pour le moment";
+  async function getReviews(type, productId = '') {
+    const qs = new URLSearchParams({type});
+    if (type === 'product' && productId) qs.set('product_id', productId);
+    const response = await fetch(`${REVIEWS_API_URL}/api/reviews?${qs}`, {cache:'no-store'});
+    if (!response.ok) throw new Error('API HTTP ' + response.status);
+    return response.json();
+  }
+  function displayReviewRows(rows) {
     reviewsList.replaceChildren();
-    avisValides.forEach(a => {
-      const entry = reviewEl("div", "review-entry");
-      entry.append(
-        reviewEl("strong", "", a.pseudo),
-        reviewEl("div", "review-stars", "★".repeat(a.note) + "☆".repeat(5 - a.note)),
-        reviewEl("p", "", a.commentaire),
-        reviewEl("small", "", a.date || "")
+    if (!rows.length) {
+      reviewsList.append(reviewEl('p', '', 'Aucun avis publié pour le moment.'));
+      return;
+    }
+    rows.forEach(r => {
+      const rating = Math.max(1, Math.min(5, Number(r.rating) || 1));
+      const el = reviewEl('div', 'review-entry');
+      if (activeReviewType === 'product') {
+        el.append(reviewEl('div','',`📦 ${r.product_name || r.product_id || 'Produit'}`));
+      }
+      el.append(
+        reviewEl('strong', '', r.nickname || 'Client'),
+        reviewEl('div','review-stars', '★'.repeat(rating) + '☆'.repeat(5-rating)),
+        reviewEl('p','',r.comment || ''),
+        reviewEl('small','',r.date || '')
       );
-      reviewsList.append(entry);
+      reviewsList.append(el);
     });
   }
-  document.getElementById("reviews-open").addEventListener("click", () => { reviewsModal.hidden = false; loadReviews(); });
-  document.getElementById("reviews-close").addEventListener("click", () => reviewsModal.hidden = true);
-  reviewsModal.addEventListener("click", e => { if(e.target === reviewsModal) reviewsModal.hidden = true; });
-  reviewForm.addEventListener("submit", e => {
-    e.preventDefault();
-    const submit = document.getElementById("review-send");
-    const telegram = window.Telegram?.WebApp;
-    // sendData fonctionne UNIQUEMENT depuis une Mini App ouverte via
-    // KeyboardButton(web_app=...) dans le clavier de conversation du bot.
-    // IMPORTANT : initData est normalement vide lors d'une ouverture depuis
-    // un bouton de clavier Telegram. Il ne faut donc PAS le vérifier ici.
-    if (!telegram || typeof telegram.sendData !== "function") {
-      reviewStatus.textContent = "❌ Ouvre le bot Telegram, tape /start et utilise le bouton 🥷🏼 Ouvrir le Shop sous le champ de message.";
-      return;
-    }
-    if (telegram.initDataUnsafe?.query_id) {
-      reviewStatus.textContent = "⚠️ Pour envoyer un avis sans serveur, ouvre /start puis le bouton 🥷🏼 Ouvrir le Shop du clavier Telegram (pas l'ancien bouton du message ni le menu).";
-      return;
-    }
-    const rating = Number(document.getElementById("review-rating").value);
-    const comment = document.getElementById("review-comment").value.trim();
-    if (!Number.isInteger(rating) || rating < 1 || rating > 5 || comment.length < 10 || comment.length > 700) {
-      reviewStatus.textContent = "❌ Sélectionne une note et écris entre 10 et 700 caractères.";
-      return;
-    }
-    const data = JSON.stringify({type:"review_submission", rating, comment});
-    if (new TextEncoder().encode(data).length > 4096) {
-      reviewStatus.textContent = "❌ Commentaire trop long pour Telegram.";
-      return;
-    }
-    submit.disabled = true;
-    reviewStatus.textContent = "📤 Envoi à Telegram… La mini-app va se fermer automatiquement.";
+  async function refreshShopReviewBadge() {
     try {
-      // Telegram ferme la Mini App et transmet l'avis au bot en web_app_data.
-      telegram.sendData(data);
+      const data = await getReviews('shop');
+      document.getElementById('reviews-average').textContent = data.count && data.average != null
+        ? `${Number(data.average).toFixed(1)}/5` : '—';
     } catch (error) {
-      reviewStatus.textContent = "❌ Envoi impossible : ouvre la boutique depuis le bouton /start du clavier Telegram.";
-      submit.disabled = false;
+      console.warn('Impossible de charger la note shop', error);
+      document.getElementById('reviews-average').textContent = '—';
     }
+  }
+  async function loadReviews() {
+    const type = activeReviewType;
+    const productId = type === 'product' ? productSelect.value : '';
+    reviewsSummary.textContent = 'Chargement des avis…';
+    reviewsList.replaceChildren();
+    try {
+      const data = await getReviews(type, productId);
+      if (activeReviewType !== type || (type === 'product' && productSelect.value !== productId)) return;
+      const name = type === 'shop' ? 'avis clients' : 'avis produits';
+      reviewsSummary.textContent = data.count && data.average != null
+        ? `⭐ ${Number(data.average).toFixed(1)}/5 · ${data.count} ${name}` : 'Aucun avis publié pour le moment';
+      displayReviewRows(data.reviews || []);
+    } catch (error) {
+      console.error(error);
+      reviewsSummary.textContent = '❌ Impossible de charger les avis pour le moment.';
+    }
+  }
+  function selectReviewTab(type) {
+    activeReviewType = type;
+    document.getElementById('reviews-tab-shop').classList.toggle('active', type === 'shop');
+    document.getElementById('reviews-tab-product').classList.toggle('active', type === 'product');
+    document.getElementById('review-filter-wrap').hidden = type !== 'product';
+    document.getElementById('reviews-form-title').textContent = type === 'shop'
+      ? 'Donner mon avis sur le shop' : 'Donner mon avis sur un produit';
+    reviewStatus.textContent = '';
+    loadReviews();
+  }
+  function openReviews(type='shop', productId='') {
+    productSelect.value = productId || '';
+    reviewsModal.hidden = false;
+    selectReviewTab(type);
+  }
+  document.getElementById('reviews-open').addEventListener('click', () => openReviews('shop'));
+  document.getElementById('reviews-close').addEventListener('click', () => {reviewsModal.hidden = true;});
+  reviewsModal.addEventListener('click', e => { if (e.target === reviewsModal) reviewsModal.hidden = true; });
+  document.getElementById('reviews-tab-shop').addEventListener('click', () => selectReviewTab('shop'));
+  document.getElementById('reviews-tab-product').addEventListener('click', () => selectReviewTab('product'));
+  productSelect.addEventListener('change', loadReviews);
+
+  async function refreshProductReviewBox(product) {
+    const ratingEl = document.getElementById('product-reviews-average');
+    const snippetEl = document.getElementById('product-reviews-snippet');
+    if (!ratingEl || !snippetEl) return;
+    try {
+      const data = await getReviews('product', product.id);
+      if (!ratingEl.isConnected) return;
+      ratingEl.textContent = data.count && data.average != null
+        ? `⭐ ${Number(data.average).toFixed(1)}/5 · ${data.count} avis` : '⭐ Aucun avis sur ce produit';
+      const recent = (data.reviews || []).slice(0,2);
+      snippetEl.textContent = recent.map(r => `${r.nickname} : ${r.comment}`).join('\n');
+    } catch(error) {
+      ratingEl.textContent = 'Avis momentanément indisponibles';
+      console.warn(error);
+    }
+  }
+
+  reviewForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const telegram = window.Telegram?.WebApp;
+    const button = document.getElementById('review-send');
+    const rating = Number(document.getElementById('review-rating').value);
+    const comment = document.getElementById('review-comment').value.trim();
+    const product = activeReviewType === 'product' ? getProductById(productSelect.value) : null;
+    if (activeReviewType === 'product' && !product) {
+      reviewStatus.textContent = '❌ Choisis d’abord un produit.';
+      return;
+    }
+    if (!Number.isInteger(rating) || rating < 1 || rating > 5 || comment.length < 10 || comment.length > 700) {
+      reviewStatus.textContent = '❌ Choisis une note et un commentaire de 10 à 700 caractères.';
+      return;
+    }
+    if (!telegram) {
+      reviewStatus.textContent = '❌ Ouvre la boutique depuis Telegram pour envoyer un avis.';
+      return;
+    }
+    const payload = {
+      type:'review_submission', reviewType:activeReviewType,
+      productId: product ? product.id : null,
+      productName: product ? product.name : null,
+      rating, comment
+    };
+    button.disabled = true;
+    reviewStatus.textContent = '📤 Envoi pour validation…';
+    try {
+      if (telegram.initData) {
+        const response = await fetch(`${REVIEWS_API_URL}/api/reviews`, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({...payload, initData:telegram.initData})
+        });
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || `HTTP ${response.status}`);
+        reviewStatus.textContent = '✅ Avis reçu ! Il apparaîtra après validation par l’équipe.';
+        reviewForm.reset();
+      } else if (typeof telegram.sendData === 'function') {
+        // Clavier /start : initData vide, sendData est la méthode officielle.
+        const text = JSON.stringify(payload);
+        if (new TextEncoder().encode(text).length > 4096) throw new Error('Avis trop long');
+        reviewStatus.textContent = '📤 Envoi via Telegram…';
+        telegram.sendData(text);
+      } else {
+        throw new Error('Ouvre la mini-app depuis le bouton du bot Telegram.');
+      }
+    } catch (error) {
+      reviewStatus.textContent = '❌ ' + (error.message || 'Envoi impossible');
+    } finally { button.disabled = false; }
   });
-  loadReviews();
+  // Lien de parrainage : uniquement la commande du bot est nécessaire.
+  const referralLink = document.getElementById('referral-link');
+  referralLink.addEventListener('click', async e => {
+    e.preventDefault();
+    try {
+      const response = await fetch(`${REVIEWS_API_URL}/api/config`);
+      const config = await response.json();
+      if (config.botUsername) {
+        window.Telegram?.WebApp?.openTelegramLink(`https://t.me/${config.botUsername}`);
+        alert('Dans le bot, envoie /parrainage pour recevoir ton lien personnel.');
+      } else {
+        alert('Envoie /parrainage à ton bot Nice Place dans Telegram.');
+      }
+    } catch { alert('Envoie /parrainage au bot Nice Place pour recevoir ton lien personnel.'); }
+  });
+  refreshShopReviewBadge();
   init();
 });
