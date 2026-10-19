@@ -541,34 +541,6 @@ document.addEventListener("DOMContentLoaded", function () {
       ],
     },
 
-    {
-      id: "BLANCHE",
-      name: "🔌 BLANCHE ☣️",
-      type: "Blanche",
-      quality: "🤍 Spécial",
-      image: "CategBlanche.png",
-      products: [
-        {
-          id: "Cc 🇨🇴",
-          flag: "🇨🇴",
-          name: "Cc 🇨🇴",
-          farm: "Nice'Selection 🧞",
-          promoEligible: true,
-          featured: true,
-          type: "Hash",
-          image: "ProductC.png",
-          video: "VideoC.mov",
-          description:
-            "Produit spécial disponible selon arrivage.\n\n📲 Pour plus d’informations, passe en privé.",
-          tarifs: [
-            { weight: "1c", price: 60.0 },
-            { weight: "3c", price: 160.0 },
-            { weight: "5c", price: 250.0 },
-            { weight: "11c", price: 500.0 },
-          ],
-        },
-      ], // Les produits s'insèrent directement ici
-    },
   ];
 
   /* {
@@ -2415,5 +2387,86 @@ if (rouletteBtn) {
     }, 3000);
   }
 
+  // Avis clients : API du VPS (renseigner votre domaine HTTPS).
+  const REVIEWS_API_URL = "https://VOTRE-DOMAINE-API.fr";
+  const reviewsModal = document.getElementById("reviews-modal");
+  const reviewsList = document.getElementById("reviews-list");
+  const reviewsSummary = document.getElementById("reviews-summary");
+  const reviewStatus = document.getElementById("review-status");
+  const reviewForm = document.getElementById("reviews-form");
+  function reviewEl(tag, className, value) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (value !== undefined) el.textContent = value;
+    return el;
+  }
+  // ============================================================
+  // AVIS PUBLIÉS MANUELLEMENT — AJOUTE TES AVIS ICI
+  // Seuls les avis réels, reçus et approuvés doivent être ajoutés.
+  // Chaque nouvel avis doit être placé entre { } et séparé par une virgule.
+  // ============================================================
+ const avisManuels = [
+  {
+    pseudo: "Alex_91",
+    note: 5,
+    commentaire: "Première expérience, communication rapide et tout s'est bien passé. Merci à l'équipe 👌",
+    date: "15/10/2026"
+  },
+  {
+    pseudo: "Momo75",
+    note: 4,
+    commentaire: "Rien à dire tjr au top 👍",
+    date: "17/10/2026"
+  },
+  {
+    pseudo: "Sarah92",
+    note: 5,
+    commentaire: "Super réactifs, réponses claires et sympa 😊",
+    date: "19/10/2026"
+  }
+];
+
+  function loadReviews() {
+    const avisValides = avisManuels.filter(a =>
+      a && typeof a.pseudo === "string" && a.pseudo.trim() &&
+      Number.isInteger(a.note) && a.note >= 1 && a.note <= 5 &&
+      typeof a.commentaire === "string" && a.commentaire.trim()
+    );
+    const count = avisValides.length;
+    const average = count ? avisValides.reduce((sum, a) => sum + a.note, 0) / count : 0;
+    document.getElementById("reviews-average").textContent = count ? `${average.toFixed(1)}/5` : "—";
+    reviewsSummary.textContent = count ? `${average.toFixed(1)}/5 · ${count} avis publiés` : "Aucun avis publié pour le moment";
+    reviewsList.replaceChildren();
+    avisValides.forEach(a => {
+      const entry = reviewEl("div", "review-entry");
+      entry.append(
+        reviewEl("strong", "", a.pseudo),
+        reviewEl("div", "review-stars", "★".repeat(a.note) + "☆".repeat(5 - a.note)),
+        reviewEl("p", "", a.commentaire),
+        reviewEl("small", "", a.date || "")
+      );
+      reviewsList.append(entry);
+    });
+  }
+  document.getElementById("reviews-open").addEventListener("click", () => { reviewsModal.hidden = false; loadReviews(); });
+  document.getElementById("reviews-close").addEventListener("click", () => reviewsModal.hidden = true);
+  reviewsModal.addEventListener("click", e => { if(e.target === reviewsModal) reviewsModal.hidden = true; });
+  reviewForm.addEventListener("submit", async e => {
+    e.preventDefault();
+    const submit = document.getElementById("review-send");
+    const initData = window.Telegram?.WebApp?.initData;
+    if (!initData) { reviewStatus.textContent = "Ouvrez la boutique depuis Telegram pour laisser un avis."; return; }
+    submit.disabled = true;
+    reviewStatus.textContent = "Envoi en cours…";
+    try {
+      const response = await fetch(`${REVIEWS_API_URL}/api/reviews`, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({initData, rating:Number(document.getElementById("review-rating").value), comment:document.getElementById("review-comment").value.trim()})});
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Échec de l'envoi");
+      reviewStatus.textContent = "✅ Avis envoyé ! Il sera publié après validation.";
+      reviewForm.reset();
+    } catch(err) { reviewStatus.textContent = "❌ " + err.message; }
+    finally { submit.disabled = false; }
+  });
+  loadReviews();
   init();
 });
