@@ -1989,7 +1989,7 @@
 .review-entry .review-stars{color:#ffcf5c}.review-entry small{color:#aaa}.review-entry p{white-space:pre-wrap;overflow-wrap:anywhere}
 #reviews-form{border-top:1px solid #555;margin-top:20px;padding-top:12px;display:grid;gap:10px}
 #reviews-form select,#reviews-form textarea{width:100%;box-sizing:border-box;border-radius:8px;padding:10px;background:#353535;color:white;border:1px solid #777;font:inherit}
-#reviews-form textarea{min-height:85px;resize:vertical}#reviews-form button{padding:12px;border:0;border-radius:9px;background:linear-gradient(90deg,#ffc550,#ed8b1e);font-weight:800;cursor:pointer}
+.review-send-hint{font-size:12px;line-height:1.5;color:#c7c7c7;margin:0}#reviews-form textarea{min-height:85px;resize:vertical}#reviews-form button{padding:12px;border:0;border-radius:9px;background:linear-gradient(90deg,#ffc550,#ed8b1e);font-weight:800;cursor:pointer}
 
     </style>
 </head>
@@ -2463,6 +2463,7 @@
           <label for="review-comment">Votre commentaire</label>
           <textarea id="review-comment" maxlength="700" minlength="10" required placeholder="Votre expérience (10 caractères minimum)"></textarea>
           <button type="submit" id="review-send">Envoyer pour validation</button>
+          <p class="review-send-hint">ℹ️ Pour envoyer un avis, ouvre le bot, tape /start puis utilise le bouton « 🥷🏼 Ouvrir le Shop » du clavier Telegram. L’envoi fermera la mini-app.</p>
           <p id="review-status" role="status"></p>
         </form>
       </div>

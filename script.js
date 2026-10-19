@@ -568,9 +568,6 @@ document.addEventListener("DOMContentLoaded", function () {
         },
       ], // Les produits s'insèrent directement ici
     },
-
-
-
   ];
 
   /* {
@@ -2417,8 +2414,7 @@ if (rouletteBtn) {
     }, 3000);
   }
 
-  // Avis clients : API du VPS (renseigner votre domaine HTTPS).
-  const REVIEWS_API_URL = "https://VOTRE-DOMAINE-API.fr";
+  // Avis : Telegram envoie directement les commentaires au bot (aucune API).
   const reviewsModal = document.getElementById("reviews-modal");
   const reviewsList = document.getElementById("reviews-list");
   const reviewsSummary = document.getElementById("reviews-summary");
@@ -2481,21 +2477,40 @@ if (rouletteBtn) {
   document.getElementById("reviews-open").addEventListener("click", () => { reviewsModal.hidden = false; loadReviews(); });
   document.getElementById("reviews-close").addEventListener("click", () => reviewsModal.hidden = true);
   reviewsModal.addEventListener("click", e => { if(e.target === reviewsModal) reviewsModal.hidden = true; });
-  reviewForm.addEventListener("submit", async e => {
+  reviewForm.addEventListener("submit", e => {
     e.preventDefault();
     const submit = document.getElementById("review-send");
-    const initData = window.Telegram?.WebApp?.initData;
-    if (!initData) { reviewStatus.textContent = "Ouvrez la boutique depuis Telegram pour laisser un avis."; return; }
+    const telegram = window.Telegram?.WebApp;
+    // sendData fonctionne UNIQUEMENT depuis une Mini App ouverte via
+    // KeyboardButton(web_app=...) dans le clavier de conversation du bot.
+    if (!telegram?.initData || typeof telegram.sendData !== "function") {
+      reviewStatus.textContent = "❌ Ouvre le bot Telegram, tape /start et utilise le bouton 🥷🏼 Ouvrir le Shop sous le champ de message.";
+      return;
+    }
+    if (telegram.initDataUnsafe?.query_id) {
+      reviewStatus.textContent = "⚠️ Pour envoyer un avis sans serveur, ouvre /start puis le bouton 🥷🏼 Ouvrir le Shop du clavier Telegram (pas l'ancien bouton du message ni le menu).";
+      return;
+    }
+    const rating = Number(document.getElementById("review-rating").value);
+    const comment = document.getElementById("review-comment").value.trim();
+    if (!Number.isInteger(rating) || rating < 1 || rating > 5 || comment.length < 10 || comment.length > 700) {
+      reviewStatus.textContent = "❌ Sélectionne une note et écris entre 10 et 700 caractères.";
+      return;
+    }
+    const data = JSON.stringify({type:"review_submission", rating, comment});
+    if (new TextEncoder().encode(data).length > 4096) {
+      reviewStatus.textContent = "❌ Commentaire trop long pour Telegram.";
+      return;
+    }
     submit.disabled = true;
-    reviewStatus.textContent = "Envoi en cours…";
+    reviewStatus.textContent = "📤 Envoi à Telegram… La mini-app va se fermer automatiquement.";
     try {
-      const response = await fetch(`${REVIEWS_API_URL}/api/reviews`, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({initData, rating:Number(document.getElementById("review-rating").value), comment:document.getElementById("review-comment").value.trim()})});
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || "Échec de l'envoi");
-      reviewStatus.textContent = "✅ Avis envoyé ! Il sera publié après validation.";
-      reviewForm.reset();
-    } catch(err) { reviewStatus.textContent = "❌ " + err.message; }
-    finally { submit.disabled = false; }
+      // Telegram ferme la Mini App et transmet l'avis au bot en web_app_data.
+      telegram.sendData(data);
+    } catch (error) {
+      reviewStatus.textContent = "❌ Envoi impossible : ouvre la boutique depuis le bouton /start du clavier Telegram.";
+      submit.disabled = false;
+    }
   });
   loadReviews();
   init();
