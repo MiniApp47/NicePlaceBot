@@ -30,7 +30,7 @@
             padding: 0;
             overscroll-behavior-y: none;
             /* FOND D'ÉCRAN */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Fondecran.png');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Fondecran2.png');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
@@ -1695,6 +1695,54 @@
             }
         }
 
+        /* Deux notifications séparées, affichées ensemble au lancement */
+        #start-promo-popup {
+            box-sizing: border-box;
+            overflow-y: auto;
+            padding: max(12px, env(safe-area-inset-top)) 14px max(12px, env(safe-area-inset-bottom));
+        }
+        .start-promo-stack {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 380px;
+            max-height: calc(100dvh - 30px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            padding: 5px;
+            scrollbar-width: thin;
+        }
+        .start-promo-card {box-sizing: border-box;flex-shrink:0;}
+        .start-promo-card[hidden], .start-referral-card[hidden] {display:none!important;}
+        .start-referral-card {
+            position: relative;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            width: 100%;
+            overflow: hidden;
+            padding: 16px 18px 17px;
+            border-radius: 20px;
+            border: 2px solid #ffd34a;
+            text-align: center;
+            color: #fff;
+            background: linear-gradient(115deg, #0a0907, #443000, #0b0907, #4b3000);
+            background-size: 240% 240%;
+            animation: startReferralGradient 5s ease-in-out infinite, promoPop .35s ease;
+            box-shadow: 0 7px 22px #000b, 0 0 16px #ffc83b80;
+        }
+        .start-referral-card .start-promo-close{background:rgba(255,255,255,.12);border:1px solid #ffd05b;}
+        .start-referral-gift{font-size:34px;line-height:1.1;animation:npReferralGift 2.8s ease-in-out infinite;}
+        .start-referral-label{font-size:.72rem;font-weight:900;letter-spacing:.16em;color:#ffdb79;margin:7px 0 5px;}
+        .start-referral-title{font-size:1.15rem;line-height:1.3;font-weight:900;color:#fff;margin:5px 16px 8px;text-wrap:balance;}
+        .start-referral-description{font-size:.82rem;line-height:1.45;color:#e6e0cf;margin:5px 0 10px;}
+        .start-referral-limit{border:1px solid #b98f29;border-radius:11px;padding:8px 10px;font-weight:700;font-size:.83rem;background:#ffdf6820;color:#ffe396;}
+        .start-referral-limit strong{font-size:1rem;color:#fff1b5;}
+        .start-referral-cta{width:100%;margin-top:11px;padding:11px 12px;border:0;border-radius:11px;font-size:.9rem;font-weight:900;cursor:pointer;color:#231704;background:linear-gradient(90deg,#ffdf81,#ffc230,#ffea98);box-shadow:0 3px 10px #0007;}
+        @keyframes startReferralGradient {0%,100% {background-position:0% 50%;}50% {background-position:100% 50%;}}
+        @media (max-height:650px) {.start-promo-stack{max-height:calc(100dvh - 24px);}}
+        @media (prefers-reduced-motion:reduce) {.start-referral-card,.start-referral-gift{animation:none!important;}}
+
         .free-gift-box {
     margin-top: 18px;
     padding: 15px;
@@ -2069,13 +2117,239 @@
 .reviews-more-arrow { font-size: 1.35rem; line-height: .9; transition: transform .2s ease; }
 .reviews-more[aria-expanded="true"] .reviews-more-arrow { transform: rotate(180deg); }
 .reviews-more:active { transform: scale(.99); }
+
+/* =========================
+   GROS BLOC PARRAINAGE HOME
+   ========================= */
+.referral-home-card {
+    margin: 16px 14px 10px 14px;
+    padding: 18px 16px;
+    border-radius: 18px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #111111, #2a2a2a, #111111);
+    border: 2px solid #f3c623;
+    box-shadow: 0 0 14px rgba(243, 198, 35, 0.35);
+    text-align: center;
+}
+
+.referral-home-badge {
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f3c623, #ffda47);
+    color: #111;
+    font-weight: 900;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+}
+
+.referral-home-title {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.35;
+}
+
+.referral-home-subtitle {
+    color: #f4f4f4;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 14px;
+}
+
+.referral-home-cta {
+    font-size: 1rem;
+    font-weight: 900;
+    color: #f3c623;
+}
+
+/* =========================
+   PAGE PARRAINAGE
+   ========================= */
+.referral-page-box {
+    margin: 14px;
+    padding: 18px;
+    border-radius: 20px;
+    background: #161616;
+    border: 1px solid rgba(243, 198, 35, 0.3);
+    box-shadow: 0 0 16px rgba(0,0,0,0.25);
+}
+
+.referral-big-title {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #f3c623;
+    text-align: center;
+    margin-bottom: 14px;
+    line-height: 1.35;
+}
+
+.referral-text {
+    color: #fff;
+    text-align: center;
+    line-height: 1.7;
+    font-size: 0.97rem;
+}
+
+.referral-offer-highlight {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 16px;
+    text-align: center;
+    background: linear-gradient(135deg, #f3c623, #ffda47);
+    color: #111;
+    font-weight: 800;
+    line-height: 1.6;
+}
+
+.referral-offer-highlight span {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+.referral-steps {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.referral-step {
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: #222;
+    color: #fff;
+    line-height: 1.5;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.referral-copy-grid {
+    margin-top: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.referral-copy-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 900;
+    cursor: pointer;
+    background: linear-gradient(90deg, #f3c623, #ffda47);
+    color: #111;
+    box-shadow: 0 0 12px rgba(243, 198, 35, 0.28);
+}
+
+.referral-link-label {
+    margin-top: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+}
+
+.referral-animated-link {
+    padding: 14px;
+    border-radius: 16px;
+    text-align: center;
+    font-weight: 900;
+    font-size: 0.95rem;
+    color: #111;
+    background: linear-gradient(90deg, #111 0%, #f3c623 25%, #111 50%, #f3c623 75%, #111 100%);
+    background-size: 250% 100%;
+    animation: referralGradientMove 3.2s linear infinite;
+    word-break: break-word;
+    box-shadow: 0 0 14px rgba(243, 198, 35, 0.25);
+}
+
+@keyframes referralGradientMove {
+    0% {
+        background-position: 0% 50%;
+        color: #f3c623;
+    }
+    50% {
+        background-position: 100% 50%;
+        color: #111;
+    }
+    100% {
+        background-position: 0% 50%;
+        color: #f3c623;
+    }
+}
+
+.referral-open-bot-btn {
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    padding: 14px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 900;
+    background: #2b2b2b;
+    color: #fff;
+    border: 1px solid #f3c623;
+    box-sizing: border-box;
+}
+/* ================================================
+   NICE PLACE · PARRAINAGE PREMIUM (2026)
+   ================================================ */
+.np-referral-home-banner{position:relative;isolation:isolate;display:flex;align-items:center;gap:15px;width:calc(100% - 28px);margin:18px 14px 12px;padding:20px 15px;border:2px solid #ffce52;border-radius:20px;color:#fff;text-align:left;cursor:pointer;overflow:hidden;background:#0e0e0f;box-shadow:0 8px 25px #0007,0 0 19px #ffc83d55;font:inherit;transform:translateZ(0);}
+.np-referral-home-banner::before,.np-referral-animated-link::before{content:"";position:absolute;z-index:0;inset:0;background:linear-gradient(105deg,#0c0c0e 0%,#3b2c07 16%,#f9c539 33%,#101010 50%,#df9d15 66%,#171717 82%,#f9c539 100%);background-size:260% 100%;animation:npReferralFlow 5s linear infinite;opacity:.67;}
+.np-referral-home-banner::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#090909dd 2%,#141414b8 70%,#0007);}
+@keyframes npReferralFlow{0%{background-position:0% 50%}100%{background-position:100% 50%}}
+.np-referral-home-banner:active{transform:scale(.985)}
+.np-referral-home-gift{position:relative;z-index:2;flex:0 0 auto;font-size:46px;line-height:1;filter:drop-shadow(0 4px 9px #ffcc506f);animation:npReferralGift 2.8s ease-in-out infinite;transform-origin:50% 80%;}
+@keyframes npReferralGift{0%,100%{transform:translateY(0) rotate(-7deg) scale(1)}25%{transform:translateY(-5px) rotate(8deg) scale(1.09)}50%{transform:translateY(0) rotate(-4deg) scale(1.02)}75%{transform:translateY(-4px) rotate(6deg)}}
+.np-referral-home-content{position:relative;z-index:2;display:flex;flex-direction:column;min-width:0;gap:5px}
+.np-referral-home-kicker{color:#ffdc84;font-size:10px;font-weight:900;letter-spacing:.12em}
+.np-referral-home-content>strong{font-size:clamp(1.1rem,4vw,1.35rem);line-height:1.22;font-weight:900;text-shadow:0 2px 8px #000}
+.np-referral-home-desc{font-size:.85rem;color:#f1e9d5}.np-referral-home-desc b{color:#ffe186}
+.np-referral-home-cta{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:7px 12px;margin-top:4px;background:linear-gradient(100deg,#ffd55b,#d9900a);color:#1e1405;border-radius:999px;font-size:.8rem;font-weight:900}
+.np-referral-page{padding-bottom:95px}.np-referral-header{justify-content:space-between;gap:10px;position:relative}.np-referral-header .title{font-size:1.08rem}.np-referral-back{border:1px solid #eba53b;border-radius:10px;background:#1d1a16;color:#fbd476;font-size:27px;line-height:1;width:37px;height:37px;cursor:pointer}
+.np-referral-content{width:min(100%,520px);margin:0 auto;box-sizing:border-box;padding:16px 13px 40px;display:flex;flex-direction:column;gap:20px}
+.np-referral-hero{position:relative;isolation:isolate;border:1px solid #ffce55;border-radius:25px;overflow:hidden;padding:24px 17px 21px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#744b13 0%,#241c13 38%,#0b0b0d 100%);box-shadow:0 0 28px #e4a92b35}
+.np-referral-hero::after{content:"";position:absolute;top:-70%;left:-120%;width:75%;height:250%;transform:rotate(24deg);background:linear-gradient(90deg,transparent,#ffe8a91e,transparent);animation:npReferralShine 5.5s ease-in-out infinite;pointer-events:none}
+@keyframes npReferralShine{0%,25%{left:-120%}65%,100%{left:180%}}
+.np-referral-gift{font-size:76px;line-height:1.1;display:block;margin-bottom:10px;animation:npReferralGift 2.8s ease-in-out infinite;filter:drop-shadow(0 8px 14px #f5bf4880)}
+.np-referral-spark{position:absolute;color:#ffdf74;font-size:34px;animation:npReferralSpark 2.2s ease-in-out infinite;pointer-events:none}
+.np-referral-spark-one{top:40px;left:13%}.np-referral-spark-two{top:77px;right:13%;animation-delay:.7s}
+@keyframes npReferralSpark{0%,100%{opacity:.35;transform:scale(.7) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(25deg)}}
+.np-referral-eyebrow{color:#ffe6a4;letter-spacing:.16em;font-size:10px;font-weight:900;margin:5px auto 10px}
+.np-referral-hero h1{font-size:clamp(1.6rem,6vw,2.1rem);line-height:1.15;margin:0 auto 12px;color:#fff;font-family:Roboto,Arial,sans-serif}.np-referral-hero h1 span{background:linear-gradient(90deg,#fff0a1,#ffb525,#ffe5a4);background-clip:text;-webkit-background-clip:text;color:transparent}
+.np-referral-hero>p{font-size:.92rem;color:#efe5d2;line-height:1.5;margin:0 0 17px}
+.np-referral-limit{display:flex;flex-direction:column;align-items:center;gap:1px;padding:14px;border-radius:18px;background:linear-gradient(160deg,#fff3bd,#ffc342,#e69a09);color:#241800;box-shadow:0 0 16px #ffc4476b,inset 0 1px 1px #fff6;transform:translateZ(0)}
+.np-referral-limit>span{font-size:.78rem;font-weight:900;letter-spacing:.11em}.np-referral-limit strong{font-size:clamp(3rem,13vw,4rem);font-family:Impact,Roboto,sans-serif;line-height:1.05;font-weight:900;text-shadow:0 2px 1px #ffffff61}.np-referral-euro{font-size:.62em}
+.np-referral-pill{display:inline-flex;margin-top:14px;color:#fee9b4;border:1px solid #cc9a31;border-radius:999px;padding:7px 11px;font-size:.77rem;font-weight:700}
+.np-referral-section-heading{margin:0 0 13px;color:#ffd16a;text-align:center;font-size:1.14rem;font-weight:900}
+.np-referral-example,.np-referral-steps-wrap,.np-referral-actions{background:#19181be8;border:1px solid #c292354e;border-radius:20px;padding:18px 13px;box-shadow:0 5px 18px #0003}
+.np-referral-example-cards{display:grid;grid-template-columns:minmax(0,1fr) 30px minmax(0,1fr);gap:5px;align-items:center}
+.np-referral-example-card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:16px 5px;border:1px solid #72603c;border-radius:15px;min-width:0;background:#2b2823}.np-referral-example-card small{color:#c8bfa7;font-size:.78rem}.np-referral-example-card strong{font-size:clamp(1.55rem,6vw,2rem)}.np-referral-example-card span{font-size:.74rem;text-align:center;color:#c9c4b9}
+.np-referral-example-win{border-color:#f8c647;background:linear-gradient(170deg,#5f4510,#292110)}.np-referral-example-win strong{color:#ffe68a}.np-referral-example-plus{text-align:center;font-size:1.7rem;color:#ffd06b;font-weight:900}.np-referral-example>p{margin:14px 4px 0;color:#bcb8ac;font-size:.78rem;line-height:1.5;text-align:center}
+.np-referral-steps{list-style:none;display:flex;flex-direction:column;gap:10px;padding:0;margin:0}.np-referral-steps li{display:flex;gap:12px;align-items:flex-start;padding:12px 10px;border:1px solid #463b2b;border-radius:12px;background:#242126}.np-referral-step-num{width:34px;height:34px;flex:0 0 34px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:#ffd05b;color:#261703;font-weight:900;font-size:.8rem}.np-referral-steps li strong{font-size:.95rem;color:#fff}.np-referral-steps li p{color:#c7c3bc;font-size:.82rem;line-height:1.5;margin:4px 0 0}.np-referral-steps code{color:#ffe68f}
+.np-referral-muted{color:#c7c2b6;font-size:.82rem;line-height:1.5;margin:0 0 14px;text-align:center}.np-referral-primary,.np-referral-copy-link{width:100%;border:0;border-radius:13px;padding:15px 12px;font:inherit;font-weight:900;font-size:.96rem;color:#1f1606;cursor:pointer;background:linear-gradient(95deg,#ffe69a,#efb331,#ffd86a);box-shadow:0 3px 16px #f9bb3440}.np-referral-primary:active,.np-referral-copy-link:active{transform:scale(.985)}
+.np-referral-command-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:11px 0 18px}.np-referral-command{border:1px solid #c29c4a;background:#302719;color:#f9deb0;border-radius:11px;padding:11px 6px;font-size:.77rem;font-weight:800;cursor:pointer}
+.np-referral-label{display:block;font-weight:900;color:#ffce69;margin-bottom:9px;font-size:.91rem}.np-referral-link-field{display:flex;align-items:stretch;border:1px solid #bd913d;border-radius:12px;background:#0e0e10;overflow:hidden}.np-referral-link-field input{flex:1;min-width:0;font:inherit;font-size:.84rem;color:#fff;outline:0;border:0;padding:14px 11px;background:transparent}.np-referral-link-field input::placeholder{color:#848180}.np-referral-link-field button{border:0;border-left:1px solid #8a672c;color:#1c1607;font-size:1.2rem;font-weight:900;background:#ffd46c;padding:0 17px;cursor:pointer}.np-referral-help{margin:8px 0 12px;font-size:.72rem;text-align:left}
+.np-referral-animated-link{position:relative;isolation:isolate;border:1px solid #ffd46c;padding:15px 12px;margin:0 0 12px;min-height:28px;border-radius:14px;overflow:hidden;color:#fff;font-size:.8rem;font-weight:800;text-align:center;display:flex;align-items:center;justify-content:center;overflow-wrap:anywhere;background:#141212;text-shadow:0 1px 4px #000}.np-referral-animated-link::before{opacity:.42}.np-referral-animated-link span{position:relative;z-index:1}.np-referral-copy-link:disabled{opacity:.48;cursor:not-allowed;filter:grayscale(.6)}.np-referral-status{color:#ffd878;font-size:.79rem;min-height:17px;margin:9px 0 0;text-align:center}
+.np-referral-disclaimer{font-size:.72rem;line-height:1.5;color:#bbb4a6;margin:0 6px 10px;text-align:center}
+.np-referral-toast[hidden]{display:none!important}.np-referral-toast{position:fixed;z-index:90;left:12px;right:12px;bottom:94px;max-width:425px;margin:auto;display:flex;align-items:center;gap:13px;border-radius:19px;padding:14px 42px 14px 12px;border:2px solid #f7c550;background:linear-gradient(125deg,#141314f7,#4e360df8,#0c0b0cf7);box-shadow:0 8px 35px #000c,0 0 20px #cba13462;animation:npReferralToastIn .42s ease-out}.np-referral-toast-gift{font-size:39px;animation:npReferralGift 2.8s ease-in-out infinite}.np-referral-toast-body{display:flex;flex-direction:column;gap:4px;min-width:0}.np-referral-toast-body strong{color:#ffe09a;font-size:1.07rem}.np-referral-toast-body span{color:#fff;font-size:.78rem}.np-referral-toast-body button{background:none;border:0;color:#ffe06f;font-weight:900;text-align:left;padding:4px 0;cursor:pointer}.np-referral-toast-close{position:absolute;top:6px;right:12px;color:#fff;font-size:25px;background:none;border:0;cursor:pointer}
+@keyframes npReferralToastIn{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media (max-width:350px){.np-referral-home-gift{font-size:37px}.np-referral-home-banner{gap:11px;padding:16px 12px}.np-referral-command-row{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.np-referral-home-banner::before,.np-referral-gift,.np-referral-home-gift,.np-referral-spark,.np-referral-hero::after,.np-referral-toast-gift,.np-referral-animated-link::before{animation:none!important}}
 </style>
 </head>
 
 <body>
     <div id="page-contact" class="page">
         <div class="page-content">
-            <img src="LogoReel.png" alt="Logo" class="contact-logo">
+            <img src="Logo2.jpg" alt="Logo" class="contact-logo">
             <div class="contact-card">
 
                 <div id="contact-links-container" class="contact-links-list">
@@ -2087,7 +2361,7 @@
 
     <div id="page-info" class="page">
         <div class="page-content">
-            <img src="LogoReel.png" alt="Logo" class="contact-logo">
+            <img src="Logo2.jpg" alt="Logo" class="contact-logo">
             <div class="contact-card">
                 <div class="accordion-container">
 
@@ -2153,6 +2427,64 @@
             </div>
         </div>
     </div>
+
+    <!-- NOUVELLE PAGE PARRAINAGE PREMIUM -->
+    <section id="page-referral" class="page np-referral-page" aria-labelledby="np-referral-title">
+        <header class="page-header np-referral-header">
+            <button type="button" id="np-referral-back" class="np-referral-back" aria-label="Retour à l’accueil">‹</button>
+            <span class="title">Programme de parrainage</span>
+            <span aria-hidden="true">🎁</span>
+        </header>
+        <div class="page-content np-referral-content">
+            <div class="np-referral-hero">
+                <div class="np-referral-spark np-referral-spark-one" aria-hidden="true">✦</div>
+                <div class="np-referral-spark np-referral-spark-two" aria-hidden="true">✧</div>
+                <div class="np-referral-gift" aria-hidden="true">🎁</div>
+                <div class="np-referral-eyebrow">OFFRE PARRAINAGE · NICE PLACE</div>
+                <h1 id="np-referral-title">Invite un proche,<br><span>double ta commande !</span></h1>
+                <p>Une commande validée via ton lien = un code DUO pour toi.</p>
+                <div class="np-referral-limit"><span>JUSQU’À</span><strong>200<span class="np-referral-euro">€</span></strong><span>DE COMMANDE DOUBLÉE</span></div>
+                <span class="np-referral-pill">✨ Un bonus par parrainage validé</span>
+            </div>
+
+            <section class="np-referral-example" aria-label="Exemple de doublement">
+                <div class="np-referral-section-heading">✨ Le résultat, en un coup d'œil</div>
+                <div class="np-referral-example-cards">
+                    <div class="np-referral-example-card"><small>Tu paies</small><strong>100 €</strong><span>Ta commande</span></div>
+                    <div class="np-referral-example-plus" aria-hidden="true">→</div>
+                    <div class="np-referral-example-card np-referral-example-win"><small>Tu reçois</small><strong>200 €</strong><span>de produits au total</span></div>
+                </div>
+                <p>Exemple : pour 100 € d'articles achetés, 100 € d'articles identiques sont offerts. Offre valable sur une commande de 200 € maximum, après validation de la commande du filleul.</p>
+            </section>
+
+            <section class="np-referral-steps-wrap" aria-labelledby="np-referral-steps-title">
+                <h2 id="np-referral-steps-title" class="np-referral-section-heading">Comment en profiter ?</h2>
+                <ol class="np-referral-steps">
+                    <li><span class="np-referral-step-num">01</span><div><strong>Récupère ton lien</strong><p>Envoie <code>/parrainage</code> au bot Telegram. Il t’envoie ton lien unique.</p></div></li>
+                    <li><span class="np-referral-step-num">02</span><div><strong>Partage-le</strong><p>Ton proche démarre le bot avec ton lien et passe une commande.</p></div></li>
+                    <li><span class="np-referral-step-num">03</span><div><strong>Reçois ton code DUO</strong><p>Une fois sa commande confirmée, tu reçois un code bonus personnel.</p></div></li>
+                    <li><span class="np-referral-step-num">04</span><div><strong>Double ton panier</strong><p>Saisis ton code DUO dans le panier et vois les articles offerts avant d’envoyer ta commande.</p></div></li>
+                </ol>
+            </section>
+
+            <section class="np-referral-actions" aria-labelledby="np-referral-actions-title">
+                <h2 id="np-referral-actions-title" class="np-referral-section-heading">Ton espace parrainage</h2>
+                <p class="np-referral-muted">Génère ton lien via le bot puis colle-le ici pour le conserver et le copier facilement.</p>
+                <button id="np-referral-open-bot" class="np-referral-primary" type="button">✈️ Ouvrir le bot Telegram</button>
+                <div class="np-referral-command-row">
+                    <button id="copy-parrainage-command" class="np-referral-command" type="button">📋 Copier /parrainage</button>
+                    <button id="copy-mesbonus-command" class="np-referral-command" type="button">🎟️ Copier /mesbonus</button>
+                </div>
+                <label class="np-referral-label" for="np-referral-user-link">🔗 Ton lien de parrainage personnel</label>
+                <div class="np-referral-link-field"><input type="url" id="np-referral-user-link" inputmode="url" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="Colle ici le lien reçu du bot" aria-describedby="np-referral-link-help"><button type="button" id="np-referral-save-link" aria-label="Enregistrer mon lien">✓</button></div>
+                <p id="np-referral-link-help" class="np-referral-muted np-referral-help">Ton lien personnel doit commencer par https://t.me/ et contenir ?start=ref_…</p>
+                <div class="np-referral-animated-link"><span id="np-referral-link-preview">Ton lien personnel apparaîtra ici ✨</span></div>
+                <button id="np-referral-copy-link" type="button" class="np-referral-copy-link" disabled>📋 Copier mon lien de parrainage</button>
+                <p id="np-referral-link-status" class="np-referral-status" role="status" aria-live="polite"></p>
+            </section>
+            <p class="np-referral-disclaimer">Le code de récompense est attribué après confirmation de la commande du filleul. Chaque code s'utilise une seule fois ; la commande est doublée à hauteur de 200 € maximum de montant payé.</p>
+        </div>
+    </section>
 
     <svg width="0" height="0" style="position:absolute">
         <defs>
@@ -2247,7 +2579,7 @@
 
     <div id="page-loader" class="page active">
         <div class="loader-box">
-            <img src="LogoReel.png" alt="Logo">
+            <img src="Logo2.jpg" alt="Logo">
             <div class="app-name">🐪 Nice Place ⌛</div>
             <div class="loading-text">Chargement de NicePlaceBot...</div>
 
@@ -2274,7 +2606,7 @@
         </div>
         <div class="home-header">
             <button id="reviews-open" class="reviews-launch" type="button">⭐ Avis <span id="reviews-average">—</span></button>
-            <img src="LogoReel.png" alt="Logo" class="home-logo">
+            <img src="Logo2.jpg" alt="Logo" class="home-logo">
             <button class="cart-button" id="home-cart-button">
                 <svg width="20" height="20">
                     <use href="#icon-cart" />
@@ -2283,7 +2615,16 @@
             </button>
         </div>
 
-        <div class="referral-home"><a id="referral-link" href="#" role="button">🎁 Mon lien de parrainage</a></div>
+        <!-- PARRAINAGE PREMIUM : grand bandeau dans la vraie page d’accueil -->
+        <button type="button" class="np-referral-home-banner" id="open-referral-page" aria-label="Découvrir l’offre de parrainage">
+            <span class="np-referral-home-gift" aria-hidden="true">🎁</span>
+            <span class="np-referral-home-content">
+                <span class="np-referral-home-kicker">OFFRE EXCLUSIVE · PARRAINAGE</span>
+                <strong>Invite un proche, double ta commande !</strong>
+                <span class="np-referral-home-desc">Jusqu’à <b>200 €</b> de commande doublée</span>
+                <span class="np-referral-home-cta">Découvrir l’offre <span aria-hidden="true">➜</span></span>
+            </span>
+        </button>
         <div class="filters">
             <div class="filter-input-wrapper" style="display:none ;">
                 <svg width="20" height="20">
@@ -2524,22 +2865,34 @@
         </button> -->
     </div>
 
-    <div id="start-promo-popup">
-        <div class="start-promo-card">
-            <button id="start-promo-close" class="start-promo-close" type="button">×</button>
-
-            <div class="start-promo-title">🎁 OFFRES DU MOMENT 🎁</div>
-
-            <div class="start-promo-list">
-                <div class="start-promo-line">
-                    🎁 4 pochettes achetées<br>
-                    <span class="start-promo-gift">+ 1 pochette de votre choix offerte 🎉</span>
+    <!-- Deux annonces distinctes, visibles ensemble dans la fenêtre d'accueil -->
+    <div id="start-promo-popup" role="dialog" aria-modal="true" aria-label="Offres Nice Place">
+        <div class="start-promo-stack">
+            <!-- Annonce n°1 : offre déjà existante, conservée -->
+            <div id="start-promo-offer" class="start-promo-card">
+                <button id="start-promo-close" class="start-promo-close" type="button" aria-label="Fermer l'offre pochettes">×</button>
+                <div class="start-promo-title">🎁 OFFRES DU MOMENT 🎁</div>
+                <div class="start-promo-list">
+                    <div class="start-promo-line">
+                        🎁 4 pochettes achetées<br>
+                        <span class="start-promo-gift">+ 1 pochette de votre choix offerte 🎉</span>
+                    </div>
+                    <div class="start-promo-line">
+                        🛒 Choix disponible directement dans le panier<br>
+                        <span class="start-promo-gift">🌿 Beuh / 🇺🇸 Cali / 🧸 Mousseux / 🍫 Dry</span>
+                    </div>
                 </div>
+            </div>
 
-                <div class="start-promo-line">
-                    🛒 Choix disponible directement dans le panier<br>
-                    <span class="start-promo-gift">🌿 Beuh / 🇺🇸 Cali / 🧸 Mousseux / 🍫 Dry</span>
-                </div>
+            <!-- Annonce n°2 : parrainage, indépendante de la première -->
+            <div id="start-referral-offer" class="start-referral-card">
+                <button id="start-referral-close" class="start-promo-close" type="button" aria-label="Fermer l'offre parrainage">×</button>
+                <div class="start-referral-gift" aria-hidden="true">🎁</div>
+                <div class="start-referral-label">OFFRE PARRAINAGE</div>
+                <div class="start-referral-title">Double ta commande en ramenant un pote à toi !</div>
+                <p class="start-referral-description">Invite un ami avec ton lien. Quand sa première commande est validée, récupère ton code DUO pour doubler ta prochaine commande.</p>
+                <div class="start-referral-limit">🔥 Jusqu'à <strong>200 €</strong> de commande doublée</div>
+                <button type="button" id="start-referral-open" class="start-referral-cta">Découvrir l'offre <span aria-hidden="true">→</span></button>
             </div>
         </div>
     </div>
@@ -2584,7 +2937,7 @@
       </div>
     </div>
     <div id="notification-toast"></div>
-    <script src="script.js?v=duo-code-20261019"></script>
+    <script src="script.js?v=referral-fix-20261019-2"></script>
 </body>
 
 </html>

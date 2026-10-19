@@ -815,14 +815,6 @@ const roulettePrizeLabel = "🎁 Packet Philip Moris Offert"; // Lot affiché si
     const avisNav = document.getElementById("nav-avis"); // <-- AJOUT ICI
     const cartNav = document.getElementById("nav-cart");
 
-    const referralHomeCard = document.getElementById("open-referral-page");
-
-if (referralHomeCard) {
-    referralHomeCard.addEventListener("click", () => {
-        showPage("page-referral");
-    });
-}
-
     // On reset tout
     homeNav.classList.remove("active");
     infoNav.classList.remove("active");
@@ -846,37 +838,109 @@ if (referralHomeCard) {
 
   // --- LOGIQUE D'AFFICHAGE ---
 
-  function copyTextToClipboard(text, successMessage = "Texte copié !") {
-    navigator.clipboard.writeText(text)
-        .then(() => {
-            if (typeof showNotification === "function") {
-                showNotification(successMessage);
-            } else {
-                alert(successMessage);
-            }
-        })
-        .catch(() => {
-            if (typeof showNotification === "function") {
-                showNotification("Impossible de copier le texte.");
-            } else {
-                alert("Impossible de copier le texte.");
-            }
-        });
-}
+  // --- PARRAINAGE PREMIUM : un seul gestionnaire, vrai lien seulement ---
+  const NP_REFERRAL_BOT = 'NiicePlaaceBot'; // même bot que dans la version d'origine
+  const NP_REFERRAL_STORAGE = 'niceplace_personal_referral_link_v1';
+  const npReferralBanner = document.getElementById('open-referral-page');
+  const npReferralInput = document.getElementById('np-referral-user-link');
+  const npReferralPreview = document.getElementById('np-referral-link-preview');
+  const npReferralCopyBtn = document.getElementById('np-referral-copy-link');
+  const npReferralStatus = document.getElementById('np-referral-link-status');
+  const npReferralToast = document.getElementById('np-referral-toast');
+  let npReferralSavedLink = '';
 
-const copyParrainageBtn = document.getElementById("copy-parrainage-command");
-if (copyParrainageBtn) {
-    copyParrainageBtn.addEventListener("click", () => {
-        copyTextToClipboard("/parrainage", "✅ /parrainage copié");
-    });
-}
-
-const copyMesbonusBtn = document.getElementById("copy-mesbonus-command");
-if (copyMesbonusBtn) {
-    copyMesbonusBtn.addEventListener("click", () => {
-        copyTextToClipboard("/mesbonus", "✅ /mesbonus copié");
-    });
-}
+  function npReferralToastHide() {
+    if (npReferralToast) npReferralToast.hidden = true;
+  }
+  function npReferralToastShow() {
+    if (!npReferralToast || !document.getElementById('page-home')?.classList.contains('active')) return;
+    try {
+      if (sessionStorage.getItem('np_referral_teaser_seen') === '1') return;
+      sessionStorage.setItem('np_referral_teaser_seen','1');
+    } catch (_) { /* stockage non disponible dans certains WebViews */ }
+    npReferralToast.hidden = false;
+  }
+  function npReferralOpenPage() {
+    npReferralToastHide();
+    showPage('page-referral');
+    window.scrollTo({top:0,behavior:'instant'});
+  }
+  if (npReferralBanner) npReferralBanner.addEventListener('click', npReferralOpenPage);
+  // Le lien secondaire, s'il existe, mène aussi à la page explicative.
+  document.getElementById('referral-link')?.addEventListener('click', (event) => {
+    event.preventDefault();
+    npReferralOpenPage();
+  });
+  document.getElementById('np-referral-toast-open')?.addEventListener('click', npReferralOpenPage);
+  document.getElementById('np-referral-toast-close')?.addEventListener('click', npReferralToastHide);
+  document.getElementById('np-referral-back')?.addEventListener('click', () => {
+    showPage('page-home'); window.scrollTo({top:0,behavior:'instant'});
+  });
+  document.getElementById('np-referral-open-bot')?.addEventListener('click', () => {
+    const url = `https://t.me/${NP_REFERRAL_BOT}`;
+    try {
+      if (window.Telegram?.WebApp?.openTelegramLink) window.Telegram.WebApp.openTelegramLink(url);
+      else window.open(url,'_blank','noopener,noreferrer');
+    } catch (_) { window.open(url,'_blank','noopener,noreferrer'); }
+  });
+  async function npReferralCopy(text, label) {
+    let ok = false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        ok = true;
+      }
+    } catch (_) {}
+    if (!ok) {
+      try {
+        const tmp=document.createElement('textarea');
+        tmp.value=text;tmp.style.position='fixed';tmp.style.opacity='0';
+        document.body.appendChild(tmp);tmp.select();
+        ok=document.execCommand('copy');tmp.remove();
+      } catch (_) {}
+    }
+    if (ok) showNotification(`✅ ${label} copié !`);
+    else { if(npReferralStatus) npReferralStatus.textContent='Impossible de copier automatiquement. Maintiens le texte pour le copier.'; }
+    return ok;
+  }
+  document.getElementById('copy-parrainage-command')?.addEventListener('click',()=>npReferralCopy('/parrainage','/parrainage'));
+  document.getElementById('copy-mesbonus-command')?.addEventListener('click',()=>npReferralCopy('/mesbonus','/mesbonus'));
+  function npReferralValidateLink(value) {
+    try {
+      const url = new URL(value.trim());
+      const bot = url.pathname.replace(/^\/|\/$/g,'');
+      const start = url.searchParams.get('start') || '';
+      if (url.protocol !== 'https:' || url.hostname.toLowerCase() !== 't.me' || !/^[a-z0-9_]{5,32}$/i.test(bot)) return '';
+      if (bot.toLowerCase() !== NP_REFERRAL_BOT.toLowerCase()) return '';
+      if (!/^ref_[a-z0-9_-]{2,64}$/i.test(start)) return '';
+      return `https://t.me/${bot}?start=${encodeURIComponent(start)}`;
+    } catch (_) { return ''; }
+  }
+  function npReferralRenderSaved() {
+    if (npReferralPreview) npReferralPreview.textContent = npReferralSavedLink || 'Ton lien personnel apparaîtra ici ✨';
+    if (npReferralCopyBtn) npReferralCopyBtn.disabled=!npReferralSavedLink;
+    if (npReferralInput && npReferralSavedLink) npReferralInput.value=npReferralSavedLink;
+  }
+  try {
+    npReferralSavedLink=npReferralValidateLink(localStorage.getItem(NP_REFERRAL_STORAGE)||'');
+  } catch (_) {}
+  npReferralRenderSaved();
+  document.getElementById('np-referral-save-link')?.addEventListener('click',()=>{
+    const link=npReferralValidateLink(npReferralInput?.value||'');
+    if (!link) {
+      if(npReferralStatus) npReferralStatus.textContent='❌ Colle le lien de parrainage reçu du bot Nice Place (https://t.me/...?...).';
+      return;
+    }
+    npReferralSavedLink=link;
+    try { localStorage.setItem(NP_REFERRAL_STORAGE,link); } catch (_) {}
+    npReferralRenderSaved();
+    if(npReferralStatus) npReferralStatus.textContent='✅ Lien enregistré sur cet appareil. Tu peux le copier !';
+  });
+  npReferralCopyBtn?.addEventListener('click',()=>{
+    if (!npReferralSavedLink) return;
+    npReferralCopy(npReferralSavedLink,'Ton lien de parrainage');
+  });
+  // Le bot est seul habilité à générer un lien personnel : aucun ref_ inventé.
 
   // --- MODIFIÉ : renderHomePage ---
 
@@ -1822,22 +1886,29 @@ qualityFilter.innerHTML = `
 
   function showStartPromoPopup() {
     const popup = document.getElementById("start-promo-popup");
-    const closeBtn = document.getElementById("start-promo-close");
-
+    const firstOffer = document.getElementById("start-promo-offer");
+    const referralOffer = document.getElementById("start-referral-offer");
     if (!popup) return;
 
+    // Au démarrage, les deux offres s'affichent ensemble, dans deux cartes distinctes.
+    if (firstOffer) firstOffer.hidden = false;
+    if (referralOffer) referralOffer.hidden = false;
     popup.classList.add("show");
 
-    if (closeBtn) {
-      closeBtn.onclick = function () {
-        popup.classList.remove("show");
-      };
-    }
-
-    popup.onclick = function (e) {
-      if (e.target === popup) {
+    const hideOffer = (offer) => {
+      if (offer) offer.hidden = true;
+      if ((!firstOffer || firstOffer.hidden) && (!referralOffer || referralOffer.hidden)) {
         popup.classList.remove("show");
       }
+    };
+    document.getElementById("start-promo-close")?.addEventListener("click", () => hideOffer(firstOffer), { once: true });
+    document.getElementById("start-referral-close")?.addEventListener("click", () => hideOffer(referralOffer), { once: true });
+    document.getElementById("start-referral-open")?.addEventListener("click", () => {
+      popup.classList.remove("show");
+      npReferralOpenPage();
+    });
+    popup.onclick = (e) => {
+      if (e.target === popup) popup.classList.remove("show");
     };
   }
 
@@ -2860,21 +2931,6 @@ if (rouletteBtn) {
     } catch (error) {
       reviewStatus.textContent = '❌ ' + (error.message || 'Envoi impossible');
     } finally { button.disabled = false; }
-  });
-  // Lien de parrainage : uniquement la commande du bot est nécessaire.
-  const referralLink = document.getElementById('referral-link');
-  referralLink.addEventListener('click', async e => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`${REVIEWS_API_URL}/api/config`);
-      const config = await response.json();
-      if (config.botUsername) {
-        window.Telegram?.WebApp?.openTelegramLink(`https://t.me/${config.botUsername}`);
-        alert('Dans le bot, envoie /parrainage pour recevoir ton lien personnel.');
-      } else {
-        alert('Envoie /parrainage à ton bot Nice Place dans Telegram.');
-      }
-    } catch { alert('Envoie /parrainage au bot Nice Place pour recevoir ton lien personnel.'); }
   });
   refreshShopReviewBadge();
   init();
