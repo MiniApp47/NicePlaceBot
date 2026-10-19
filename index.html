@@ -93,6 +93,22 @@
             cursor: pointer;
         }
 
+        /* PARRAINAGE DUO : visible dans la mini-app et lisible sur mobile */
+        .np-bonus-card{margin:18px 0;padding:16px;border:1px solid #ffb345;border-radius:16px;background:linear-gradient(140deg,#2a2119ed,#17171aeb);box-shadow:0 0 14px #e56a1433}
+        .np-bonus-card h4{margin:0 0 8px;color:#ffca61;font-size:1.1rem}
+        .np-bonus-card p{font-size:.85rem;color:#eee;margin:0 0 12px;line-height:1.45}
+        .np-bonus-row{display:flex;gap:8px;width:100%}
+        .np-bonus-row input{width:55%;min-width:0;flex:1;background:#101013;border:1px solid #ff9950;color:white;border-radius:10px;padding:12px 10px;font-size:1rem;letter-spacing:.05em;text-transform:uppercase}
+        .np-bonus-row button{border:0;border-radius:10px;background:linear-gradient(180deg,#ffc746,#ef7915);color:#111;font-weight:800;padding:12px;cursor:pointer}
+        .np-bonus-row button:disabled{opacity:.55;cursor:wait}
+        .np-bonus-status{min-height:1.1em;margin-top:8px;font-size:.85rem}
+        .np-bonus-applied{display:flex;gap:12px;justify-content:space-between;align-items:center;color:#b8ffc2;background:#0e3f219c;padding:10px;border:1px solid #2bca62;border-radius:10px;margin-top:8px}
+        .np-bonus-applied button{background:none;border:1px solid #a7e8ba;color:white;padding:8px;border-radius:8px;cursor:pointer}
+        .np-bonus-summary{border:2px solid #ffd175;background:linear-gradient(140deg,#492607,#1b3f1e);color:white;border-radius:14px;padding:13px;margin:15px 0;line-height:1.7;font-size:.95rem}
+        .np-bonus-summary strong{color:#ffde7a}
+        .np-bonus-free-item{background:#17482bba;border:1px solid #35d96a;border-radius:12px;padding:12px;margin:8px 0;color:#dcffe5;font-weight:600}
+        .np-bonus-line{color:#b9ffd6;font-weight:700}
+
         .page-content {
             flex-grow: 1;
             padding: 1.5vh;
@@ -2354,6 +2370,21 @@
                 </div>
             </div>
 
+            <!-- Code de doublement : vérifié côté serveur, jamais consommé avant validation admin -->
+            <section class="np-bonus-card" aria-label="Bonus de parrainage">
+                <h4>🎁 Doubler ma commande</h4>
+                <p>Tu as parrainé quelqu’un ? Entre ton code DUO reçu sur Telegram. Jusqu’à 200 € de commande.</p>
+                <div class="np-bonus-row" id="np-bonus-row">
+                    <input id="np-bonus-input" type="text" maxlength="12" placeholder="DUO-ABCDEFGH" autocomplete="off" spellcheck="false" aria-label="Code bonus DUO">
+                    <button id="np-bonus-apply" type="button">Appliquer</button>
+                </div>
+                <div id="np-bonus-status" class="np-bonus-status" role="status" aria-live="polite"></div>
+                <div id="np-bonus-applied" class="np-bonus-applied" style="display:none">
+                    <span id="np-bonus-applied-label"></span>
+                    <button id="np-bonus-remove" type="button" aria-label="Retirer le bonus">Retirer</button>
+                </div>
+            </section>
+
             <!--   <div class="payment-selector">
                 <h4>Paiement</h4>
                 <div class="payment-options">
@@ -2553,7 +2584,7 @@
       </div>
     </div>
     <div id="notification-toast"></div>
-    <script src="script.js?v=avis-sept-voirplus-20261019"></script>
+    <script src="script.js?v=duo-code-20261019"></script>
 </body>
 
 </html>

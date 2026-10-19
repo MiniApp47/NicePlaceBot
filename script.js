@@ -697,6 +697,10 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentCategoryId = null; // Garde en mémoire la catégorie sélectionnée
   let currentFarmId = null; // Garde en mémoire la farm sélectionnée
   let appliedPromo = null; // Pour suivre le code promo
+  let appliedBonusCode = null; // Code DUO réservé pour affichage (consommation = validation admin)
+  let bonusValidatedAmountCents = null;
+  let bonusCartSignature = null;
+  let bonusRequestInProgress = false;
   let paymentMethod = "Espèce"; // Méthode de paiement par défaut
   let notificationTimeout = null; // Timer pour la notification panier
   let selectedFreeGift = ""; // Poche offerte choisie par le client
@@ -1436,6 +1440,10 @@ function renderCategoryList() {
 
   // Met à jour l'affichage du panier (CORRIGÉ : Cache l'image si vide)
   function renderCart() {
+    // Un panier modifié doit repasser par la vérification serveur du bonus.
+    if (appliedBonusCode && bonusCartSignature !== npCurrentCartSignature()) {
+      appliedBonusCode = null; bonusValidatedAmountCents = null; bonusCartSignature = null;
+    }
     const cartContainer = document.getElementById("cart-items-container");
     if (cart.length === 0) {
       cartContainer.innerHTML = "<p>Votre panier est vide.</p>";
@@ -1522,7 +1530,8 @@ function renderCategoryList() {
 
             <div class="item-details">
                 <div>${index + 1}. ${item.name}</div>
-                <div>Quantité: ${item.quantity}x ${item.weight}</div>
+                <div>Quantité payée: ${item.quantity}x ${item.weight}</div>
+                ${npBonusActive() ? `<div class="np-bonus-line">🎁 Offert : +${item.quantity}x ${item.weight} · TOTAL ${item.quantity * 2}x</div>` : ''}
                 <div>Prix unitaire: ${item.unitPrice.toFixed(2)}€</div>
             </div>
         </div>
@@ -1572,6 +1581,7 @@ function renderCategoryList() {
       document.getElementById("promo-code-input").value = "";
     }
 
+    npRenderBonusUI(Math.round(totalPrice * 100));
     // UI Paiement
     document.querySelectorAll(".payment-btn").forEach((btn) => {
       btn.classList.toggle("active", btn.dataset.method === paymentMethod);
@@ -1599,6 +1609,17 @@ function renderCategoryList() {
             <span>${totalPrice.toFixed(2)}€</span>
         </div>
     `;
+    if (npBonusActive()) {
+      const euros = totalPrice.toFixed(2);
+      summaryHTML += `<div class="np-bonus-summary">
+        🎁 <strong>COMMANDE DOUBLÉE !</strong><br>
+        💶 Tu paies : ${euros} €<br>
+        🎉 Même quantité offerte : +${euros} € de produits<br>
+        📦 <strong>Valeur totale reçue : ${(totalPrice * 2).toFixed(2)} €</strong><br>
+        🎟️ Code : ${appliedBonusCode}<br>
+        <small>Bonus désactivé après confirmation de la commande par le shop.</small>
+      </div>`;
+    }
     summaryContainer.innerHTML = summaryHTML;
 
     showPage("page-confirmation");
@@ -1903,15 +1924,74 @@ function spinRewardRoulette() {
     renderCart();
   }
 
+  // --- CODE DUO : validation en ligne sans consommation avant confirmation admin ---
+  const NP_BONUS_API = 'https://api.niiceplaace.pro';
+  function npCurrentCartSignature() { return JSON.stringify(cart.map(i => [i.id,i.quantity,i.totalPrice])); }
+  function npCartTotalCents() {
+    let sub = cart.reduce((n, i) => n + i.totalPrice, 0);
+    let discount = 0;
+    if (appliedPromo) {
+      const promo = validPromoCodes[appliedPromo];
+      let eligible = 0;
+      if (promo.appliesTo === 'eligible') {
+        cart.forEach(i => { const p = getProductById(i.productId); if (p && p.promoEligible) eligible += i.totalPrice; });
+      } else eligible = sub;
+      discount = promo.type === 'percent' ? eligible * promo.value / 100 : promo.value;
+    }
+    return Math.round(Math.max(0, sub - Math.min(sub, discount)) * 100);
+  }
+  async function npCheckBonus(code) {
+    if (!npClientValid) throw new Error('Ouvre la boutique depuis le dernier bouton /start du bot Telegram.');
+    if (appliedPromo) throw new Error('Retire ton code promo avant d’utiliser le bonus DUO.');
+    const cents = npCartTotalCents();
+    if (cents < 1 || cents > 20000) throw new Error('Bonus valable sur une commande de 200 € maximum.');
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    try {
+      const response = await fetch(`${NP_BONUS_API}/api/bonus/check`, {
+        method:'POST', headers:{'Content-Type':'application/json'}, cache:'no-store',
+        body:JSON.stringify({code, clientCode:npClientCode, amountCents:cents}),
+        signal:controller.signal
+      });
+      const data = await response.json();
+      if (!response.ok || !data.ok || data.code !== code || data.amountCents !== cents)
+        throw new Error(data.error || 'Impossible de vérifier le code bonus.');
+      return data;
+    } catch (e) {
+      if (e.name === 'AbortError') throw new Error('Vérification trop longue : réessaie.');
+      throw e;
+    } finally { clearTimeout(timeout); }
+  }
+  function npBonusActive() {
+    return Boolean(appliedBonusCode && bonusValidatedAmountCents === npCartTotalCents() && bonusCartSignature === npCurrentCartSignature() && !appliedPromo);
+  }
+  function npRenderBonusUI(totalCents) {
+    const status = document.getElementById('np-bonus-status');
+    const applied = document.getElementById('np-bonus-applied');
+    const inputRow = document.getElementById('np-bonus-row');
+    if (npBonusActive()) {
+      applied.style.display = 'flex';
+      inputRow.style.display = 'none';
+      document.getElementById('np-bonus-applied-label').textContent = `✅ ${appliedBonusCode} • +${(totalCents/100).toFixed(2)} € offerts`;
+      status.textContent = '🎉 Le même panier est ajouté gratuitement !';
+      status.style.color = '#9dffb5';
+    } else {
+      applied.style.display = 'none';
+      inputRow.style.display = 'flex';
+      status.textContent = '';
+    }
+  }
+
   // --- SUIVI PARRAINAGE (code opaque attribué par Telegram /start) ---
   const npClientCode = new URLSearchParams(window.location.search).get('np_client') || '';
-  const npClientValid = /^NC-[A-Za-z0-9_-]{18,48}$/.test(npClientCode);
+  const npClientValid = /^NC-(?:[A-Z2-9]{8}|[A-Za-z0-9_-]{18,48})$/.test(npClientCode);
   let npOrderReference = null;
   function getNpOrderReference() {
     if (npOrderReference) return npOrderReference;
-    const bytes = new Uint8Array(6);
+    const bytes = new Uint8Array(8);
     window.crypto.getRandomValues(bytes);
-    npOrderReference = 'NP-' + Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('').toUpperCase();
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    npOrderReference = 'NP-' + Array.from(bytes, b => chars[b % chars.length]).join('');
     return npOrderReference;
   }
 
@@ -1958,7 +2038,8 @@ function spinRewardRoulette() {
       message += `*${index + 1}. ${cleanName}*\n`;
 
       // Ligne 2 : Quantité
-      message += `• Quantité: ${item.quantity}x ${item.weight}\n`;
+      message += `• Quantité payée: ${item.quantity}x ${item.weight}\n`;
+      if (npBonusActive()) message += `• 🎁 BONUS DUO: +${item.quantity}x ${item.weight} OFFERT\n• ✅ Quantité totale : ${item.quantity * 2}x ${item.weight}\n`;
 
       // Ligne 3 : Prix unitaire
       message += `• Prix unitaire: ${item.unitPrice.toFixed(2)}€\n`;
@@ -1989,7 +2070,15 @@ function spinRewardRoulette() {
       message += `*💰 TOTAL: ${totalPrice.toFixed(2)}€*\n`;
     }
 
-    // Pied de page
+    if (npBonusActive()) {
+      message += `\n*🎁 PARRAINAGE : COMMANDE DOUBLÉE*\n`;
+      message += `🎟️ Code : *${appliedBonusCode}*\n`;
+      message += `🎉 Valeur OFFERTE : +${totalPrice.toFixed(2)} €\n`;
+      message += `📦 Valeur des produits : ${(totalPrice * 2).toFixed(2)} €\n`;
+      message += `💶 Montant à payer : ${totalPrice.toFixed(2)} €\n`;
+      message += `⚠️ Bonus désactivé par le shop après confirmation de commande.\n`;
+    }
+
     // Pied de page
     const addressInput = document.getElementById("customer-address");
     const customerAddress = addressInput ? addressInput.value.trim() : "";
@@ -2043,7 +2132,20 @@ function spinRewardRoulette() {
   // --- WHATSAPP CONTACT SAFE ---
   const WHATSAPP_NUMBER = "33745923730"; // Remplace par ton numéro, sans + ni espace
 
-  function openWhatsAppContact() {
+  async function openWhatsAppContact() {
+    if (appliedBonusCode) {
+      try {
+        const checked = await npCheckBonus(appliedBonusCode);
+        bonusValidatedAmountCents = checked.amountCents;
+        bonusCartSignature = npCurrentCartSignature();
+      } catch (error) {
+        appliedBonusCode = null;
+        bonusValidatedAmountCents = null;
+        renderConfirmation();
+        showNotification('❌ ' + (error.message || 'Code DUO à revérifier'));
+        return;
+      }
+    }
     const message = formatOrderMessage();
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
@@ -2272,12 +2374,47 @@ if (rouletteBtn) {
       return;
     }
 
+    // Clic sur "Appliquer" un code DUO (le code n'est consommé qu'à la validation de la vente)
+    if (target.closest('#np-bonus-apply')) {
+      if (bonusRequestInProgress) return;
+      const btn = document.getElementById('np-bonus-apply');
+      const input = document.getElementById('np-bonus-input');
+      const status = document.getElementById('np-bonus-status');
+      const code = input.value.trim().toUpperCase().replace(/\s/g, '');
+      if (!/^DUO-[A-Z2-9]{8}$/.test(code)) {
+        status.textContent = '❌ Code attendu : DUO-XXXXXXXX'; status.style.color='#ff9999';return;
+      }
+      bonusRequestInProgress = true;
+      btn.disabled = true;
+      status.textContent = 'Vérification du code…';
+      try {
+        const response = await npCheckBonus(code);
+        appliedBonusCode = response.code;
+        bonusValidatedAmountCents = response.amountCents;
+        bonusCartSignature = npCurrentCartSignature();
+        renderConfirmation();
+        showNotification('🎁 Code accepté : commande doublée !');
+      } catch (error) {
+        appliedBonusCode = null;
+        bonusValidatedAmountCents = null;
+        bonusCartSignature = null;
+        status.textContent = '❌ ' + (error.message || 'Code invalide');
+        status.style.color = '#ff9999';
+      } finally { bonusRequestInProgress = false; btn.disabled = false; }
+      return;
+    }
+    if (target.closest('#np-bonus-remove')) {
+      appliedBonusCode = null; bonusValidatedAmountCents = null; bonusCartSignature = null;
+      renderConfirmation();showNotification('Bonus retiré du panier.');return;
+    }
+
     // Clic sur "Appliquer" le code promo
     if (target.closest("#apply-promo-btn")) {
       const input = document.getElementById("promo-code-input");
       const code = input.value.toUpperCase(); // Mets en majuscule
 
       if (validPromoCodes[code]) {
+        appliedBonusCode = null; bonusValidatedAmountCents = null; bonusCartSignature = null;
         appliedPromo = code;
         tg.HapticFeedback.notificationOccurred("success");
         showNotification("✅ Code promo appliqué !");
