@@ -540,7 +540,34 @@ document.addEventListener("DOMContentLoaded", function () {
                     }, */
       ],
     },
- 
+  {
+      id: "BLANCHE",
+      name: "🔌 BLANCHE ☣️",
+      type: "Blanche",
+      quality: "🤍 Spécial",
+      image: "CategBlanche.png",
+      products: [
+        {
+          id: "Cc 🇨🇴",
+          flag: "🇨🇴",
+          name: "Cc 🇨🇴",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          featured: true,
+          type: "Hash",
+          image: "ProductC.png",
+          video: "VideoC.mov",
+          description:
+            "Produit spécial disponible selon arrivage.\n\n📲 Pour plus d’informations, passe en privé.",
+          tarifs: [
+            { weight: "1c", price: 60.0 },
+            { weight: "3c", price: 160.0 },
+            { weight: "5c", price: 250.0 },
+            { weight: "11c", price: 500.0 },
+          ],
+        },
+      ], // Les produits s'insèrent directement ici
+    },
   ];
 
   /* {
