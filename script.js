@@ -2466,13 +2466,32 @@ if (rouletteBtn) {
     const data = await response.json();
     return withTestReviews(data, type, productId);
   }
-  function displayReviewRows(rows) {
+  const REVIEWS_VISIBLE_COUNT = 7;
+  const reviewsFade = document.getElementById('reviews-fade');
+  const reviewsMore = document.getElementById('reviews-more');
+  let allReviewRows = [];
+  let reviewsExpanded = false;
+
+  function displayReviewRows(rows, reset = true) {
+    if (reset) {
+      allReviewRows = Array.isArray(rows) ? rows : [];
+      reviewsExpanded = false;
+    }
     reviewsList.replaceChildren();
-    if (!rows.length) {
+    const reviewRows = allReviewRows;
+    const hasMore = reviewRows.length > REVIEWS_VISIBLE_COUNT;
+    const visibleRows = reviewsExpanded ? reviewRows : reviewRows.slice(0, REVIEWS_VISIBLE_COUNT);
+    reviewsMore.hidden = !hasMore;
+    reviewsFade.hidden = !hasMore || reviewsExpanded;
+    reviewsMore.setAttribute('aria-expanded', String(reviewsExpanded));
+    reviewsMore.innerHTML = reviewsExpanded
+      ? 'Voir moins <span class="reviews-more-arrow" aria-hidden="true">↓</span>'
+      : `Voir plus (${reviewRows.length - REVIEWS_VISIBLE_COUNT}) <span class="reviews-more-arrow" aria-hidden="true">↓</span>`;
+    if (!reviewRows.length) {
       reviewsList.append(reviewEl('p', '', 'Aucun avis publié pour le moment.'));
       return;
     }
-    rows.forEach(r => {
+    visibleRows.forEach(r => {
       const rating = Math.max(1, Math.min(5, Number(r.rating) || 1));
       const el = reviewEl('div', 'review-entry');
       if (activeReviewType === 'product') {
@@ -2487,6 +2506,13 @@ if (rouletteBtn) {
       reviewsList.append(el);
     });
   }
+  reviewsMore.addEventListener('click', () => {
+    reviewsExpanded = !reviewsExpanded;
+    displayReviewRows(allReviewRows, false);
+    if (!reviewsExpanded) {
+      document.querySelector('.reviews-list-title')?.scrollIntoView({block:'nearest', behavior:'smooth'});
+    }
+  });
   async function refreshShopReviewBadge() {
     try {
       const data = await getReviews('shop');
@@ -2502,6 +2528,8 @@ if (rouletteBtn) {
     const productId = type === 'product' ? productSelect.value : '';
     reviewsSummary.textContent = 'Chargement des avis…';
     reviewsList.replaceChildren();
+    reviewsFade.hidden = true;
+    reviewsMore.hidden = true;
     try {
       const data = await getReviews(type, productId);
       if (activeReviewType !== type || (type === 'product' && productSelect.value !== productId)) return;
@@ -2512,6 +2540,9 @@ if (rouletteBtn) {
     } catch (error) {
       console.error(error);
       reviewsSummary.textContent = '❌ Impossible de charger les avis pour le moment.';
+      reviewsList.replaceChildren();
+      reviewsFade.hidden = true;
+      reviewsMore.hidden = true;
     }
   }
   function selectReviewTab(type) {

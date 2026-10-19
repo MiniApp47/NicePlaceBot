@@ -2007,6 +2007,52 @@
 /* Mode aperçu : avis synthétiques + vrais avis, jamais publics comme témoignages */
 .reviews-test-notice{background:#472a13;color:#ffe1a4;border:1px dashed #ffc866;border-radius:9px;padding:10px;margin:8px 0;font-size:12px;line-height:1.45;text-align:center;font-weight:700}
 .reviews-test-chip{display:inline-block;background:#321107;color:#ffd57d;border-radius:5px;font-size:10px;padding:2px 4px;margin:0 4px}
+
+/* Avis : formulaire en premier, 7 commentaires et fondu Voir plus */
+#reviews-form {
+  margin: 8px 0 22px;
+  padding: 16px;
+  border: 1px solid #a67436;
+  border-radius: 14px;
+  background: linear-gradient(160deg, #302c2a, #242327);
+  display: grid;
+  gap: 10px;
+}
+#reviews-form h3 { margin: 0 0 4px; color: #ffcd75; text-align: center; }
+#review-status:empty { display: none; }
+.reviews-published-section { margin-top: 20px; }
+.reviews-list-title { margin: 0 0 12px; color: #ffcf7a; text-align: center; }
+.reviews-list-viewport { position: relative; }
+.reviews-fade[hidden], .reviews-more[hidden] { display: none !important; }
+.reviews-fade {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 76px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, rgba(36,35,39,.85) 65%, #242327 100%);
+}
+.reviews-more {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin-top: -3px;
+  position: relative;
+  padding: 12px;
+  border: 1px solid #ad7a37;
+  border-radius: 11px;
+  color: #ffe0a2;
+  background: linear-gradient(140deg, #403028, #2a2524);
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+.reviews-more-arrow { font-size: 1.35rem; line-height: .9; transition: transform .2s ease; }
+.reviews-more[aria-expanded="true"] .reviews-more-arrow { transform: rotate(180deg); }
+.reviews-more:active { transform: scale(.99); }
 </style>
 </head>
 
@@ -2480,7 +2526,6 @@
           <select id="reviews-product-select"></select>
         </div>
         <div id="reviews-summary" class="reviews-summary">Chargement…</div>
-        <div id="reviews-list" class="reviews-list"></div>
         <form id="reviews-form">
           <h3 id="reviews-form-title">Donner mon avis sur le shop</h3>
           <label for="review-rating">Votre note</label>
@@ -2495,10 +2540,20 @@
           <p class="review-send-hint">Ton avis sera publié après validation par l'équipe. L'envoi est possible depuis Telegram.</p>
           <p id="review-status" role="status"></p>
         </form>
+        <section class="reviews-published-section" aria-label="Avis déjà publiés">
+          <h3 class="reviews-list-title">💬 Avis publiés</h3>
+          <div id="reviews-list-viewport" class="reviews-list-viewport">
+            <div id="reviews-list" class="reviews-list"></div>
+            <div id="reviews-fade" class="reviews-fade" hidden aria-hidden="true"></div>
+          </div>
+          <button id="reviews-more" class="reviews-more" type="button" hidden aria-expanded="false" aria-controls="reviews-list">
+            Voir plus <span class="reviews-more-arrow" aria-hidden="true">↓</span>
+          </button>
+        </section>
       </div>
     </div>
     <div id="notification-toast"></div>
-    <script src="script.js?v=avis-preview-183-20261019-1"></script>
+    <script src="script.js?v=avis-sept-voirplus-20261019"></script>
 </body>
 
 </html>
