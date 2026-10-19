@@ -3,8 +3,145 @@ document.addEventListener("DOMContentLoaded", function () {
   const tg = window.Telegram.WebApp;
   tg.ready();
   tg.expand();
-  tg.setHeaderColor("#2c2c2e");
-  tg.setBackgroundColor("#1c1c1d");
+  tg.setHeaderColor("#2b1534");
+  tg.setBackgroundColor("#120d1b");
+
+
+  // HALLOWEEN : interrupteur des décorations animées, sans toucher aux achats.
+  const npHalloweenSwitch = document.getElementById('np-halloween-toggle');
+  const npHalloweenPrefKey = 'niceplace_halloween_motion_2026';
+  let npHalloweenMotion = true;
+  try { npHalloweenMotion = localStorage.getItem(npHalloweenPrefKey) !== 'off'; } catch (_) {}
+  function npSetHalloweenMotion(enabled) {
+    npHalloweenMotion = !!enabled;
+    document.body.classList.toggle('np-halloween-no-motion', !npHalloweenMotion);
+    if (npHalloweenSwitch) {
+      npHalloweenSwitch.setAttribute('aria-pressed', String(npHalloweenMotion));
+      npHalloweenSwitch.setAttribute('aria-label', npHalloweenMotion ? 'Désactiver les animations Halloween' : 'Activer les animations Halloween');
+      npHalloweenSwitch.textContent = npHalloweenMotion ? '✨' : '⏸';
+      npHalloweenSwitch.title = npHalloweenMotion ? 'Mettre les animations en pause' : 'Relancer les animations Halloween';
+    }
+    try { localStorage.setItem(npHalloweenPrefKey, enabled ? 'on' : 'off'); } catch (_) {}
+  }
+  npSetHalloweenMotion(npHalloweenMotion);
+  if (npHalloweenSwitch) npHalloweenSwitch.addEventListener('click', () => npSetHalloweenMotion(!npHalloweenMotion));
+
+  // 🎁 HALLOWEEN : des cadeaux tombent ; de temps en temps l'araignée
+  // existante descend, en attrape un, puis remonte avec dans sa toile.
+  // Ce module est purement décoratif (aucune incidence sur le panier ou les bonus).
+  (function initHalloweenFallingPresents() {
+    const decor = document.getElementById('np-halloween-decor');
+    const spider = decor?.querySelector('.np-halloween-spider');
+    if (!decor || !spider) return;
+
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    const activePresents = new Set();
+    const cleanupTimers = new Set();
+    let nextPresentTimer = null;
+    let presentsCreated = 0;
+    let spiderBusy = false;
+
+    function isAllowed() {
+      return npHalloweenMotion && !document.hidden && !reducedMotion?.matches;
+    }
+    function after(callback, delay) {
+      const handle = window.setTimeout(() => {
+        cleanupTimers.delete(handle);
+        callback();
+      }, delay);
+      cleanupTimers.add(handle);
+    }
+    function trackPresent(element) {
+      activePresents.add(element);
+      decor.appendChild(element);
+      return element;
+    }
+    function removePresent(element) {
+      activePresents.delete(element);
+      element.remove();
+    }
+    function makePresent(x) {
+      const el = document.createElement('span');
+      el.className = 'np-halloween-falling-gift';
+      el.textContent = '🎁';
+      el.setAttribute('aria-hidden', 'true');
+      el.style.left = `${x}px`;
+      return trackPresent(el);
+    }
+    function fallingPresent() {
+      if (activePresents.size >= 5) return; // Pas de surcharge d'animations.
+      const maxX = Math.max(12, window.innerWidth - 52);
+      const x = 12 + Math.random() * (maxX - 12);
+      const gift = makePresent(x);
+      const seconds = 6.4 + Math.random() * 2.0;
+      const drift = (Math.random() * 90 - 45).toFixed(0);
+      gift.style.setProperty('--np-gift-size', `${26 + Math.round(Math.random()*9)}px`);
+      gift.style.setProperty('--np-gift-duration', `${seconds.toFixed(2)}s`);
+      gift.style.setProperty('--np-gift-drift', `${drift}px`);
+      after(() => removePresent(gift), (seconds + .15) * 1000);
+    }
+    function spiderTakesPresent() {
+      if (spiderBusy || activePresents.size >= 5) {
+        fallingPresent();
+        return;
+      }
+      spiderBusy = true;
+      const width = window.innerWidth;
+      const x = Math.max(48, Math.min(width - 48, width * (.20 + Math.random() * .60)));
+      const gift = makePresent(x - 17);
+      gift.classList.add('np-gift-being-caught');
+
+      const silk = document.createElement('div');
+      silk.className = 'np-halloween-catch-thread';
+      silk.style.left = `${x}px`;
+      silk.setAttribute('aria-hidden', 'true');
+      decor.appendChild(silk);
+      spider.style.setProperty('--np-spider-catch-left', `${x - 34}px`);
+      // Le CSS anime la même araignée que celle qui parcourt déjà l'écran.
+      spider.classList.add('np-spider-catching');
+      after(() => {
+        removePresent(gift);
+        silk.remove();
+        spider.classList.remove('np-spider-catching');
+        spider.style.removeProperty('--np-spider-catch-left');
+        spiderBusy = false;
+      }, 5300);
+    }
+    function schedulePresent(delay) {
+      if (nextPresentTimer !== null || !isAllowed()) return;
+      nextPresentTimer = window.setTimeout(() => {
+        nextPresentTimer = null;
+        if (!isAllowed()) return;
+        presentsCreated += 1;
+        if (presentsCreated % 4 === 0) spiderTakesPresent();
+        else fallingPresent();
+        schedulePresent(3200 + Math.random() * 1700);
+      }, delay);
+    }
+    function stop() {
+      if (nextPresentTimer !== null) window.clearTimeout(nextPresentTimer);
+      nextPresentTimer = null;
+      cleanupTimers.forEach(window.clearTimeout);
+      cleanupTimers.clear();
+      activePresents.forEach((gift) => gift.remove());
+      activePresents.clear();
+      decor.querySelectorAll('.np-halloween-catch-thread').forEach(el => el.remove());
+      spider.classList.remove('np-spider-catching');
+      spider.style.removeProperty('--np-spider-catch-left');
+      spiderBusy = false;
+    }
+    function refresh() {
+      if (!isAllowed()) stop();
+      else schedulePresent(1200);
+    }
+    // L'interrupteur ✨ existant gère aussi cette pluie de cadeaux.
+    // Son écouteur a été installé plus haut et s'exécute avant celui-ci.
+    npHalloweenSwitch?.addEventListener('click', refresh);
+    document.addEventListener('visibilitychange', refresh);
+    if (reducedMotion?.addEventListener) reducedMotion.addEventListener('change', refresh);
+    refresh();
+  })();
+
 
   const progressBar = document.getElementById("myBar");
   const loader = document.getElementById("page-loader");
@@ -83,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "100G", price: 650.0 },
           ],
         }, */
-         {
+        /*  {
           id: "Mario 🍄",
           flag: "🇪🇸",
           name: "Mario 🍄",
@@ -101,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "50G", price: 200.0 },
             { weight: "100G", price: 350.0 },
           ],
-        },
+        }, */
         {
           id: "Forbiden fruit X Honey banana🍌 ",
           flag: "🇪🇸",
@@ -436,7 +573,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "4,5G", price: 50.0 },
           ],
         },
-        {
+       /*  {
           id: "pink runtz",
           flag: "🇺🇸",
           name: "🎀 Pink Runtz 🎀",
@@ -452,7 +589,7 @@ document.addEventListener("DOMContentLoaded", function () {
           tarifs: [
             { weight: "4,5G", price: 50.0 },
           ],
-        },
+        }, */
          /* {
           id: "biscotti banana",
           flag: "🇺🇸",
