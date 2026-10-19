@@ -2483,7 +2483,9 @@ if (rouletteBtn) {
     const telegram = window.Telegram?.WebApp;
     // sendData fonctionne UNIQUEMENT depuis une Mini App ouverte via
     // KeyboardButton(web_app=...) dans le clavier de conversation du bot.
-    if (!telegram?.initData || typeof telegram.sendData !== "function") {
+    // IMPORTANT : initData est normalement vide lors d'une ouverture depuis
+    // un bouton de clavier Telegram. Il ne faut donc PAS le vérifier ici.
+    if (!telegram || typeof telegram.sendData !== "function") {
       reviewStatus.textContent = "❌ Ouvre le bot Telegram, tape /start et utilise le bouton 🥷🏼 Ouvrir le Shop sous le champ de message.";
       return;
     }
