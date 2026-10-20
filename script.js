@@ -397,24 +397,61 @@ document.addEventListener("DOMContentLoaded", function () {
           ],
         }, */
          {
+          id: "Papaya Lemon",
+          flag: "🇪🇸",
+          name: "Papaya Lemon 🍹",
+          farm: "FrostKings 🧞",
+          promoEligible: true,
+          type: "🍯 Frozen 160/73u 🍯",
+          selectionType: "🍯 Frozen 🍯",
+          featured: true,
+          image: "ProductPL.png",
+          video: "VideoPL.mov",
+          description:
+          "🇪🇸 PAPAYA LEMON 🍹 🇪🇸\n\nUne référence Frozen signée FrostKings 🧞, au nom qui évoque un mélange tropical entre papaye sucrée et citron acidulé. Une identité fruitée qui rappelle les cocktails exotiques et les agrumes frais.\n\n🥭 Inspiration papaye mûre et tropicale\n🍋 Notes évoquant le citron frais\n🍹 Univers fruité, sucré et acidulé\n❄️ Catégorie Frozen 160/73u\n\n👑 FROSTKINGS 🧞 — Une référence à l'identité tropicale et rafraîchissante.",
+          tarifs: [
+            { weight: "5G", price: 80.0 },
+            { weight: "10G", price: 150.0 },
+            { weight: "25G", price: 250.0 },
+          ],
+        },
+         {
           id: "Fresh Frozen X 24K 🧊",
           flag: "🇪🇸",
           name: "Fresh Frozen X 24K 🧊",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
           type: "🍯 Frozen 160/73u 🍯",
-          selectionType: "🍯 Frozen 160/73u 🍯",
+          selectionType: "🍯 Frozen 🍯",
           featured: true,
           image: "ProductF24.png",
           video: "VideoF24.mov",
           description:
-          "",
+          "🇪🇸 FRESH FROZEN X 24K 🧊 🇪🇸\n\nUne référence de la gamme Frozen 160/73u de Nice'Selection 🧞. Son nom associe l'univers glacé du Fresh Frozen à l'identité dorée du 24K, pour une présentation inspirée des agrumes et des nuances gourmandes.\n\n🍊 Inspiration agrumes et zestes d'orange\n🍯 Univers doux, miellé et gourmand\n🧊 Identité Fresh Frozen\n❄️ Catégorie Frozen 160/73u\n\n🏆 NICE'SELECTION 🧞 — Une référence au caractère visuel frais et doré.",
           tarifs: [
             { weight: "5G", price: 80.0 },
             { weight: "10G", price: 150.0 },
           ],
         },
          {
+          id: "Grappe Gas 🍇 ",
+          name: "Grappe Gas 🍇",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          customerFavorite: true,
+          type: "Hash",
+          selectionType: "🔮 Plasma Static 🔮",
+          featured: true,
+          image: "ProductGG.png",
+          video: "VideoGG.mov",
+          description:
+              "🇪🇸 GRAPPE GAS 🍇 🇪🇸\n\nUne référence Plasma Static de Nice'Selection 🧞 dont le nom évoque la rencontre entre le raisin gourmand et l'univers aromatique Gas. Une identité contrastée, entre douceur fruitée et notes plus profondes.\n\n🍇 Inspiration raisin mûr et sucré\n⛽ Univers Gas aux nuances prononcées\n🍬 Association fruitée et gourmande\n🔮 Catégorie Plasma Static\n\n💎 NICE'SELECTION 🧞 — Une identité originale mêlant inspiration fruitée et caractère Gas.",
+          tarifs: [
+            { weight: "5G", price: 100.0 },
+            { weight: "10G", price: 180.0 },
+          ],
+        },
+        /*  {
           id: "Panna cotta ",
           name: "Panna cotta 🍮",
           farm: "Nice'Selection 🧞",
@@ -431,7 +468,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "5G", price: 120.0 },
             { weight: "10G", price: 220.0 },
           ],
-        },
+        }, */
        /*  {
           id: "GRAPES N CREAM",
           flag: "🇪🇸",
