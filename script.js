@@ -81,9 +81,11 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "1OG", price: 50.0 },
             { weight: "50G", price: 200.0 },
             { weight: "100G", price: 350.0 },
+            { weight: "30G", price: 120.0, halloweenPromo: true },
+
           ],
         },
-        {
+        /* {
           id: "Moula",
           flag: "🇪🇸",
           name: "Moula 🍄",
@@ -101,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "100G", price: 350.0 },
             { weight: "30G", price: 120.0, halloweenPromo: true },
           ],
-        },
+        }, */
         /* {
           id: "Papaya Sorbet 🍧",
           flag: "🇪🇸",
@@ -358,7 +360,6 @@ document.addEventListener("DOMContentLoaded", function () {
           description:
             "🎁 PACK DUO FROZEN 20G 🍹🧊\n\nDeux références de la gamme Frozen 160/73u réunies dans un seul pack.\n\n🍹 10G de Papaya Lemon — FrostKings 🧞\n🧊 10G de Fresh Frozen X 24K — Nice'Selection 🧞\n\n📸 Parcours les deux photos et les deux vidéos pour découvrir chaque référence.\n💰 Prix habituel du pack : 220 € (300 € séparément). Offre spéciale Halloweedn : 200 € pour les 20G.",
           tarifs: [
-            { weight: "20G (10G + 10G)", price: 220.0 },
             { weight: "20G (10G + 10G)", price: 200.0, halloweenPromo: true },
           ],
         },
