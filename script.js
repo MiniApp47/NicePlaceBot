@@ -26,123 +26,6 @@ document.addEventListener("DOMContentLoaded", function () {
   npSetHalloweenMotion(npHalloweenMotion);
   if (npHalloweenSwitch) npHalloweenSwitch.addEventListener('click', () => npSetHalloweenMotion(!npHalloweenMotion));
 
-  // 🎁 HALLOWEEN : des cadeaux tombent ; de temps en temps l'araignée
-  // existante descend, en attrape un, puis remonte avec dans sa toile.
-  // Ce module est purement décoratif (aucune incidence sur le panier ou les bonus).
-  (function initHalloweenFallingPresents() {
-    const decor = document.getElementById('np-halloween-decor');
-    const spider = decor?.querySelector('.np-halloween-spider');
-    if (!decor || !spider) return;
-
-    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)');
-    const activePresents = new Set();
-    const cleanupTimers = new Set();
-    let nextPresentTimer = null;
-    let presentsCreated = 0;
-    let spiderBusy = false;
-
-    function isAllowed() {
-      return npHalloweenMotion && !document.hidden && !reducedMotion?.matches;
-    }
-    function after(callback, delay) {
-      const handle = window.setTimeout(() => {
-        cleanupTimers.delete(handle);
-        callback();
-      }, delay);
-      cleanupTimers.add(handle);
-    }
-    function trackPresent(element) {
-      activePresents.add(element);
-      decor.appendChild(element);
-      return element;
-    }
-    function removePresent(element) {
-      activePresents.delete(element);
-      element.remove();
-    }
-    function makePresent(x) {
-      const el = document.createElement('span');
-      el.className = 'np-halloween-falling-gift';
-      el.textContent = '🎁';
-      el.setAttribute('aria-hidden', 'true');
-      el.style.left = `${x}px`;
-      return trackPresent(el);
-    }
-    function fallingPresent() {
-      if (activePresents.size >= 5) return; // Pas de surcharge d'animations.
-      const maxX = Math.max(12, window.innerWidth - 52);
-      const x = 12 + Math.random() * (maxX - 12);
-      const gift = makePresent(x);
-      const seconds = 6.4 + Math.random() * 2.0;
-      const drift = (Math.random() * 90 - 45).toFixed(0);
-      gift.style.setProperty('--np-gift-size', `${26 + Math.round(Math.random()*9)}px`);
-      gift.style.setProperty('--np-gift-duration', `${seconds.toFixed(2)}s`);
-      gift.style.setProperty('--np-gift-drift', `${drift}px`);
-      after(() => removePresent(gift), (seconds + .15) * 1000);
-    }
-    function spiderTakesPresent() {
-      if (spiderBusy || activePresents.size >= 5) {
-        fallingPresent();
-        return;
-      }
-      spiderBusy = true;
-      const width = window.innerWidth;
-      const x = Math.max(48, Math.min(width - 48, width * (.20 + Math.random() * .60)));
-      const gift = makePresent(x - 17);
-      gift.classList.add('np-gift-being-caught');
-
-      const silk = document.createElement('div');
-      silk.className = 'np-halloween-catch-thread';
-      silk.style.left = `${x}px`;
-      silk.setAttribute('aria-hidden', 'true');
-      decor.appendChild(silk);
-      spider.style.setProperty('--np-spider-catch-left', `${x - 34}px`);
-      // Le CSS anime la même araignée que celle qui parcourt déjà l'écran.
-      spider.classList.add('np-spider-catching');
-      after(() => {
-        removePresent(gift);
-        silk.remove();
-        spider.classList.remove('np-spider-catching');
-        spider.style.removeProperty('--np-spider-catch-left');
-        spiderBusy = false;
-      }, 5300);
-    }
-    function schedulePresent(delay) {
-      if (nextPresentTimer !== null || !isAllowed()) return;
-      nextPresentTimer = window.setTimeout(() => {
-        nextPresentTimer = null;
-        if (!isAllowed()) return;
-        presentsCreated += 1;
-        if (presentsCreated % 4 === 0) spiderTakesPresent();
-        else fallingPresent();
-        schedulePresent(3200 + Math.random() * 1700);
-      }, delay);
-    }
-    function stop() {
-      if (nextPresentTimer !== null) window.clearTimeout(nextPresentTimer);
-      nextPresentTimer = null;
-      cleanupTimers.forEach(window.clearTimeout);
-      cleanupTimers.clear();
-      activePresents.forEach((gift) => gift.remove());
-      activePresents.clear();
-      decor.querySelectorAll('.np-halloween-catch-thread').forEach(el => el.remove());
-      spider.classList.remove('np-spider-catching');
-      spider.style.removeProperty('--np-spider-catch-left');
-      spiderBusy = false;
-    }
-    function refresh() {
-      if (!isAllowed()) stop();
-      else schedulePresent(1200);
-    }
-    // L'interrupteur ✨ existant gère aussi cette pluie de cadeaux.
-    // Son écouteur a été installé plus haut et s'exécute avant celui-ci.
-    npHalloweenSwitch?.addEventListener('click', refresh);
-    document.addEventListener('visibilitychange', refresh);
-    if (reducedMotion?.addEventListener) reducedMotion.addEventListener('change', refresh);
-    refresh();
-  })();
-
-
   const progressBar = document.getElementById("myBar");
   const loader = document.getElementById("page-loader");
 
@@ -200,6 +83,25 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "100G", price: 350.0 },
           ],
         },
+        {
+          id: "Moula",
+          flag: "🇪🇸",
+          name: "Moula 🍄",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "🧽 Jaune Mousseux 🧽",
+          selectionType: "🧽 Jaune Mousseux 🧽",
+          featured: true,
+          image: "ProductM.png",
+          video: "VideoM.Mov",
+          description: "🇪🇸 MOULA 🇪🇸\n\nUne sélection Jaune Mousseux de Nice'Selection 🧞, avec une identité classique et une présentation soignée.",
+          tarifs: [
+            { weight: "10G", price: 50.0 },
+            { weight: "50G", price: 200.0 },
+            { weight: "100G", price: 350.0 },
+            { weight: "30G", price: 120.0, halloweenPromo: true },
+          ],
+        },
         /* {
           id: "Papaya Sorbet 🍧",
           flag: "🇪🇸",
@@ -255,6 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
           tarifs: [
             { weight: "5G", price: 60.0 },
             { weight: "25G", price: 200.0 },
+            { weight: "25G", price: 150.0, halloweenPromo: true },
           ],
         },
          /* {
@@ -434,6 +337,32 @@ document.addEventListener("DOMContentLoaded", function () {
           ],
         },
          {
+          id: "PACK_FROZEN_PAPAYA_24K_20G",
+          flag: "🎁",
+          name: "PACK DUO FROZEN 🍹🧊 — 20G",
+          farm: "FrostKings 🧞 × Nice'Selection 🧞",
+          // Tarif pack déjà réduit : évite le cumul des promotions ordinaires.
+          promoEligible: false,
+          type: "Pack",
+          selectionType: "🍯 Frozen 🍯",
+          featured: true,
+          fullWidth: true,
+          dualMedia: true,
+          image: "ProductPL.png",
+          images: ["ProductPL.png", "ProductF24.png"],
+          videos: ["VideoPL.mov", "VideoF24.mov"],
+          packContents: [
+            { name: "🍹 Papaya Lemon — 10G · FrostKings", targetId: "Papaya Lemon" },
+            { name: "🧊 Fresh Frozen X 24K — 10G · Nice'Selection", targetId: "Fresh Frozen X 24K 🧊" },
+          ],
+          description:
+            "🎁 PACK DUO FROZEN 20G 🍹🧊\n\nDeux références de la gamme Frozen 160/73u réunies dans un seul pack.\n\n🍹 10G de Papaya Lemon — FrostKings 🧞\n🧊 10G de Fresh Frozen X 24K — Nice'Selection 🧞\n\n📸 Parcours les deux photos et les deux vidéos pour découvrir chaque référence.\n💰 Prix habituel du pack : 220 € (300 € séparément). Offre spéciale Halloweedn : 200 € pour les 20G.",
+          tarifs: [
+            { weight: "20G (10G + 10G)", price: 220.0 },
+            { weight: "20G (10G + 10G)", price: 200.0, halloweenPromo: true },
+          ],
+        },
+         {
           id: "Grappe Gas 🍇 ",
           name: "Grappe Gas 🍇",
           farm: "Nice'Selection 🧞",
@@ -608,6 +537,7 @@ document.addEventListener("DOMContentLoaded", function () {
                "🍍🌴 DARK PINEAPPLE — NICE'SELECTION 🌴🍍\n\nUne sélection Cali au profil fruité, tropical et gourmand. Dark Pineapple se distingue par une belle intensité aromatique, mêlant la douceur de l’ananas mûr à une touche plus profonde et légèrement crémeuse, pour un rendu moderne et très agréable. 🇺🇸🔥\n\n👃 Profil aromatique :\n🍍 Ananas sucré et tropical\n🍬 Notes candy fruitées\n🍦 Fond doux et légèrement crémeux\n🌿 Nuance végétale propre\n🌙 Petite finition plus sombre et résineuse\n\n👅 Goût :\nEn bouche, Dark Pineapple développe une attaque fruitée et sucrée, avec une vraie présence tropicale. Le profil devient ensuite plus rond et gourmand, avec une finale propre, douce et légèrement résineuse qui reste bien en bouche. 😮‍💨🍍\n\n🌿 Qualité & sélection :\n💎 Sélection Cali premium\n✨ Profil fruité bien marqué\n☁️ Dégustation douce et parfumée\n🔥 Belle rondeur aromatique\n🧞 Sélection signée Nice'Selection\n\n🏆 Le verdict :\nUne variété parfaite pour les amateurs de profils tropicaux, sucrés et modernes. Dark Pineapple combine fraîcheur fruitée, rondeur gourmande et finition premium dans une sélection originale et très propre. 🍍🌴🔥",
           tarifs: [
             { weight: "4,5G", price: 50.0 },
+            { weight: "25G", price: 230.0, halloweenPromo: true },
           ],
         },
        /*  {
@@ -676,6 +606,8 @@ document.addEventListener("DOMContentLoaded", function () {
             "🇳🇱 Amnesia Hollandaise 🇳🇱\n\nL'incontournable classique des coffee shops. Une structure florale dense et résineuse, libérant un parfum terreux profond avec des notes acidulées et d'agrumes caractéristiques.\n\n🍋 Notes citronnées et boisées intenses\n🌿 Fleurs compactes et manucure soignée\n⚡️ Une valeur sûre garantissant une expérience optimale et un goût authentique.",
           tarifs: [
             { weight: "6G", price: 50.0 },
+            { weight: "30G", price: 200.0 },
+            { weight: "30G", price: 180.0, halloweenPromo: true },
             { weight: "50G", price: 350.0 },
             { weight: "100G", price: 600.0 },
           ],
@@ -1223,6 +1155,62 @@ const roulettePrizeLabel = "🎁 Packet Philip Moris Offert"; // Lot affiché si
     }
   }
 
+  // Une seule ligne par véritable offre spéciale; aucun prix normal n'est faussement affiché comme promo.
+  function getHalloweenOffer(product) {
+    return product && Array.isArray(product.tarifs)
+      ? product.tarifs.find(tarif => tarif.halloweenPromo === true)
+      : null;
+  }
+
+  function buildHalloweenPromoLine(product) {
+    const offer = getHalloweenOffer(product);
+    if (!offer) return "";
+    return `<div class="halloween-special-line" aria-label="Promo Halloweedn ${offer.weight} ${offer.price} euros">
+       <span class="halloween-special-label">✱ PROMO HALLOWEEDN</span>
+       <span class="halloween-special-weight">${offer.weight}</span>
+       <strong>${offer.price.toFixed(2)} €</strong>
+    </div>`;
+  }
+
+function showHalloweenCartAnimation(sourceElement = null) {
+  const burst = document.createElement("div");
+  burst.className = "halloween-cart-burst";
+
+  let baseX = window.innerWidth / 2;
+  let baseY = window.innerHeight - 120;
+
+  if (sourceElement) {
+    const rect = sourceElement.getBoundingClientRect();
+    baseX = rect.left + rect.width / 2;
+    baseY = rect.top + rect.height / 2;
+  }
+
+  const icons = ["🎃", "🕸️", "🦇", "👻", "🍬", "✨"];
+  const positions = [
+    { tx: "-70px", ty: "-90px", rot: "-18deg" },
+    { tx: "75px", ty: "-95px", rot: "22deg" },
+    { tx: "-100px", ty: "-25px", rot: "-30deg" },
+    { tx: "105px", ty: "-20px", rot: "30deg" },
+    { tx: "-40px", ty: "-120px", rot: "-12deg" },
+    { tx: "35px", ty: "-130px", rot: "16deg" },
+  ];
+
+  positions.forEach((pos, index) => {
+    const fx = document.createElement("span");
+    fx.className = "fx";
+    fx.textContent = icons[index % icons.length];
+    fx.style.left = `${baseX}px`;
+    fx.style.top = `${baseY}px`;
+    fx.style.setProperty("--tx", pos.tx);
+    fx.style.setProperty("--ty", pos.ty);
+    fx.style.setProperty("--rot", pos.rot);
+    burst.appendChild(fx);
+  });
+
+  document.body.appendChild(burst);
+  setTimeout(() => burst.remove(), 1400);
+}
+
 function renderCategoryList() {
     productListContainer.innerHTML = "";
 
@@ -1237,6 +1225,7 @@ function renderCategoryList() {
         if (product.type === "Pack" || product.id === "PackNoel2025") {
             card.classList.add("full-width");
         }
+        if (product.dualMedia) card.classList.add("np-frozen-pack-card");
 
         if (product.clickable === false) {
             card.classList.add("unclickable");
@@ -1246,31 +1235,39 @@ function renderCategoryList() {
             ? `<span class="product-flag">${product.flag}</span>`
             : "";
 
-        const mediaHTML = product.image
-            ? `<div class="product-media"><img src="${product.image}" alt="${product.name}"></div>`
-            : `<div class="product-media product-media-empty"></div>`;
+        const mediaHTML = product.dualMedia && Array.isArray(product.images) && product.images.length === 2
+            ? `<div class="product-media np-pack-dual-media">
+                  <span class="np-pack-image"><img src="${product.images[0]}" alt="Papaya Lemon"><small>🍹 10G PAPAYA LEMON</small></span>
+                  <span class="np-pack-image"><img src="${product.images[1]}" alt="Fresh Frozen X 24K"><small>🧊 10G FRESH FROZEN X 24K</small></span>
+               </div>`
+            : product.image
+                ? `<div class="product-media"><img src="${product.image}" alt="${product.name}"></div>`
+                : `<div class="product-media product-media-empty"></div>`;
 
         const firstTarif = product.tarifs && product.tarifs.length > 0
             ? product.tarifs[0]
             : null;
 
         const priceHTML = firstTarif && typeof firstTarif.price === "number"
-            ? firstTarif.price.toFixed(2) + "€"
-            : "";
-
-            const favoriteBadgeHTML = product.customerFavorite === true
-    ? `<div class="customer-favorite-badge">❤️ PRÉFÉRÉ DES CLIENTS</div>`
+    ? firstTarif.price.toFixed(2) + "€"
     : "";
 
-        card.innerHTML = `
-    ${mediaHTML}
-    ${favoriteBadgeHTML}
+const favoriteBadgeHTML = product.customerFavorite === true
+  ? `<div class="customer-favorite-badge">❤️ PRÉFÉRÉ DES CLIENTS</div>`
+  : "";
 
-    <div class="info">
-        <div class="name">${product.name} ${flagHTML}</div>
-        <div class="farm">${product.farm}</div>
-        <div class="price">${priceHTML}</div>
-    </div>
+const promoLineHTML = buildHalloweenPromoLine(product);
+
+card.innerHTML = `
+  ${mediaHTML}
+  ${favoriteBadgeHTML}
+
+  <div class="info">
+      <div class="name">${product.name} ${flagHTML}</div>
+      <div class="farm">${product.farm}</div>
+      <div class="price">À partir de ${priceHTML}</div>
+      ${promoLineHTML}
+  </div>
 `;
 
         return card;
@@ -1497,6 +1494,7 @@ function renderCategoryList() {
       }
 
       if (product.clickable === false) card.classList.add("unclickable");
+      if (product.dualMedia) card.classList.add("np-frozen-pack-card");
 
       let flagHTML = product.flag
         ? `<span class="product-flag">${product.flag}</span>`
@@ -1504,7 +1502,9 @@ function renderCategoryList() {
 
       // --- 2. LOGIQUE IMAGE (On affiche seulement si elle existe) ---
       let imgHTML = "";
-      if (product.image && product.image !== "") {
+      if (product.dualMedia && product.images?.length === 2) {
+        imgHTML = `<div class="product-media np-pack-dual-media"><span class="np-pack-image"><img src="${product.images[0]}" alt="Papaya Lemon"><small>🍹 10G PAPAYA LEMON</small></span><span class="np-pack-image"><img src="${product.images[1]}" alt="Fresh Frozen X 24K"><small>🧊 10G FRESH FROZEN X 24K</small></span></div>`;
+      } else if (product.image && product.image !== "") {
         imgHTML = `<img src="${product.image}" alt="${product.name}">`;
       }
 
@@ -1514,6 +1514,7 @@ function renderCategoryList() {
                 <div class="name">${product.name} ${flagHTML}</div>
                 <div class="farm">${product.farm}</div> 
                 <div class="price">${product.tarifs[0].price.toFixed(2)}€</div>
+                ${buildHalloweenPromoLine(product)}
             </div>
         `;
       productListContainer.appendChild(card);
@@ -1564,17 +1565,21 @@ function renderCategoryList() {
       if (product.clickable === false) {
         card.classList.add("unclickable");
       }
+      if (product.dualMedia) card.classList.add("np-frozen-pack-card");
 
       let flagHTML = product.flag
         ? `<span class="product-flag">${product.flag}</span>`
         : "";
 
       card.innerHTML = `
-                <img src="${product.image}" alt="${product.name}">
+                ${product.dualMedia && product.images?.length === 2
+                  ? `<div class="product-media np-pack-dual-media"><span class="np-pack-image"><img src="${product.images[0]}" alt="Papaya Lemon"><small>🍹 10G PAPAYA LEMON</small></span><span class="np-pack-image"><img src="${product.images[1]}" alt="Fresh Frozen X 24K"><small>🧊 10G FRESH FROZEN X 24K</small></span></div>`
+                  : `<img src="${product.image}" alt="${product.name}">`}
                 <div class="info">
                     <div class="name">${product.name} ${flagHTML}</div>
                     <div class="farm">${product.farm}</div>
                     <div class="price">${product.tarifs[0].price.toFixed(2)}€</div>
+                ${buildHalloweenPromoLine(product)}
                 </div>
             `;
       productListContainer.appendChild(card);
@@ -1678,12 +1683,13 @@ function renderCategoryList() {
     let tarifsHTML = product.tarifs
       .map(
         (tarif) => `
-            <div class="tarif-item">
+            <div class="tarif-item ${tarif.halloweenPromo ? "halloween-special-tarif" : ""}">
+                ${tarif.halloweenPromo ? '<span class="halloween-special-tarif-label">✱ PROMO HALLOWEEDN</span>' : ''}
                 <div class="box-tarif">
                     <div class="tarif-wieght">${tarif.weight}</div>
                     <div class="tarif-price">${tarif.price.toFixed(2)}€</div>
                 </div>
-                <button class="add-to-cart-btn" data-product-id="${product.id}" data-weight="${tarif.weight}" data-price="${tarif.price}">
+                <button class="add-to-cart-btn" data-product-id="${product.id}" data-weight="${tarif.weight}" data-price="${tarif.price}" data-halloween-promo="${tarif.halloweenPromo === true}">
                     <svg width="20" height="20"><use href="#icon-cart"/></svg>
                 </button>
             </div>
@@ -1697,11 +1703,10 @@ function renderCategoryList() {
 
     const oldVideo = document.querySelector("#page-product .product-video");
     if (oldVideo) oldVideo.style.display = "none";
-
     // --- 3. INJECTION (On cache la galerie si pas de média) ---
     detailsContainer.innerHTML = `
             ${hasMedia ? `<div class="product-gallery-wrapper">${galleryHTML}</div>` : ""}
-            ${hasMedia ? `<div class="gallery-counter">Swipe pour voir la video➡️</div>` : ""} 
+            ${hasMedia ? `<div class="gallery-counter">${product.dualMedia ? "📸 2 photos + 🎬 2 vidéos — Fais glisser pour tout voir ➡️" : "Swipe pour voir la video➡️"}</div>` : ""} 
 
             <div class="name" style="margin-top: ${hasMedia ? "0" : "20px"}">${product.name}</div>
             <div class="farm">${product.farm}</div>
@@ -1710,10 +1715,11 @@ function renderCategoryList() {
               <div id="product-reviews-snippet" class="product-review-snippet"></div>
               <button type="button" id="product-reviews-open">⭐ Voir / donner un avis</button>
             </div>
-            ${packLinksHTML} ${descriptionHTML}
-                        ${variantsHTML}
-            <h4 class="tarifs-title">💰 Tarifs disponibles :</h4>
-            <div class="tarifs-grid-container">${tarifsHTML}</div>
+            ${packLinksHTML}
+${descriptionHTML}
+${variantsHTML}
+<h4 class="tarifs-title">💰 Tarifs disponibles :</h4>
+<div class="tarifs-grid-container">${tarifsHTML}</div>
         `;
 
     showPage("page-product");
@@ -2064,15 +2070,15 @@ qualityFilter.innerHTML = `
 
     clearTimeout(notificationTimeout);
 
-    notification.classList.remove("show");
+    notification.classList.remove("show", "halloween-toast");
     notification.innerHTML = "";
     void notification.offsetWidth;
 
     notification.textContent = message;
-    notification.classList.add("show");
+    notification.classList.add("show", "halloween-toast");
 
     notificationTimeout = setTimeout(() => {
-      notification.classList.remove("show");
+      notification.classList.remove("show", "halloween-toast");
       notification.innerHTML = "";
     }, 3000);
   }
@@ -2203,10 +2209,22 @@ function spinRewardRoulette() {
 
   // --- LOGIQUE DU PANIER ---
 
+  const headerHalloweenPromoBtn = document.getElementById("header-halloween-promo");
+
+if (headerHalloweenPromoBtn) {
+  headerHalloweenPromoBtn.addEventListener("click", () => {
+    const firstSection = document.querySelector("#page-home .halloween-special-line")?.closest(".product-card") || document.querySelector("#page-home .home-category-section");
+    if (firstSection) {
+      firstSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    showNotification("🎃 Découvre les promos d’Halloweedn dans nos produits !");
+  });
+}
+
   // Ajoute le paramètre 'variant' à la fin
-  function addToCart(productId, weight, price, variant = null) {
-    // L'ID du panier doit inclure la variante pour différencier (ex: 10g Gelato vs 10g Papaya)
-    const cartItemId = `${productId}-${weight}-${variant ? variant.replace(/\s+/g, "") : "default"}`;
+function addToCart(productId, weight, price, variant = null, sourceElement = null, isHalloweenPromo = false) {
+      // L'ID du panier doit inclure la variante pour différencier (ex: 10g Gelato vs 10g Papaya)
+    const cartItemId = `${productId}-${weight}-${variant ? variant.replace(/\s+/g, "") : "default"}-${isHalloweenPromo ? "halloweedn" : "normal"}`;
 
     const existingItem = cart.find((item) => item.id === cartItemId);
     const product = getProductById(productId);
@@ -2223,18 +2241,20 @@ function spinRewardRoulette() {
       cart.push({
         id: cartItemId,
         productId: productId,
-        name: displayName, // On utilise le nom avec la variante
+        name: isHalloweenPromo ? `${displayName} 🎃 PROMO HALLOWEEDN` : displayName, // Variante promo reconnaissable dans le panier
         image: product.image,
         weight: weight,
         quantity: 1,
         unitPrice: price,
         totalPrice: price,
         variant: variant, // On garde la variante en mémoire si besoin
+        halloweenPromo: isHalloweenPromo,
       });
     }
     renderCart();
     tg.HapticFeedback.notificationOccurred("success");
-    showNotification("✅ Produit ajouté au panier !");
+    showHalloweenCartAnimation(sourceElement);
+    showNotification(isHalloweenPromo ? "🎃 Offre Halloweedn ajoutée au panier !" : "🎃 Produit ajouté au panier !");
   }
   // updateQuantity (inchangé)
   function updateQuantity(cartItemId, action) {
@@ -2793,11 +2813,13 @@ if (rouletteBtn) {
       }
 
       addToCart(
-        btn.dataset.productId,
-        btn.dataset.weight,
-        parseFloat(btn.dataset.price),
-        selectedVariant,
-      );
+  btn.dataset.productId,
+  btn.dataset.weight,
+  parseFloat(btn.dataset.price),
+  selectedVariant,
+  btn,
+  btn.dataset.halloweenPromo === "true"
+);
     }
 
     // Clic sur les boutons de quantité
