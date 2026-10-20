@@ -690,6 +690,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "3c", price: 160.0 },
             { weight: "5c", price: 250.0 },
             { weight: "11c", price: 500.0 },
+            { weight: "10c", price: 400.0, halloweenPromo: true },
           ],
         },
       ], // Les produits s'insèrent directement ici
