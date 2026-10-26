@@ -2604,7 +2604,26 @@ body.np-halloween-no-motion .start-referral-card{animation:none!important}
   box-shadow:0 0 16px rgba(244,132,60,.28),0 8px 22px rgba(0,0,0,.3);
 }
 
-</style>
+
+/* Nice Place : videos visibles immediatement dans la fiche produit */
+#page-product .product-gallery-wrapper { width:100%; max-width:100%; }
+#page-product .product-gallery-wrapper .gallery-item video {
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain; /* montre toute la video, sans la recadrer */
+  background:#08050c;
+}
+#page-product .gallery-counter {
+  font-size:clamp(.77rem,2.9vw,.96rem);
+  line-height:1.35;
+  padding:0 8px;
+  color:#ffd59a;
+  animation:none;
+  text-shadow:none;
+}
+
+    </style>
 </head>
 
 <body class="np-halloween-theme">
@@ -3237,7 +3256,7 @@ body.np-halloween-no-motion .start-referral-card{animation:none!important}
       </div>
     </div>
     <div id="notification-toast"></div>
-    <script src="script.js?v=halloweedn-cinq-offres-20261020-2"></script>
+    <script src="script.js?v=video-direct-20261026"></script>
 </body>
 
 </html>

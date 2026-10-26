@@ -524,6 +524,24 @@ document.addEventListener("DOMContentLoaded", function () {
       image: "CategWeed.png",
       products: [
         {
+          id: "Pink runtz",
+          flag: "🇺🇸",
+          name: "Pink runtz 🌺",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+                    type: "🌿 Weed 🌿",
+          selectionType: "🌴 CALI 🌴",
+          featured: true,
+          image: "ProductPPR.png",
+          video: "VideoPPR.mov",
+          description:
+               "🇺🇸 PINK RUNTZ 🌺 🇺🇸\n\nUne sélection Cali signée Nice'Selection 🧞, au profil gourmand inspiré des célèbres variétés Runtz. Pink Runtz évoque un univers fruité et sucré, mêlant des notes de bonbons, de fruits rouges et une touche crémeuse.\n\n👃 Profil aromatique :\n🍓 Notes de fraise et de fruits rouges\n🍬 Inspiration bonbons sucrés et candy\n🌺 Nuances florales délicates\n🍦 Fond doux et crémeux\n\n🌴 Gamme CALI 🇺🇸\n💎 Sélection Nice'Selection 🧞\n🎃 OFFRE SPÉCIALE HALLOWEEDN : 25G à 230€ !\n\n🏆 Une identité gourmande et colorée pour les amateurs de profils fruités et sucrés.",
+          tarifs: [
+            { weight: "4,5G", price: 50.0 },
+            { weight: "25G", price: 230.0, halloweenPromo: true },
+          ],
+        },
+       /*  {
           id: "Dark pineapple",
           flag: "🇺🇸",
           name: "Dark pineapple 🍍",
@@ -540,7 +558,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "4,5G", price: 50.0 },
             { weight: "25G", price: 230.0, halloweenPromo: true },
           ],
-        },
+        }, */
        /*  {
           id: "pink runtz",
           flag: "🇺🇸",
@@ -1596,48 +1614,39 @@ card.innerHTML = `
     document.getElementById("product-page-title").innerText = product.name;
     const detailsContainer = document.getElementById("product-details-content");
 
-    // --- 1. GESTION INTELLIGENTE DES MÉDIAS ---
+    // --- 1. GALERIE : VIDEO EN PREMIER, PHOTOS ENSUITE ---
+    // Les videos passent avant les images pour que la fiche s'ouvre directement sur la video.
+    // Autoplay muet pour etre compatible avec les navigateurs mobiles / Telegram.
     let galleryHTML = "";
     let hasMedia = false;
+    let hasVideo = false;
 
-    // Images
-    let mediaItems = [];
-    if (product.images && product.images.length > 0) {
-      mediaItems = product.images;
-    } else if (product.image && product.image !== "") {
-      mediaItems = [product.image];
-    }
+    const mediaItems = Array.isArray(product.images) && product.images.length
+      ? product.images
+      : product.image ? [product.image] : [];
+    const videoItems = Array.isArray(product.videos) && product.videos.length
+      ? product.videos
+      : product.video ? [product.video] : [];
 
-    if (mediaItems.length > 0) {
+    // Premiere diapositive : video, pas de poster photo qui cacherait la lecture.
+    videoItems.forEach((videoSrc, index) => {
       hasMedia = true;
-      galleryHTML += mediaItems
-        .map(
-          (imgSrc) => `
-                <div class="gallery-item"><img src="${imgSrc}" alt="${product.name}"></div>
-            `,
-        )
-        .join("");
-    }
-
-    // Vidéos
-    if (product.videos && product.videos.length > 0) {
-      hasMedia = true;
-      product.videos.forEach((videoSrc) => {
-        galleryHTML += `
-                    <div class="gallery-item">
-                        <video controls playsinline poster="${product.image || ""}">
-                            <source src="${videoSrc}" type="video/mp4">
-                        </video>
-                    </div>`;
-      });
-    } else if (product.video && product.video !== "") {
-      hasMedia = true;
+      hasVideo = true;
+      const first = index === 0;
       galleryHTML += `
-                <div class="gallery-item">
-                    <video controls playsinline poster="${product.image || ""}">
-                        <source src="${product.video}" type="video/mp4">
-                    </video>
-                </div>`;
+        <div class="gallery-item">
+          <video src="${videoSrc}" controls playsinline webkit-playsinline preload="metadata"
+                 ${first ? 'autoplay muted data-np-primary-video="true"' : ''}
+                 aria-label="Video ${index + 1} de ${product.name}"></video>
+        </div>`;
+    });
+
+    // Les photos restent disponibles par balayage apres la ou les videos.
+    if (mediaItems.length) {
+      hasMedia = true;
+      galleryHTML += mediaItems.map(imgSrc => `
+        <div class="gallery-item"><img src="${imgSrc}" alt="${product.name}" loading="lazy"></div>
+      `).join("");
     }
 
     // --- 2. LE RESTE (OPTIONS, DESCRIPTION, TARIFS) ---
@@ -1708,7 +1717,7 @@ card.innerHTML = `
     // --- 3. INJECTION (On cache la galerie si pas de média) ---
     detailsContainer.innerHTML = `
             ${hasMedia ? `<div class="product-gallery-wrapper">${galleryHTML}</div>` : ""}
-            ${hasMedia ? `<div class="gallery-counter">${product.dualMedia ? "📸 2 photos + 🎬 2 vidéos — Fais glisser pour tout voir ➡️" : "Swipe pour voir la video➡️"}</div>` : ""} 
+            ${hasMedia ? `<div class="gallery-counter">${product.dualMedia ? "🎬 Les 2 vidéos en premier · Glisse pour voir les photos ➡️" : hasVideo && mediaItems.length ? "🎬 Vidéo en premier · Glisse pour voir la photo ➡️" : hasVideo ? "🎬 Vidéo du produit" : "📸 Photo du produit"}</div>` : ""} 
 
             <div class="name" style="margin-top: ${hasMedia ? "0" : "20px"}">${product.name}</div>
             <div class="farm">${product.farm}</div>
@@ -1725,6 +1734,38 @@ ${variantsHTML}
         `;
 
     showPage("page-product");
+
+    // showPage() stoppe les anciennes videos : demarrer la premiere APRES la navigation.
+    // En autoplay, le son est coupe par defaut. L'utilisateur peut l'activer via les controles.
+    const npGallery = detailsContainer.querySelector('.product-gallery-wrapper');
+    const npPrimaryVideo = detailsContainer.querySelector('video[data-np-primary-video]');
+    if (npGallery && npPrimaryVideo) {
+      npGallery.scrollLeft = 0;
+      npPrimaryVideo.muted = true;
+      npPrimaryVideo.defaultMuted = true;
+      npPrimaryVideo.playsInline = true;
+      const npStartVideo = () => {
+        if (!document.getElementById('page-product').classList.contains('active')) return;
+        const playPromise = npPrimaryVideo.play();
+        if (playPromise && typeof playPromise.catch === 'function') {
+          playPromise.catch(() => { /* lecture manuelle via les commandes video */ });
+        }
+      };
+      requestAnimationFrame(npStartVideo);
+
+      // Ne pas laisser la video jouer en arriere-plan quand on regarde les photos.
+      let npScrollFrame = null;
+      npGallery.addEventListener('scroll', () => {
+        if (npScrollFrame !== null) return;
+        npScrollFrame = requestAnimationFrame(() => {
+          npScrollFrame = null;
+          if (npGallery.scrollLeft > npGallery.clientWidth * 0.45) {
+            npPrimaryVideo.pause();
+          }
+        });
+      }, {passive: true});
+    }
+
     document.getElementById('product-reviews-open').addEventListener('click', () => openReviews('product', product.id));
     refreshProductReviewBox(product);
 
