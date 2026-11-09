@@ -2623,6 +2623,53 @@ body.np-halloween-no-motion .start-referral-card{animation:none!important}
   text-shadow:none;
 }
 
+    
+/* GRAPE GASPLINE : ancien prix discret, barré au-dessus du nouveau tarif. */
+.np-previous-price {
+  display: block;
+  color: #b9a4bf;
+  font-size: .68em;
+  font-weight: 500;
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #ff9862;
+  opacity: .88;
+  line-height: 1.35;
+}
+.np-new-price {
+  display: block;
+  color: #ffe28b;
+  font-size: 1.05em;
+  line-height: 1.35;
+  font-weight: 900;
+  text-shadow: 0 0 9px rgba(255, 146, 54, .35);
+}
+.tarif-item.np-reduced-tarif {
+  border-color: #e6a065;
+  box-shadow: 0 0 12px rgba(253, 151, 69, .26);
+}
+.tarif-item.np-reduced-tarif .tarif-price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: .45vh .2vh;
+  white-space: nowrap;
+  font-size: clamp(19px, 5vw, 25px);
+}
+.product-card .price.np-price-reduced {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 1px;
+  font-size: .8rem;
+  padding-top: 3px;
+}
+.product-card .price.np-price-reduced .np-previous-price {font-size: .75rem;}
+.product-card .price.np-price-reduced .np-new-price {font-size: 1.05rem;}
+
     </style>
 </head>
 
@@ -3256,7 +3303,7 @@ body.np-halloween-no-motion .start-referral-card{animation:none!important}
       </div>
     </div>
     <div id="notification-toast"></div>
-    <script src="script.js?v=video-direct-20261026"></script>
+    <script src="script.js?v=grape-gaspline-prix-barres-20261109"></script>
 </body>
 
 </html>

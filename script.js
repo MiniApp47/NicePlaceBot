@@ -162,6 +162,24 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "25G", price: 150.0, halloweenPromo: true },
           ],
         },
+        {
+          id: "Peche OZ",
+          flag: "🇪🇸",
+          name: "Peche OZ 🍑",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "⚛️ Dry 120u ⚛️",
+          selectionType: "⚛️ Dry ⚛️",
+          featured: true,
+          image: "ProductOZ.png",
+          video: "VideoOZ.mov",
+          description:
+          "🇪🇸 Peche OZ 🍑 🇪🇸\n\nDry 120u avec un profil fruité, doux et légèrement sucré. Une sélection agréable, propre et parfumée, parfaite pour ceux qui aiment les notes melon et fruit jaune.\n\n🍈 Arômes fruités et sucrés\n✨ Texture propre et régulière\n💛 Une sélection douce avec une belle présence aromatique.",
+          tarifs: [
+            { weight: "5G", price: 60.0 },
+            { weight: "25G", price: 200.0 },
+          ],
+        },
          /* {
           id: "Yellow melon",
           flag: "🇪🇸",
@@ -363,7 +381,44 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "20G (10G + 10G)", price: 200.0, halloweenPromo: true },
           ],
         },
+
+          {
+          id: "🫒 Cherry 🍒 ",
+          name: "🫒 Cherry 🍒",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          customerFavorite: true,
+          type: "Hash",
+          selectionType: "🫒 Olive Static 🔮",
+          featured: true,
+          image: "ProductCY.png",
+          video: "VideoCY.mov",
+          description:
+          "🫒 Cherry 🍒🇪🇸\n\n Olive Static au profil gourmand, doux et légèrement pâtissier. Texture propre, aspect premium et belle présence aromatique dès l’ouverture.\n\n🍰 Notes cake sucrées et crémeuses\n⚡ Qualité Olive Static\n🏆 Une sélection haut de gamme pour ceux qui aiment les profils doux et travaillés.",
+           tarifs: [
+            { weight: "10G", oldPrice: 200.0, price: 180.0 },
+            { weight: "20G", oldPrice: 380.0, price: 320.0 },
+          ],
+        },
          {
+          id: "grape gaspline ⛽️ ",
+          name: "Grape Gaspline ⛽️",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          customerFavorite: true,
+          type: "Hash",
+          selectionType: "🫒 Olive Static 🔮",
+          featured: true,
+          image: "ProductGGG.png",
+          video: "VideoGGG.mov",
+          description:
+              "Grape Gaspline ⛽️🇪🇸\n\n Olive Static au profil doux, crémeux et gourmand. Une sélection premium avec une belle texture et une odeur sucrée qui rappelle les desserts vanillés.\n\n🍮 Notes dessert et crème\n🔮 Qualité Olive Static\n✨ Produit bien fini, idéal pour les amateurs de profils doux et travaillés.",
+           tarifs: [
+            { weight: "10G", oldPrice: 200.0, price: 180.0 },
+            { weight: "20G", oldPrice: 380.0, price: 320.0 },
+          ],
+        },
+         /* {
           id: "Grappe Gas 🍇 ",
           name: "Grappe Gas 🍇",
           farm: "Nice'Selection 🧞",
@@ -380,7 +435,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "5G", price: 100.0 },
             { weight: "10G", price: 180.0 },
           ],
-        },
+        }, */
         /*  {
           id: "Panna cotta ",
           name: "Panna cotta 🍮",
@@ -708,7 +763,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "3c", price: 160.0 },
             { weight: "5c", price: 250.0 },
             { weight: "11c", price: 500.0 },
-            { weight: "10g", price: 400.0, halloweenPromo: true },
+            { weight: "10g", price: 450.0, halloweenPromo: true },
           ],
         },
       ], // Les produits s'insèrent directement ici
@@ -1231,6 +1286,19 @@ function showHalloweenCartAnimation(sourceElement = null) {
   setTimeout(() => burst.remove(), 1400);
 }
 
+// NICE PLACE : ancien tarif barré uniquement lorsqu'il est supérieur au prix de vente.
+// Le champ `price` reste le SEUL montant utilisé pour les commandes et le panier.
+function npHasRealDiscount(tarif) {
+  return Boolean(tarif && Number.isFinite(tarif.oldPrice) && Number.isFinite(tarif.price)
+    && tarif.oldPrice > tarif.price);
+}
+function npPricePreviewHTML(tarif) {
+  if (!tarif || !Number.isFinite(tarif.price)) return '';
+  if (!npHasRealDiscount(tarif)) return `${tarif.price.toFixed(2)}€`;
+  return `<span class="np-previous-price">${tarif.oldPrice.toFixed(2)}€</span>
+          <strong class="np-new-price">${tarif.price.toFixed(2)}€</strong>`;
+}
+
 function renderCategoryList() {
     productListContainer.innerHTML = "";
 
@@ -1268,9 +1336,7 @@ function renderCategoryList() {
             ? product.tarifs[0]
             : null;
 
-        const priceHTML = firstTarif && typeof firstTarif.price === "number"
-    ? firstTarif.price.toFixed(2) + "€"
-    : "";
+        const priceHTML = npPricePreviewHTML(firstTarif);
 
 const favoriteBadgeHTML = product.customerFavorite === true
   ? `<div class="customer-favorite-badge">❤️ PRÉFÉRÉ DES CLIENTS</div>`
@@ -1285,7 +1351,7 @@ card.innerHTML = `
   <div class="info">
       <div class="name">${product.name} ${flagHTML}</div>
       <div class="farm">${product.farm}</div>
-      <div class="price">À partir de ${priceHTML}</div>
+      <div class="price ${npHasRealDiscount(firstTarif) ? 'np-price-reduced' : ''}">${npHasRealDiscount(firstTarif) ? 'Prix réduit' : 'À partir de'} ${priceHTML}</div>
       ${promoLineHTML}
   </div>
 `;
@@ -1533,7 +1599,7 @@ card.innerHTML = `
             <div class="info">
                 <div class="name">${product.name} ${flagHTML}</div>
                 <div class="farm">${product.farm}</div> 
-                <div class="price">${product.tarifs[0].price.toFixed(2)}€</div>
+                <div class="price ${npHasRealDiscount(product.tarifs[0]) ? 'np-price-reduced' : ''}">${npPricePreviewHTML(product.tarifs[0])}</div>
                 ${buildHalloweenPromoLine(product)}
             </div>
         `;
@@ -1598,7 +1664,7 @@ card.innerHTML = `
                 <div class="info">
                     <div class="name">${product.name} ${flagHTML}</div>
                     <div class="farm">${product.farm}</div>
-                    <div class="price">${product.tarifs[0].price.toFixed(2)}€</div>
+                    <div class="price ${npHasRealDiscount(product.tarifs[0]) ? 'np-price-reduced' : ''}">${npPricePreviewHTML(product.tarifs[0])}</div>
                 ${buildHalloweenPromoLine(product)}
                 </div>
             `;
@@ -1694,11 +1760,11 @@ card.innerHTML = `
     let tarifsHTML = product.tarifs
       .map(
         (tarif) => `
-            <div class="tarif-item ${tarif.halloweenPromo ? "halloween-special-tarif" : ""}">
+            <div class="tarif-item ${tarif.halloweenPromo ? "halloween-special-tarif" : ""} ${npHasRealDiscount(tarif) ? 'np-reduced-tarif' : ''}">
                 ${tarif.halloweenPromo ? '<span class="halloween-special-tarif-label">✱ PROMO HALLOWEEDN</span>' : ''}
                 <div class="box-tarif">
                     <div class="tarif-wieght">${tarif.weight}</div>
-                    <div class="tarif-price">${tarif.price.toFixed(2)}€</div>
+                    <div class="tarif-price">${npPricePreviewHTML(tarif)}</div>
                 </div>
                 <button class="add-to-cart-btn" data-product-id="${product.id}" data-weight="${tarif.weight}" data-price="${tarif.price}" data-halloween-promo="${tarif.halloweenPromo === true}">
                     <svg width="20" height="20"><use href="#icon-cart"/></svg>
