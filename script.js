@@ -26,6 +26,90 @@ document.addEventListener("DOMContentLoaded", function () {
   npSetHalloweenMotion(npHalloweenMotion);
   if (npHalloweenSwitch) npHalloweenSwitch.addEventListener('click', () => npSetHalloweenMotion(!npHalloweenMotion));
 
+
+  // ============================================================
+  // PREMIERE OLIVE STATIC : video apres le chargement, facile a passer.
+  // Olives.mov doit etre depose a cote de index.html et script.js.
+  // ============================================================
+  const npOlivesOverlay = document.getElementById('np-olives-premiere');
+  const npOlivesVideo = document.getElementById('np-olives-premiere-video');
+  const npOlivesSkip = document.getElementById('np-olives-skip');
+  const npOlivesSound = document.getElementById('np-olives-sound');
+  const npOlivesStatus = document.getElementById('np-olives-premiere-status');
+  let npOlivesStartupPending = false;
+
+  function npHideOlivesPremiere() {
+    if (!npOlivesOverlay || npOlivesOverlay.hidden) return;
+    const showExistingPopup = npOlivesStartupPending;
+    npOlivesStartupPending = false;
+    if (npOlivesVideo) {
+      npOlivesVideo.pause();
+      try { npOlivesVideo.currentTime = 0; } catch (_) {}
+    }
+    npOlivesOverlay.hidden = true;
+    npOlivesOverlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('np-olives-overlay-open');
+    if (showExistingPopup) {
+      // Les deux notifications existantes ne s'affichent QU'APRES la video.
+      setTimeout(() => showStartPromoPopup(), 350);
+    }
+  }
+
+  function npOpenOlivesPremiere(isStartup = false) {
+    if (!npOlivesOverlay || !npOlivesVideo) return false;
+    npOlivesStartupPending = !!isStartup;
+    npOlivesOverlay.hidden = false;
+    npOlivesOverlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('np-olives-overlay-open');
+    if (npOlivesStatus) npOlivesStatus.textContent = '';
+    npOlivesVideo.pause();
+    try { npOlivesVideo.currentTime = 0; } catch (_) {}
+    npOlivesVideo.muted = true; // obligatoire pour la lecture automatique sur mobile
+    npOlivesVideo.defaultMuted = true;
+    npOlivesVideo.playsInline = true;
+    if (npOlivesSound) {
+      npOlivesSound.textContent = '🔇 Activer le son';
+      npOlivesSound.setAttribute('aria-pressed','false');
+    }
+    npOlivesSkip?.focus({ preventScroll: true });
+    const playing = npOlivesVideo.play();
+    if (playing && typeof playing.catch === 'function') {
+      playing.catch(() => {
+        if (!npOlivesOverlay.hidden && npOlivesStatus)
+          npOlivesStatus.textContent = 'Appuie sur ▶ dans la vidéo pour la lancer.';
+      });
+    }
+    return true;
+  }
+  npOlivesSkip?.addEventListener('click', npHideOlivesPremiere);
+  npOlivesSound?.addEventListener('click', () => {
+    if (!npOlivesVideo) return;
+    npOlivesVideo.muted = !npOlivesVideo.muted;
+    const soundOn = !npOlivesVideo.muted;
+    npOlivesSound.textContent = soundOn ? '🔊 Couper le son' : '🔇 Activer le son';
+    npOlivesSound.setAttribute('aria-pressed', String(soundOn));
+    if (npOlivesVideo.paused) npOlivesVideo.play()?.catch(() => {});
+  });
+  npOlivesVideo?.addEventListener('ended', () => {
+    // Fin de video : on ouvre automatiquement la boutique.
+    setTimeout(() => {
+      if (npOlivesOverlay && !npOlivesOverlay.hidden && npOlivesVideo.ended)
+        npHideOlivesPremiere();
+    }, 650);
+  });
+  npOlivesVideo?.addEventListener('error', () => {
+    if (npOlivesStatus)
+      npOlivesStatus.textContent = 'Vidéo indisponible : ajoute Olives.mov au dépôt GitHub (MP4/H.264 recommandé si besoin).';
+  });
+  // Un bouton dans la section et dans chaque fiche Olive Static.
+  document.addEventListener('click', (event) => {
+    const replayButton = event.target.closest('.np-olives-replay-btn');
+    if (!replayButton) return;
+    event.preventDefault();
+    event.stopPropagation();
+    npOpenOlivesPremiere(false);
+  });
+
   const progressBar = document.getElementById("myBar");
   const loader = document.getElementById("page-loader");
 
@@ -1464,6 +1548,7 @@ card.innerHTML = `
 
     groupBlock.innerHTML = `
         <h3 class="selection-group-title">${groupName}</h3>
+        ${groupName.includes('Olive Static') ? '<button type="button" class="np-olives-replay-btn np-olives-replay-group">🎬 Revoir la vidéo des nouvelles olives 🫒</button>' : ''}
         <div class="home-products-grid"></div>
     `;
 
@@ -1778,6 +1863,10 @@ card.innerHTML = `
       ? `<p class="product-description">${product.description.replace(/\n/g, "<br>")}</p>`
       : "";
 
+    const npOlivesReplayHTML = String(product.selectionType || '').includes('Olive Static')
+      ? '<button type="button" class="np-olives-replay-btn">🎬 Revoir la vidéo des nouvelles olives 🫒</button>'
+      : '';
+
     const oldVideo = document.querySelector("#page-product .product-video");
     if (oldVideo) oldVideo.style.display = "none";
     // --- 3. INJECTION (On cache la galerie si pas de média) ---
@@ -1787,6 +1876,7 @@ card.innerHTML = `
 
             <div class="name" style="margin-top: ${hasMedia ? "0" : "20px"}">${product.name}</div>
             <div class="farm">${product.farm}</div>
+            ${npOlivesReplayHTML}
             <div class="product-review-box">
               <div id="product-reviews-average">⭐ Chargement des avis…</div>
               <div id="product-reviews-snippet" class="product-review-snippet"></div>
@@ -3009,9 +3099,9 @@ if (rouletteBtn) {
       // Cache le loader et affiche la home
       showPage("page-home");
 
-      // Affiche la popup promo juste après le chargement
+      // Affiche d'abord Olives.mov ; les anciennes offres suivront apres "Passer" ou la fin de video.
       setTimeout(() => {
-        showStartPromoPopup();
+        if (!npOpenOlivesPremiere(true)) showStartPromoPopup();
       }, 400);
     }, 3000);
   }

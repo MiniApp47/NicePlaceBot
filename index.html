@@ -2670,6 +2670,115 @@ body.np-halloween-no-motion .start-referral-card{animation:none!important}
 .product-card .price.np-price-reduced .np-previous-price {font-size: .75rem;}
 .product-card .price.np-price-reduced .np-new-price {font-size: 1.05rem;}
 
+
+/* ==============================================================
+   NICE PLACE : PREMIERE VIDEO OLIVE STATIC - 2026-11-09
+   ============================================================= */
+#np-olives-premiere[hidden] { display: none !important; }
+#np-olives-premiere {
+    position: fixed;
+    inset: 0;
+    z-index: 20000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: max(16px, env(safe-area-inset-top)) 14px max(20px, env(safe-area-inset-bottom));
+    overflow-y: auto;
+    box-sizing: border-box;
+    background: radial-gradient(circle at 50% 12%, #1c413ad9, #080e11fa 57%, #06080bfc);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+body.np-olives-overlay-open { overflow: hidden !important; }
+.np-olives-premiere-card {
+    position: relative;
+    width: min(100%, 460px);
+    max-height: 100%;
+    padding: 17px 15px 16px;
+    border-radius: 24px;
+    border: 1px solid #d2b87b;
+    box-sizing: border-box;
+    background: linear-gradient(150deg, #1c382f 0%, #10251f 37%, #0e1118 100%);
+    box-shadow: 0 22px 65px #000c, 0 0 30px #6a9e7540, inset 0 1px #d6ba7440;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    text-align: center;
+}
+.np-olives-premiere-kicker {
+    display: block;
+    color: #c3e1b0;
+    font: 800 10px/1.4 'Roboto', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.np-olives-premiere-title {
+    margin: 0;
+    color: #f7eccd;
+    font: 800 clamp(21px, 5.6vw, 28px)/1.1 Georgia, serif;
+    text-shadow: 0 2px 14px #d5ab543d;
+}
+.np-olives-premiere-desc {
+    margin: 0 0 3px;
+    color: #c9d8c8;
+    font: 500 13px/1.35 'Roboto', sans-serif;
+}
+#np-olives-premiere-video {
+    display: block;
+    width: 100%;
+    height: min(54dvh, 505px);
+    max-height: 505px;
+    min-height: 170px;
+    border-radius: 15px;
+    background: #050807;
+    object-fit: contain;
+    border: 1px solid #d6c18f47;
+    box-sizing: border-box;
+}
+.np-olives-premiere-controls { display: flex; gap: 9px; justify-content: center; }
+.np-olives-premiere-btn {
+    min-width: 0;
+    border-radius: 12px;
+    border: 1px solid #c3be91;
+    padding: 12px 13px;
+    font: 800 13px/1.2 'Roboto', sans-serif;
+    cursor: pointer;
+    transition: transform .15s ease, filter .15s ease;
+}
+.np-olives-premiere-btn:active, .np-olives-replay-btn:active { transform: scale(.97); }
+#np-olives-skip {
+    flex: 1.4;
+    color: #101d13;
+    background: linear-gradient(120deg, #b8d29d, #f2d494 65%, #b8d29d);
+}
+#np-olives-sound { flex: 1; color: #eef9db; background: #1a332b; }
+.np-olives-premiere-status { min-height: 1.1em; margin: 0; color: #d3dcbf; font-size: 11px; }
+.np-olives-replay-btn {
+    display: block;
+    width: min(100%, 380px);
+    margin: 11px auto 17px;
+    border: 1px solid #d7c18a;
+    border-radius: 13px;
+    padding: 12px 14px;
+    background: linear-gradient(115deg, #1b3d34, #396042, #23463e);
+    box-shadow: 0 3px 17px #a3c4733a, inset 0 1px #ffffff29;
+    color: #fff2c5;
+    font: 800 13px/1.35 'Roboto', sans-serif;
+    text-align: center;
+    cursor: pointer;
+}
+.np-olives-replay-group { margin: 6px auto 12px; width: calc(100% - 24px); }
+@media (max-height: 690px) {
+    #np-olives-premiere { align-items: flex-start; }
+    .np-olives-premiere-card { margin: auto 0; padding: 11px 12px; gap: 5px; }
+    #np-olives-premiere-video { height: min(48dvh, 370px); }
+    .np-olives-premiere-title { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .np-olives-premiere-btn, .np-olives-replay-btn { transition: none; }
+}
+
     </style>
 </head>
 
@@ -2934,6 +3043,22 @@ body.np-halloween-no-motion .start-referral-card{animation:none!important}
                 <div class="progress-bar" id="myBar"></div>
             </div>
 
+        </div>
+    </div>
+
+
+    <!-- Nouvelle collection Olive Static : video de lancement (Olives.mov a ajouter a GitHub) -->
+    <div id="np-olives-premiere" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="np-olives-premiere-title">
+        <div class="np-olives-premiere-card">
+            <span class="np-olives-premiere-kicker">NICE PLACE · NOUVEL ARRIVAGE</span>
+            <h2 id="np-olives-premiere-title" class="np-olives-premiere-title">🫒 Les nouvelles olives sont là !</h2>
+            <p class="np-olives-premiere-desc">Découvre la sélection Olive Static avant d'entrer dans la boutique.</p>
+            <video id="np-olives-premiere-video" src="Olives.mov" playsinline webkit-playsinline muted autoplay controls preload="auto" aria-label="Présentation des nouvelles olives"></video>
+            <p id="np-olives-premiere-status" class="np-olives-premiere-status" role="status" aria-live="polite"></p>
+            <div class="np-olives-premiere-controls">
+                <button id="np-olives-skip" class="np-olives-premiere-btn" type="button">Passer · Voir la boutique ➜</button>
+                <button id="np-olives-sound" class="np-olives-premiere-btn" type="button" aria-pressed="false">🔇 Activer le son</button>
+            </div>
         </div>
     </div>
 
@@ -3303,7 +3428,7 @@ body.np-halloween-no-motion .start-referral-card{animation:none!important}
       </div>
     </div>
     <div id="notification-toast"></div>
-    <script src="script.js?v=grape-gaspline-prix-barres-20261109"></script>
+    <script src="script.js?v=olives-premiere-20261109"></script>
 </body>
 
 </html>
