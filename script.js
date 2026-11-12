@@ -480,7 +480,7 @@ document.addEventListener("DOMContentLoaded", function () {
           description:
           "🫒 Cherry 🍒🇪🇸\n\n Olive Static au profil gourmand, doux et légèrement pâtissier. Texture propre, aspect premium et belle présence aromatique dès l’ouverture.\n\n🍰 Notes cake sucrées et crémeuses\n⚡ Qualité Olive Static\n🏆 Une sélection haut de gamme pour ceux qui aiment les profils doux et travaillés.",
            tarifs: [
-            { weight: "10G", oldPrice: 200.0, price: 180.0 },
+            { weight: "10G", oldPrice: 200.0, price: 150.0 },
             { weight: "20G", oldPrice: 380.0, price: 320.0 },
           ],
         },
