@@ -3,29 +3,106 @@ document.addEventListener("DOMContentLoaded", function () {
   const tg = window.Telegram.WebApp;
   tg.ready();
   tg.expand();
-  tg.setHeaderColor("#2b1534");
-  tg.setBackgroundColor("#120d1b");
 
 
-  // HALLOWEEN : interrupteur des décorations animées, sans toucher aux achats.
-  const npHalloweenSwitch = document.getElementById('np-halloween-toggle');
-  const npHalloweenPrefKey = 'niceplace_halloween_motion_2026';
-  let npHalloweenMotion = true;
-  try { npHalloweenMotion = localStorage.getItem(npHalloweenPrefKey) !== 'off'; } catch (_) {}
-  function npSetHalloweenMotion(enabled) {
-    npHalloweenMotion = !!enabled;
-    document.body.classList.toggle('np-halloween-no-motion', !npHalloweenMotion);
-    if (npHalloweenSwitch) {
-      npHalloweenSwitch.setAttribute('aria-pressed', String(npHalloweenMotion));
-      npHalloweenSwitch.setAttribute('aria-label', npHalloweenMotion ? 'Désactiver les animations Halloween' : 'Activer les animations Halloween');
-      npHalloweenSwitch.textContent = npHalloweenMotion ? '✨' : '⏸';
-      npHalloweenSwitch.title = npHalloweenMotion ? 'Mettre les animations en pause' : 'Relancer les animations Halloween';
+  // ============================================================
+  // NICE PLACE · NOËL 2026 : animations & musique originale.
+  // Les choix sont mémorisés; les vidéos produits restent prioritaires.
+  // ============================================================
+  tg.setHeaderColor("#133f2d");
+  tg.setBackgroundColor("#071b15");
+  const npNoelToggle = document.getElementById('np-noel-toggle');
+  const npNoelPrefKey = 'niceplace_noel_motion_2026';
+  let npNoelMotion = true;
+  try { npNoelMotion = localStorage.getItem(npNoelPrefKey) !== 'off'; } catch (_) {}
+  function npSetNoelMotion(enabled) {
+    npNoelMotion = !!enabled;
+    document.body.classList.toggle('np-noel-no-motion', !npNoelMotion);
+    if (npNoelToggle) {
+      npNoelToggle.setAttribute('aria-pressed', String(npNoelMotion));
+      npNoelToggle.setAttribute('aria-label', npNoelMotion ? 'Désactiver les animations de Noël' : 'Activer les animations de Noël');
+      npNoelToggle.textContent = npNoelMotion ? '❄️' : '⏸';
+      npNoelToggle.title = npNoelMotion ? 'Mettre la neige en pause' : 'Relancer la neige';
     }
-    try { localStorage.setItem(npHalloweenPrefKey, enabled ? 'on' : 'off'); } catch (_) {}
+    try { localStorage.setItem(npNoelPrefKey, npNoelMotion ? 'on' : 'off'); } catch (_) {}
   }
-  npSetHalloweenMotion(npHalloweenMotion);
-  if (npHalloweenSwitch) npHalloweenSwitch.addEventListener('click', () => npSetHalloweenMotion(!npHalloweenMotion));
+  npSetNoelMotion(npNoelMotion);
+  npNoelToggle?.addEventListener('click', () => npSetNoelMotion(!npNoelMotion));
+  const npSnowBox = document.getElementById('np-noel-snow');
+  if (npSnowBox) {
+    const flakeCount = window.matchMedia('(max-width: 420px)').matches ? 34 : 55;
+    const fragment = document.createDocumentFragment();
+    for (let i = 0; i < flakeCount; i++) {
+      const flake = document.createElement('i');
+      flake.className = 'np-noel-flake';
+      flake.style.setProperty('--x', `${(i * 41.17 + Math.random() * 8) % 100}%`);
+      flake.style.setProperty('--size', `${2 + Math.random() * 4.4}px`);
+      flake.style.setProperty('--opacity', String(.25 + Math.random() * .49));
+      flake.style.setProperty('--duration', `${10 + Math.random() * 17}s`);
+      flake.style.setProperty('--delay', `${-Math.random() * 29}s`);
+      flake.style.setProperty('--drift', `${-36 + Math.random() * 72}px`);
+      fragment.appendChild(flake);
+    }
+    npSnowBox.appendChild(fragment);
+  }
 
+  const npNoelAudio = document.getElementById('np-noel-audio');
+  const npNoelMusicBtn = document.getElementById('np-noel-music-toggle');
+  const npMusicPrefKey = 'niceplace_noel_music_2026';
+  let npMusicWanted = true;
+  try { npMusicWanted = localStorage.getItem(npMusicPrefKey) !== 'off'; } catch (_) {}
+  if (npNoelAudio) npNoelAudio.volume = .23;
+  function npIsOtherVideoPlaying() {
+    const preview = document.getElementById('np-olives-premiere');
+    if (preview && !preview.hidden) return true;
+    return [...document.querySelectorAll('.page.active video')].some(v => !v.paused && !v.ended);
+  }
+  function npUpdateMusicButton() {
+    if (!npNoelMusicBtn) return;
+    npNoelMusicBtn.textContent = npMusicWanted ? '🎵' : '🔇';
+    npNoelMusicBtn.setAttribute('aria-pressed', String(npMusicWanted));
+    npNoelMusicBtn.setAttribute('aria-label', npMusicWanted ? 'Couper la musique de Noël' : 'Activer la musique de Noël');
+    npNoelMusicBtn.title = npMusicWanted ? 'Couper la musique' : 'Mettre la musique';
+  }
+  function npTryNoelMusic() {
+    if (!npNoelAudio) return;
+    if (!npMusicWanted || document.hidden || npIsOtherVideoPlaying()) {
+      npNoelAudio.pause();
+      return;
+    }
+    const result = npNoelAudio.play();
+    if (result && typeof result.then === 'function') {
+      result.then(() => npNoelMusicBtn?.classList.remove('np-noel-music-needs-tap'))
+        .catch(() => npNoelMusicBtn?.classList.add('np-noel-music-needs-tap'));
+    }
+  }
+  npUpdateMusicButton();
+  npNoelMusicBtn?.addEventListener('click', () => {
+    // Si la lecture auto a été bloquée, un SEUL clic lance la musique.
+    if (npMusicWanted && npNoelAudio?.paused) {
+      npTryNoelMusic();
+      return;
+    }
+    npMusicWanted = !npMusicWanted;
+    try { localStorage.setItem(npMusicPrefKey, npMusicWanted ? 'on' : 'off'); } catch (_) {}
+    npUpdateMusicButton();
+    if (npMusicWanted) npTryNoelMusic();
+    else { npNoelAudio?.pause(); npNoelMusicBtn.classList.remove('np-noel-music-needs-tap'); }
+  });
+  document.addEventListener('visibilitychange', npTryNoelMusic);
+  // Le navigateur peut exiger un geste utilisateur avant tout son.
+  document.addEventListener('pointerdown', () => {
+    if (npMusicWanted && npNoelAudio?.paused && !npIsOtherVideoPlaying()) npTryNoelMusic();
+  }, {passive:true});
+  // On évite les mélanges avec les vidéos d'articles.
+  document.addEventListener('play', (e) => {
+    if (e.target instanceof HTMLVideoElement) npNoelAudio?.pause();
+  }, true);
+  function npResumeAfterProductVideo(e) {
+    if (e.target instanceof HTMLVideoElement && npMusicWanted) setTimeout(npTryNoelMusic, 200);
+  }
+  document.addEventListener('pause', npResumeAfterProductVideo, true);
+  document.addEventListener('ended', npResumeAfterProductVideo, true);
 
   // ============================================================
   // PREMIERE OLIVE STATIC : video apres le chargement, facile a passer.
@@ -49,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
     npOlivesOverlay.hidden = true;
     npOlivesOverlay.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('np-olives-overlay-open');
+    npTryNoelMusic();
     if (showExistingPopup) {
       // Les deux notifications existantes ne s'affichent QU'APRES la video.
       setTimeout(() => showStartPromoPopup(), 350);
@@ -61,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
     npOlivesOverlay.hidden = false;
     npOlivesOverlay.setAttribute('aria-hidden', 'false');
     document.body.classList.add('np-olives-overlay-open');
+    npNoelAudio?.pause();
     if (npOlivesStatus) npOlivesStatus.textContent = '';
     npOlivesVideo.pause();
     try { npOlivesVideo.currentTime = 0; } catch (_) {}
@@ -165,8 +244,6 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "1OG", price: 50.0 },
             { weight: "50G", price: 200.0 },
             { weight: "100G", price: 350.0 },
-            { weight: "30G", price: 120.0, halloweenPromo: true },
-
           ],
         },
         /* {
@@ -227,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "100G", price: 350.0 },
           ],
         }, */
-        {
+       /*  {
           id: "Forbiden fruit X Honey banana🍌 ",
           flag: "🇪🇸",
           name: "Forbiden fruit X Honey banana🍌",
@@ -245,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "25G", price: 200.0 },
             { weight: "25G", price: 150.0, halloweenPromo: true },
           ],
-        },
+        }, */
         {
           id: "Peche OZ",
           flag: "🇪🇸",
@@ -262,6 +339,8 @@ document.addEventListener("DOMContentLoaded", function () {
           tarifs: [
             { weight: "5G", price: 60.0 },
             { weight: "25G", price: 200.0 },
+            { weight: "50G", price: 350.0 },
+            { weight: "100G", price: 600.0 },
           ],
         },
          /* {
@@ -403,7 +482,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "10G", price: 180.0 },
           ],
         }, */
-         {
+       /*   {
           id: "Papaya Lemon",
           flag: "🇪🇸",
           name: "Papaya Lemon 🍹",
@@ -460,12 +539,12 @@ document.addEventListener("DOMContentLoaded", function () {
             { name: "🧊 Fresh Frozen X 24K — 10G · Nice'Selection", targetId: "Fresh Frozen X 24K 🧊" },
           ],
           description:
-            "🎁 PACK DUO FROZEN 20G 🍹🧊\n\nDeux références de la gamme Frozen 160/73u réunies dans un seul pack.\n\n🍹 10G de Papaya Lemon — FrostKings 🧞\n🧊 10G de Fresh Frozen X 24K — Nice'Selection 🧞\n\n📸 Parcours les deux photos et les deux vidéos pour découvrir chaque référence.\n💰 Prix habituel du pack : 220 € (300 € séparément). Offre spéciale Halloweedn : 200 € pour les 20G.",
+            "🎁 PACK DUO FROZEN 20G 🍹🧊\n\nDeux références de la gamme Frozen 160/73u réunies dans un seul pack.\n\n🍹 10G de Papaya Lemon — FrostKings 🧞\n🧊 10G de Fresh Frozen X 24K — Nice'Selection 🧞\n\n📸 Parcours les deux photos et les deux vidéos pour découvrir chaque référence.\n💰 Prix habituel du pack : 220 € (300 € séparément). Offre spéciale : 200 € pour les 20G.",
           tarifs: [
             { weight: "20G (10G + 10G)", price: 200.0, halloweenPromo: true },
           ],
         },
-
+ */
           {
           id: "🫒 Cherry 🍒 ",
           name: "🫒 Cherry 🍒",
@@ -674,7 +753,7 @@ document.addEventListener("DOMContentLoaded", function () {
           image: "ProductPPR.png",
           video: "VideoPPR.mov",
           description:
-               "🇺🇸 PINK RUNTZ 🌺 🇺🇸\n\nUne sélection Cali signée Nice'Selection 🧞, au profil gourmand inspiré des célèbres variétés Runtz. Pink Runtz évoque un univers fruité et sucré, mêlant des notes de bonbons, de fruits rouges et une touche crémeuse.\n\n👃 Profil aromatique :\n🍓 Notes de fraise et de fruits rouges\n🍬 Inspiration bonbons sucrés et candy\n🌺 Nuances florales délicates\n🍦 Fond doux et crémeux\n\n🌴 Gamme CALI 🇺🇸\n💎 Sélection Nice'Selection 🧞\n🎃 OFFRE SPÉCIALE HALLOWEEDN : 25G à 230€ !\n\n🏆 Une identité gourmande et colorée pour les amateurs de profils fruités et sucrés.",
+               "🇺🇸 PINK RUNTZ 🌺 🇺🇸\n\nUne sélection Cali signée Nice'Selection 🧞, au profil gourmand inspiré des célèbres variétés Runtz. Pink Runtz évoque un univers fruité et sucré, mêlant des notes de bonbons, de fruits rouges et une touche crémeuse.\n\n👃 Profil aromatique :\n🍓 Notes de fraise et de fruits rouges\n🍬 Inspiration bonbons sucrés et candy\n🌺 Nuances florales délicates\n🍦 Fond doux et crémeux\n\n🌴 Gamme CALI 🇺🇸\n💎 Sélection Nice'Selection 🧞\n🎁 OFFRE SPÉCIALE : 25G à 230€ !\n\n🏆 Une identité gourmande et colorée pour les amateurs de profils fruités et sucrés.",
           tarifs: [
             { weight: "4,5G", price: 50.0 },
             { weight: "25G", price: 230.0, halloweenPromo: true },
@@ -823,7 +902,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }, */
       ],
     },
-  {
+     {
       id: "BLANCHE",
       name: "🔌 BLANCHE ☣️",
       type: "Blanche",
@@ -847,7 +926,6 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "3c", price: 160.0 },
             { weight: "5c", price: 250.0 },
             { weight: "11c", price: 500.0 },
-            { weight: "10g", price: 450.0, halloweenPromo: true },
           ],
         },
       ], // Les produits s'insèrent directement ici
@@ -1315,25 +1393,25 @@ const roulettePrizeLabel = "🎁 Packet Philip Moris Offert"; // Lot affiché si
   }
 
   // Une seule ligne par véritable offre spéciale; aucun prix normal n'est faussement affiché comme promo.
-  function getHalloweenOffer(product) {
+  function getSeasonalOffer(product) {
     return product && Array.isArray(product.tarifs)
       ? product.tarifs.find(tarif => tarif.halloweenPromo === true)
       : null;
   }
 
-  function buildHalloweenPromoLine(product) {
-    const offer = getHalloweenOffer(product);
+  function buildSeasonalPromoLine(product) {
+    const offer = getSeasonalOffer(product);
     if (!offer) return "";
-    return `<div class="halloween-special-line" aria-label="Promo Halloweedn ${offer.weight} ${offer.price} euros">
-       <span class="halloween-special-label">✱ PROMO HALLOWEEDN</span>
-       <span class="halloween-special-weight">${offer.weight}</span>
+    return `<div class="noel-special-line" aria-label="Prix spécial ${offer.weight} ${offer.price} euros">
+       <span class="noel-special-label">✱ PRIX SPÉCIAL</span>
+       <span class="noel-special-weight">${offer.weight}</span>
        <strong>${offer.price.toFixed(2)} €</strong>
     </div>`;
   }
 
-function showHalloweenCartAnimation(sourceElement = null) {
+function showNoelCartAnimation(sourceElement = null) {
   const burst = document.createElement("div");
-  burst.className = "halloween-cart-burst";
+  burst.className = "noel-cart-burst";
 
   let baseX = window.innerWidth / 2;
   let baseY = window.innerHeight - 120;
@@ -1344,7 +1422,7 @@ function showHalloweenCartAnimation(sourceElement = null) {
     baseY = rect.top + rect.height / 2;
   }
 
-  const icons = ["🎃", "🕸️", "🦇", "👻", "🍬", "✨"];
+  const icons = ["🎁", "❄️", "🔔", "⭐", "🎄", "✨"];
   const positions = [
     { tx: "-70px", ty: "-90px", rot: "-18deg" },
     { tx: "75px", ty: "-95px", rot: "22deg" },
@@ -1426,7 +1504,7 @@ const favoriteBadgeHTML = product.customerFavorite === true
   ? `<div class="customer-favorite-badge">❤️ PRÉFÉRÉ DES CLIENTS</div>`
   : "";
 
-const promoLineHTML = buildHalloweenPromoLine(product);
+const promoLineHTML = buildSeasonalPromoLine(product);
 
 card.innerHTML = `
   ${mediaHTML}
@@ -1685,7 +1763,7 @@ card.innerHTML = `
                 <div class="name">${product.name} ${flagHTML}</div>
                 <div class="farm">${product.farm}</div> 
                 <div class="price ${npHasRealDiscount(product.tarifs[0]) ? 'np-price-reduced' : ''}">${npPricePreviewHTML(product.tarifs[0])}</div>
-                ${buildHalloweenPromoLine(product)}
+                ${buildSeasonalPromoLine(product)}
             </div>
         `;
       productListContainer.appendChild(card);
@@ -1750,7 +1828,7 @@ card.innerHTML = `
                     <div class="name">${product.name} ${flagHTML}</div>
                     <div class="farm">${product.farm}</div>
                     <div class="price ${npHasRealDiscount(product.tarifs[0]) ? 'np-price-reduced' : ''}">${npPricePreviewHTML(product.tarifs[0])}</div>
-                ${buildHalloweenPromoLine(product)}
+                ${buildSeasonalPromoLine(product)}
                 </div>
             `;
       productListContainer.appendChild(card);
@@ -1845,8 +1923,8 @@ card.innerHTML = `
     let tarifsHTML = product.tarifs
       .map(
         (tarif) => `
-            <div class="tarif-item ${tarif.halloweenPromo ? "halloween-special-tarif" : ""} ${npHasRealDiscount(tarif) ? 'np-reduced-tarif' : ''}">
-                ${tarif.halloweenPromo ? '<span class="halloween-special-tarif-label">✱ PROMO HALLOWEEDN</span>' : ''}
+            <div class="tarif-item ${tarif.halloweenPromo ? "noel-special-tarif" : ""} ${npHasRealDiscount(tarif) ? 'np-reduced-tarif' : ''}">
+                ${tarif.halloweenPromo ? '<span class="noel-special-tarif-label">✱ PRIX SPÉCIAL</span>' : ''}
                 <div class="box-tarif">
                     <div class="tarif-wieght">${tarif.weight}</div>
                     <div class="tarif-price">${npPricePreviewHTML(tarif)}</div>
@@ -2269,15 +2347,15 @@ qualityFilter.innerHTML = `
 
     clearTimeout(notificationTimeout);
 
-    notification.classList.remove("show", "halloween-toast");
+    notification.classList.remove("show", "noel-toast");
     notification.innerHTML = "";
     void notification.offsetWidth;
 
     notification.textContent = message;
-    notification.classList.add("show", "halloween-toast");
+    notification.classList.add("show", "noel-toast");
 
     notificationTimeout = setTimeout(() => {
-      notification.classList.remove("show", "halloween-toast");
+      notification.classList.remove("show", "noel-toast");
       notification.innerHTML = "";
     }, 3000);
   }
@@ -2408,22 +2486,22 @@ function spinRewardRoulette() {
 
   // --- LOGIQUE DU PANIER ---
 
-  const headerHalloweenPromoBtn = document.getElementById("header-halloween-promo");
+  const headerNoelSpecialBtn = document.getElementById("header-noel-special");
 
-if (headerHalloweenPromoBtn) {
-  headerHalloweenPromoBtn.addEventListener("click", () => {
-    const firstSection = document.querySelector("#page-home .halloween-special-line")?.closest(".product-card") || document.querySelector("#page-home .home-category-section");
+if (headerNoelSpecialBtn) {
+  headerNoelSpecialBtn.addEventListener("click", () => {
+    const firstSection = document.querySelector("#page-home .noel-special-line")?.closest(".product-card") || document.querySelector("#page-home .home-category-section");
     if (firstSection) {
       firstSection.scrollIntoView({ behavior: "smooth", block: "start" });
     }
-    showNotification("🎃 Découvre les promos d’Halloweedn dans nos produits !");
+    showNotification("🎁 Découvre les prix spéciaux dans nos produits !");
   });
 }
 
   // Ajoute le paramètre 'variant' à la fin
-function addToCart(productId, weight, price, variant = null, sourceElement = null, isHalloweenPromo = false) {
+function addToCart(productId, weight, price, variant = null, sourceElement = null, isSpecialOffer = false) {
       // L'ID du panier doit inclure la variante pour différencier (ex: 10g Gelato vs 10g Papaya)
-    const cartItemId = `${productId}-${weight}-${variant ? variant.replace(/\s+/g, "") : "default"}-${isHalloweenPromo ? "halloweedn" : "normal"}`;
+    const cartItemId = `${productId}-${weight}-${variant ? variant.replace(/\s+/g, "") : "default"}-${isSpecialOffer ? "special" : "normal"}`;
 
     const existingItem = cart.find((item) => item.id === cartItemId);
     const product = getProductById(productId);
@@ -2440,20 +2518,20 @@ function addToCart(productId, weight, price, variant = null, sourceElement = nul
       cart.push({
         id: cartItemId,
         productId: productId,
-        name: isHalloweenPromo ? `${displayName} 🎃 PROMO HALLOWEEDN` : displayName, // Variante promo reconnaissable dans le panier
+        name: isSpecialOffer ? `${displayName} 🎁 PRIX SPÉCIAL` : displayName, // Variante promo reconnaissable dans le panier
         image: product.image,
         weight: weight,
         quantity: 1,
         unitPrice: price,
         totalPrice: price,
         variant: variant, // On garde la variante en mémoire si besoin
-        halloweenPromo: isHalloweenPromo,
+        halloweenPromo: isSpecialOffer,
       });
     }
     renderCart();
     tg.HapticFeedback.notificationOccurred("success");
-    showHalloweenCartAnimation(sourceElement);
-    showNotification(isHalloweenPromo ? "🎃 Offre Halloweedn ajoutée au panier !" : "🎃 Produit ajouté au panier !");
+    showNoelCartAnimation(sourceElement);
+    showNotification(isSpecialOffer ? "🎁 Offre spéciale ajoutée au panier !" : "🎁 Produit ajouté au panier !");
   }
   // updateQuantity (inchangé)
   function updateQuantity(cartItemId, action) {
@@ -3101,7 +3179,7 @@ if (rouletteBtn) {
 
       // Affiche d'abord Olives.mov ; les anciennes offres suivront apres "Passer" ou la fin de video.
       setTimeout(() => {
-        if (!npOpenOlivesPremiere(true)) showStartPromoPopup();
+        if (!npOpenOlivesPremiere(true)) { showStartPromoPopup(); npTryNoelMusic(); }
       }, 400);
     }, 3000);
   }

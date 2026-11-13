@@ -2345,157 +2345,122 @@
 @media (prefers-reduced-motion:reduce){.np-referral-home-banner::before,.np-referral-gift,.np-referral-home-gift,.np-referral-spark,.np-referral-hero::after,.np-referral-toast-gift,.np-referral-animated-link::before{animation:none!important}}
 
 
-/* ===========================================================
-   NICE PLACE — HALLOWEEN 2026 | TOUTES LES PAGES
-   Le style est purement cosmétique : aucun système métier modifié.
-   =========================================================== */
-:root {
-  --np-h-orange:#ff852b;
-  --np-h-pumpkin:#ffad47;
-  --np-h-violet:#b27af3;
-  --np-h-lilac:#e7d0ff;
-  --np-h-night:#120b1b;
-  --background-color:#120d1b;
-  --secondary-bg-color:#281c32;
-  --tertiary-bg-color:#3b2a49;
-  --accent-color:#b58afe;
+
+/* ============================================================
+   NICE PLACE · NOËL 2026 — Sapin, rouge carmin, or & neige
+   Habillage seulement, tarifs et fonctions d'achat préservés.
+   ============================================================ */
+:root{
+  --background-color:#071712;--secondary-bg-color:#143026;
+  --tertiary-bg-color:#254436;--accent-color:#d7ae66;
+  --np-gold:#f6d892;--np-red:#c64348;--np-green:#1d6a4c;
 }
-html{background:#100c18}
+html{background:#061510}
 body{
-  background-color:#100b18;
+  background-color:#061510;
   background-image:
-    radial-gradient(ellipse at 12% 8%, rgba(153,75,201,.30), transparent 39%),
-    radial-gradient(ellipse at 95% 69%,rgba(229,89,14,.20),transparent 48%),
-    linear-gradient(180deg,rgba(15,6,23,.86),rgba(15,9,20,.80)),
-    url('Fondecran2.png');
-  background-position:center,center,center,center;
-  background-size:cover;
-  background-attachment:fixed;
+    radial-gradient(ellipse at 9% 6%,rgba(19,101,68,.42),transparent 40%),
+    radial-gradient(ellipse at 94% 57%,rgba(126,24,36,.27),transparent 53%),
+    linear-gradient(180deg,rgba(4,21,16,.91),rgba(8,21,20,.80)),url('Fondecran2.png');
+  background-position:center;background-size:cover;background-attachment:fixed;
 }
-body::before{
-  content:"";pointer-events:none;position:fixed;inset:0;z-index:0;
-  background:repeating-linear-gradient(115deg,transparent 0 42px,rgba(123,62,156,.018) 44px 46px);
+body::before{content:"";pointer-events:none;position:fixed;inset:0;z-index:0;
+  background:radial-gradient(circle at 8% 17%,#fff7db28 0 1px,transparent 2px),
+             radial-gradient(circle at 76% 24%,#fff6ce20 0 1px,transparent 2px);
+  background-size:118px 106px,151px 122px;
 }
 .page{position:relative;z-index:1}
 #page-home .home-header{
-  background:linear-gradient(180deg,rgba(83,31,101,.83),rgba(28,12,34,.44));
-  border-bottom:1px solid rgba(245,141,52,.26);
+  background:linear-gradient(180deg,rgba(12,67,45,.95),rgba(4,28,25,.57));
+  border-bottom:1px solid #e9c77a66;
 }
-.home-logo{box-shadow:0 0 9px 2px rgba(255,138,41,.68),0 0 20px rgba(148,67,177,.42)}
-.page-header{background:linear-gradient(180deg,#5b2a6dcc,#25122ce6);border-bottom:1px solid #f28d4080}
-.page-header .title{color:#ffe5b5;text-shadow:0 2px 12px #a854ff70}
-.top-marquee{
-      background: linear-gradient(310deg, #311842, #f28b2a, #3d1b51, #ff9f37);
-    background-size: 280% 100%;
-    color: #f3bc50;
-    /* animation: npHalloweenGradient 14s linear infinite; */
-    border-bottom: 1px solid #ffd79b8c;
-}
-#page-home .filters .filter-select-wrapper{background:#2b1b35df;border:1px solid #9455b55c;box-shadow:0 0 14px #12071b70}
-#quality-filter{background:linear-gradient(115deg,#180b20,#542b55,#30182e);color:#fff1cc}
+.home-logo{box-shadow:0 0 9px 2px #f8d58ca8,0 0 20px #19764a77}
+.page-header{background:linear-gradient(180deg,#15523dcc,#0b2926ed);border-bottom:1px solid #d9bc7996}
+.page-header .title{color:#fff0c9;text-shadow:0 2px 13px #d3b36a70}
+.top-marquee{background:linear-gradient(110deg,#124b3a,#9e2b37,#19694a,#bc8d42,#124b3a);
+  background-size:260% 100%;color:#fff1c9;border-bottom:1px solid #ffe5ae85;
+  animation:npNoelMarqueeGlow 16s ease-in-out infinite}
+@keyframes npNoelMarqueeGlow{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+#page-home .filters .filter-select-wrapper{background:#103a2de8;border:1px solid #d6b77376;box-shadow:0 0 13px #021e166d}
+#quality-filter{background:linear-gradient(115deg,#071e19,#20513a,#102925);color:#fff2ca}
 #page-home .home-category-title,.home-category-title{
-  color:#fff4d9!important;
-  background:linear-gradient(100deg,#170e1d,#763671,#ef7b25,#4f235a,#170e1d)!important;
-  border:1px solid rgba(255,151,63,.58);
-  box-shadow:0 0 16px #f68b344f,0 0 9px #9952b24f!important;
-  text-shadow:0 2px 9px #17071e;
+  color:#fff3d0!important;background:linear-gradient(100deg,#0c2e25,#1a7250,#a23d46,#c49b4d,#0b3328)!important;
+  border:1px solid #e7c67aa0;box-shadow:0 0 16px #d5b37140,0 0 8px #1a8b6360!important;
+  text-shadow:0 2px 6px #0a2819;
 }
 #page-home .product-card,.product-card{
-  background:linear-gradient(160deg,#602a63dd,#1b1124 57%,#110d19)!important;
-  border-color:#a75ac5!important;
-  box-shadow:0 0 12px #b66bce59,0 6px 16px #08040bcc!important;
+  background:linear-gradient(160deg,#174e3ddd,#102922 57%,#071b17)!important;
+  border-color:#cba95e!important;box-shadow:0 0 12px #dfbc6d41,0 6px 16px #0009!important;
 }
-.product-card .name{color:#ffdf9f;text-shadow:0 2px 5px #140a1b}
-.product-card .farm{color:#deb5f2}
-.product-card .price{color:#ffc18d}
-#page-product .product-details{background:#271731d9!important;border:1px solid #a867ad78!important;box-shadow:0 0 20px #a154b038}
-.tarif-item{background:linear-gradient(165deg,#763966,#25142e,#1a101f);border-color:#f59539;box-shadow:0 3px 10px #0007}
-.add-to-cart-btn,.main-action-btn{background:linear-gradient(110deg,#ffc168,#f38b2c,#ba68cb)!important;color:#180e1c!important;box-shadow:0 0 11px #e984496e!important;font-weight:800}
-.nav-item{background:#392344e3;box-shadow:0 0 9px #ae5bc66b;color:#ffc777;border:1px solid rgba(179,93,192,.40)}
-.nav-item.active{background:linear-gradient(160deg,#753a6d,#2b1836);color:#fff0cb;box-shadow:0 0 14px #ff984a8c;border-color:#e98641}
-.bottom-nav{background:#1b1025ed;border-top:1px solid #a766bd6b;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-#nav-cart-number{background:linear-gradient(150deg,#b372e6,#fc9b39);color:#170b1a}
-.np-bonus-card,.cart-summary,.contact-card,.np-referral-example,.np-referral-actions{
-  border-color:#ab6dba9c!important;
-  box-shadow:0 0 16px #8f3cbf3b!important;
+.product-card .name{color:#fff0bb;text-shadow:0 2px 6px #0009}
+.product-card .farm{color:#caead3}.product-card .price{color:#ffe2a5}
+#page-product .product-details{background:#102d25dd!important;border:1px solid #bcab7e85!important;box-shadow:0 0 22px #22684f48}
+.tarif-item{background:linear-gradient(165deg,#22553e,#142d28,#0d2420);border-color:#d2a65a;box-shadow:0 3px 10px #0008}
+.add-to-cart-btn,.main-action-btn{background:linear-gradient(110deg,#fff0b8,#d9ac58,#e5d0a0)!important;color:#163125!important;box-shadow:0 0 12px #dbbc786b!important;font-weight:800}
+.nav-item{background:#14382df0;box-shadow:0 0 9px #69b38d4c;color:#f6dc9a;border:1px solid #cfa9635c}
+.nav-item.active{background:linear-gradient(160deg,#8b3040,#294d37);color:#fff5cf;box-shadow:0 0 14px #e6be7282;border-color:#edd190}
+.bottom-nav{background:#08291eea;border-top:1px solid #c29c606b;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+#nav-cart-number{background:linear-gradient(160deg,#bf3648,#e7c16e);color:#fff}
+.np-bonus-card,.cart-summary,.contact-card,.np-referral-example,.np-referral-actions{border-color:#cfb1799c!important;box-shadow:0 0 16px #b79b5e48!important}
+#notification-toast{background:linear-gradient(110deg,#115e48,#b43d4d)!important}
+.start-promo-card{background:linear-gradient(150deg,#1e6e4e,#b83f4b,#123e30)!important;border-color:#e8d29b!important;box-shadow:0 0 22px #97a35e66,0 0 13px #f1ca6690!important}
+.start-promo-title{color:#fff3c9;text-shadow:0 2px 6px #153a2c}
+.start-promo-gift{color:#ffebc3}
+.start-referral-card{border-color:#d9c384;background:linear-gradient(125deg,#102922,#276947,#7d283b,#22533b);background-size:250% 250%;box-shadow:0 0 18px #96b08568}
+.start-referral-cta{background:linear-gradient(90deg,#ffe6a0,#c6a35b,#f5e7b4);color:#173528}
+.np-referral-home-banner{border-color:#e2c887!important;box-shadow:0 0 18px #c5b06755,0 0 10px #57ad7c67!important}
+.np-referral-home-banner::before{background:linear-gradient(90deg,#082419,#c5a64a,#164c37,#ad4750,#135641,#f1d49d);background-size:260% 100%}
+.np-referral-home-cta{background:linear-gradient(100deg,#f3dfa1,#d0a862);color:#142f25}
+.np-referral-hero{border-color:#ddbe7c;background:radial-gradient(ellipse at 50% 0%,#356d51,#153a2d 48%,#0c211b);box-shadow:0 0 21px #a5aa674f}
+.np-referral-limit{background:linear-gradient(160deg,#f2de9c,#d9b86f,#c8a661)}
+.np-referral-step-num{background:#e9c77f;color:#203d2e}
+.np-referral-primary,.np-referral-copy-link{background:linear-gradient(100deg,#e4cf8a,#fff0bd,#cba567)}
+.reviews-panel{background:linear-gradient(160deg,#163c2f,#0b241d)!important;border:1px solid #cbb57c9c}
+.review-tab.active,.reviews-more{background:linear-gradient(100deg,#a53b43,#f1d188)!important;color:#163124!important}
+/* En-tête de Noël, 2 boutons compacts, accessible sur mobiles étroits */
+.np-noel-hero{
+  margin:15px 12px 7px;padding:14px 12px;display:flex;align-items:center;gap:10px;position:relative;
+  border:1.5px solid #f7dc9c;border-radius:20px;overflow:hidden;
+  background:radial-gradient(ellipse at 13% 0%,#24694bc1,transparent 67%),linear-gradient(115deg,#102a22,#20513c,#12392f);
+  box-shadow:0 0 20px #e5bd6a40,inset 0 0 24px #001a1459;
 }
-#notification-toast{background:linear-gradient(100deg,#713f88,#ef8836)!important}
-.start-promo-card{
-  background:linear-gradient(150deg,#6a2879,#ed842c,#27112d)!important;
-  border-color:#dcb0ff!important;
-  box-shadow:0 0 22px #bc57d989,0 0 13px #fa8e4990!important;
-}
-.start-promo-title{color:#fff3c6;text-shadow:0 2px 6px #32093e}
-.start-promo-gift{color:#ffd1ad}
-.start-referral-card{border-color:#d999f6;background:linear-gradient(125deg,#1a0e23,#662b68,#26112b,#b9582d);background-size:250% 250%;box-shadow:0 0 17px #b86add89}
-.start-referral-cta{background:linear-gradient(90deg,#e2a0ff,#ffc15d,#b970d8);color:#160b20}
-.np-referral-home-banner{border-color:#d48cdd!important;box-shadow:0 0 18px #d979e965,0 0 10px #ffa24b6b!important}
-.np-referral-home-banner::before{background:linear-gradient(90deg,#0d0713,#7c3579,#f19540,#21102a,#a452af,#f4a651);background-size:260% 100%}
-.np-referral-home-cta{background:linear-gradient(100deg,#f6b14e,#c77bef);color:#210d28}
-.np-referral-hero{border-color:#bc85e4;background:radial-gradient(ellipse at 50% 0%,#81406c,#2c1733 48%,#120b1c);box-shadow:0 0 21px #b761ce4f}
-.np-referral-limit{background:linear-gradient(160deg,#f9c579,#ee8a40,#c97ee1)}
-.np-referral-step-num{background:#e6a1e9;color:#220e29}
-.np-referral-primary,.np-referral-copy-link{background:linear-gradient(100deg,#e9a0e8,#ffad5c,#f0c491)}
-.reviews-panel{background:linear-gradient(160deg,#341d41,#1b1126)!important;border:1px solid #d18eed7b}
-.review-tab.active,.reviews-more{background:linear-gradient(100deg,#b16fd6,#f79747)!important;color:#180f20!important}
-/* Habillage Halloween du bandeau d'accueil */
-.np-halloween-hero{
-  margin:15px 14px 7px;padding:13px 12px;display:flex;align-items:center;gap:10px;position:relative;
-  border:1.5px solid #db91fa;border-radius:19px;overflow:hidden;
-  background:radial-gradient(ellipse at 13% 0%,#7b2c74b9,transparent 64%),linear-gradient(115deg,#211028,#3b1941,#211126);
-  box-shadow:0 0 17px #a855bd4d,inset 0 0 22px #08030d5c;
-}
-.np-halloween-hero::after{content:"✦    ✧       ✦";position:absolute;right:-3px;top:4px;color:#ffb75142;font-size:25px;letter-spacing:7px;pointer-events:none}
-.np-halloween-pumpkin{font-size:42px;line-height:1;filter:drop-shadow(0 0 9px #ff9026a9);animation:npPumpkinFloat 3.1s ease-in-out infinite;z-index:1}
-.np-halloween-hero-text{display:flex;flex-direction:column;gap:3px;z-index:1;min-width:0;flex:1}
-.np-halloween-kicker{font-size:10px;font-weight:900;color:#dcb1ff;letter-spacing:.10em}
-.np-halloween-hero-text strong{font-size:clamp(.94rem,3.3vw,1.18rem);line-height:1.2;color:#ffcc8b;text-shadow:0 2px 6px #0008}
-.np-halloween-hero-text span:last-child{font-size:11px;color:#e8d2f3;line-height:1.35}
-.np-halloween-toggle{position:relative;z-index:2;flex:0 0 34px;height:34px;border:1px solid #c68cde;background:#51305a;color:#ffca7a;border-radius:12px;font-size:1rem;cursor:pointer;touch-action:manipulation}
-.np-halloween-toggle:focus-visible{outline:2px solid #ffcc8a;outline-offset:3px}
-.np-halloween-toggle[aria-pressed="false"]{filter:grayscale(.6);opacity:.65}
-/* Araignée et toiles flottantes, ne capturent jamais les clics */
-.np-halloween-decor{position:fixed;inset:0;z-index:48;pointer-events:none;overflow:hidden;isolation:isolate}
-.np-halloween-web{position:absolute;color:#bc92d2;opacity:.48;width:min(46vw,225px);height:min(46vw,225px);filter:drop-shadow(0 0 8px #9e5eb656)}
-.np-halloween-web svg{display:block;width:100%;height:100%}
-.np-halloween-web-left{top:0;left:0;transform:translate(-1px,-1px)}
-.np-halloween-web-right{top:0;right:0;transform:scaleX(-1) translate(-1px,-1px)}
-.np-halloween-spider{position:fixed;top:0;left:0;width:68px;height:68px;filter:drop-shadow(0 7px 11px #000b);will-change:transform;animation:npSpiderWalk 39s linear infinite;animation-delay:2s;z-index:4;transform:translate3d(-100px,18vh,0)}
-.np-spider-svg{display:block;width:100%;height:100%;animation:npSpiderWiggle .43s ease-in-out infinite alternate}
-.np-spider-legs{transform-origin:56px 52px;animation:npSpiderLegs .52s ease-in-out infinite alternate}
-.np-halloween-bat{position:fixed;font-size:clamp(18px,6vw,27px);opacity:.68;filter:drop-shadow(0 4px 7px #0009);will-change:transform}
-.np-bat-one{top:12vh;left:0;animation:npBatFly 28s linear infinite}
-.np-bat-two{top:35vh;right:0;font-size:19px;animation:npBatFlyBack 33s linear infinite;animation-delay:-10s}
-.np-bat-three{top:77vh;left:0;font-size:17px;animation:npBatFly 40s linear infinite;animation-delay:-17s;opacity:.4}
-.np-halloween-ghost{position:fixed;bottom:17vh;right:7%;font-size:32px;opacity:.25;animation:npGhost 7s ease-in-out infinite}
-@keyframes npHalloweenGradient{0%{background-position:0% 50%}100%{background-position:280% 50%}}
-@keyframes npPumpkinFloat{0%,100%{transform:translateY(1px) rotate(-7deg)}50%{transform:translateY(-6px) rotate(6deg)}}
-@keyframes npSpiderWalk{
-  0%{transform:translate3d(-100px,18vh,0) rotate(70deg)}
-  14%{transform:translate3d(20vw,39vh,0) rotate(95deg)}
-  29%{transform:translate3d(61vw,24vh,0) rotate(120deg)}
-  44%{transform:translate3d(78vw,62vh,0) rotate(180deg)}
-  59%{transform:translate3d(33vw,73vh,0) rotate(225deg)}
-  73%{transform:translate3d(8vw,56vh,0) rotate(270deg)}
-  86%{transform:translate3d(57vw,13vh,0) rotate(340deg)}
-  100%{transform:translate3d(110vw,3vh,0) rotate(385deg)}
-}
-@keyframes npSpiderWiggle{from{transform:rotate(-8deg) translateY(-2px)}to{transform:rotate(8deg) translateY(3px)}}
-@keyframes npSpiderLegs{from{transform:scaleX(.93)}to{transform:scaleX(1.04)}}
-@keyframes npBatFly{0%{transform:translateX(-12vw) translateY(0) rotate(-15deg)}50%{transform:translateX(50vw) translateY(-35px) rotate(9deg)}100%{transform:translateX(115vw) translateY(10px) rotate(-8deg)}}
-@keyframes npBatFlyBack{0%{transform:translateX(14vw) translateY(0) scaleX(-1)}50%{transform:translateX(-40vw) translateY(30px) scaleX(-1)}100%{transform:translateX(-116vw) translateY(-12px) scaleX(-1)}}
-@keyframes npGhost{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-18px) rotate(8deg)}}
-/* Bouton animation : coupe uniquement les mouvements décoratifs, pas la navigation. */
-body.np-halloween-no-motion .np-halloween-spider,
-body.np-halloween-no-motion .np-halloween-bat,
-body.np-halloween-no-motion .np-halloween-ghost{display:none!important}
-body.np-halloween-no-motion .np-halloween-pumpkin,
-body.np-halloween-no-motion .top-marquee,
-body.np-halloween-no-motion .np-referral-home-banner::before,
-body.np-halloween-no-motion .np-referral-gift,
-body.np-halloween-no-motion .start-referral-card{animation:none!important}
-@media(max-width:380px){.np-halloween-hero{gap:7px;padding:11px 9px}.np-halloween-pumpkin{font-size:33px}.np-halloween-hero-text span:last-child{font-size:10px}.np-halloween-kicker{font-size:9px}}
-@media(prefers-reduced-motion:reduce){.np-halloween-decor .np-halloween-spider,.np-halloween-decor .np-halloween-bat,.np-halloween-decor .np-halloween-ghost{display:none!important}.np-halloween-pumpkin,.top-marquee{animation:none!important}}
+.np-noel-hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(circle at 15% 17%,#fff6cfcc 0 1px,transparent 2px),radial-gradient(circle at 78% 26%,#ffd79a8c 0 1.5px,transparent 3px);background-size:54px 52px,76px 64px;opacity:.5}
+.np-noel-tree{font-size:44px;line-height:1;filter:drop-shadow(0 0 9px #f0ce7888);animation:npNoelTreeFloat 3.7s ease-in-out infinite;z-index:1}
+.np-noel-hero-text{display:flex;flex-direction:column;gap:4px;z-index:1;min-width:0;flex:1}
+.np-noel-kicker{font-size:9px;font-weight:900;color:#e3cb8c;letter-spacing:.09em}
+.np-noel-hero-text strong{font-size:clamp(.96rem,3.3vw,1.23rem);line-height:1.18;color:#fff0c1;text-shadow:0 2px 6px #0008}
+.np-noel-hero-text span:last-child{font-size:11px;color:#d6f1df;line-height:1.35}
+.np-noel-actions{display:flex;flex-direction:column;gap:6px;position:relative;z-index:2}
+.np-noel-btn{width:36px;height:34px;display:grid;place-items:center;border:1px solid #e1c485;background:#24563f;color:#ffe2a4;border-radius:12px;font-size:18px;cursor:pointer;touch-action:manipulation}
+.np-noel-btn:focus-visible{outline:2px solid #f8deb6;outline-offset:2px}
+.np-noel-btn[aria-pressed="false"]{opacity:.68}
+.np-noel-btn.np-noel-music-needs-tap{box-shadow:0 0 0 2px #dba94c99,0 0 13px #fbd89066}
+@keyframes npNoelTreeFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(4deg)}}
+/* Décor au-dessus des pages mais jamais des zones cliquables */
+.np-noel-decor{position:fixed;inset:0;z-index:48;pointer-events:none;overflow:hidden;isolation:isolate}
+.np-noel-garland{position:absolute;top:0;left:0;right:0;height:36px;display:flex;justify-content:space-around;align-items:flex-start;
+  padding:7px 4px 0;background:linear-gradient(180deg,#0c3f2b95,transparent);border-top:3px solid #356d49}
+.np-noel-garland::before{content:"";position:absolute;left:0;right:0;top:5px;height:20px;border-bottom:2px solid #b59b63ad;border-radius:0 0 45% 45%;transform:translateY(-10px)}
+.np-noel-light{position:relative;z-index:1;display:block;width:10px;height:15px;border-radius:60% 60% 50% 50%;background:#ffd779;
+  box-shadow:0 0 12px #fbe3a3,0 0 20px #f2d68e80;animation:npNoelLightPulse 1.9s ease-in-out infinite alternate}
+.np-noel-light:nth-child(3n+2){background:#f36a70;box-shadow:0 0 12px #e65d65,0 0 17px #ed7d81}
+.np-noel-light:nth-child(3n){background:#abf4be;box-shadow:0 0 12px #93e3aa,0 0 17px #a6e5bc}
+.np-noel-light:nth-child(2n){animation-delay:-.8s}
+@keyframes npNoelLightPulse{from{opacity:.49;filter:brightness(.85)}to{opacity:1;filter:brightness(1.3)}}
+.np-noel-snow{position:absolute;inset:0;overflow:hidden}
+.np-noel-flake{position:absolute;top:-12vh;left:var(--x);display:block;border-radius:50%;width:var(--size);height:var(--size);background:#fbffff;
+  box-shadow:0 0 6px #d6faff8a;opacity:var(--opacity);animation:npNoelSnowFall var(--duration) linear var(--delay) infinite;will-change:transform}
+@keyframes npNoelSnowFall{0%{transform:translate3d(0,-10vh,0)}100%{transform:translate3d(var(--drift),112vh,0)}}
+.np-noel-sleigh{position:absolute;top:14vh;left:-175px;font-size:29px;filter:drop-shadow(0 0 8px #cdb26888);opacity:.82;animation:npNoelSleigh 34s linear infinite}
+@keyframes npNoelSleigh{0%,8%{transform:translateX(-140px) translateY(16px);opacity:0}12%{opacity:.88}85%{opacity:.88}93%,100%{transform:translateX(calc(100vw + 300px)) translateY(-45px);opacity:0}}
+.np-noel-falling-gift{position:absolute;top:-65px;left:var(--gift-x);font-size:21px;opacity:0;
+  filter:drop-shadow(0 0 4px #e5ca7e90);animation:npNoelGiftDrop var(--gift-duration) ease-in var(--gift-delay) infinite}
+@keyframes npNoelGiftDrop{0%,14%{transform:translate3d(0,-12vh,0) rotate(-15deg);opacity:0}16%{opacity:.72}86%{opacity:.72}97%,100%{transform:translate3d(20vw,110vh,0) rotate(180deg);opacity:0}}
+body.np-noel-no-motion .np-noel-decor .np-noel-snow,body.np-noel-no-motion .np-noel-sleigh,body.np-noel-no-motion .np-noel-falling-gift{display:none!important}
+body.np-noel-no-motion .np-noel-light,body.np-noel-no-motion .np-noel-tree,body.np-noel-no-motion .top-marquee,body.np-noel-no-motion .np-referral-home-banner::before{animation:none!important}
+@media(max-width:380px){.np-noel-hero{gap:7px;padding:10px 9px}.np-noel-tree{font-size:36px}.np-noel-hero-text span:last-child{font-size:10px}.np-noel-kicker{font-size:8px}.np-noel-actions{gap:4px}.np-noel-btn{width:32px;height:32px}}
+@media(prefers-reduced-motion:reduce){.np-noel-flake,.np-noel-sleigh,.np-noel-falling-gift{display:none!important}.np-noel-light,.np-noel-tree,.top-marquee{animation:none!important}}
 
 
 /* PACK DUO FROZEN : carte sur deux colonnes, deux photos côte à côte. */
@@ -2530,79 +2495,48 @@ body.np-halloween-no-motion .start-referral-card{animation:none!important}
 @media(max-width:360px){.product-card.np-frozen-pack-card .np-pack-image img{height:118px}}
 
 
-/* HALLOWEEDN : petit astérisque dans la colonne droite, jamais sur le logo central. */
-#page-home .header-halloween-promo{
+
+/* OFFRES EXISTANTES : tarifs inchangés, présentation hivernale sans ancien slogan Halloween */
+#page-home .header-noel-special{
   position:absolute;top:50%;right:8px;transform:translateY(-50%);
-  width:clamp(82px,24vw,112px);max-width:calc((100% - 112px) / 2 - 9px);
+  width:clamp(84px,24vw,112px);max-width:calc((100% - 112px) / 2 - 9px);
   min-height:49px;display:flex;align-items:center;justify-content:center;gap:4px;
-  padding:5px 4px;border-radius:12px;border:1px solid #e4a75f;
-  background:linear-gradient(140deg,#3c1b4a,#783c61 65%,#ac582f);
-  box-shadow:0 0 12px #e67d3940;color:#fff0cc;cursor:pointer;z-index:4;
+  padding:5px 4px;border-radius:12px;border:1px solid #d9ba79;
+  background:linear-gradient(145deg,#235f46,#8b3845 68%,#25553b);
+  box-shadow:0 0 13px #e2c28560;color:#fff4d8;cursor:pointer;z-index:4;
   font-size:9px;font-weight:800;line-height:1.13;text-align:left;
   overflow:hidden;white-space:normal;box-sizing:border-box;
 }
-.header-halloween-star{color:#ffbb54;font-size:18px;line-height:1;flex:none;filter:drop-shadow(0 0 3px #f99c47)}
-.header-halloween-text{display:block;min-width:0;overflow-wrap:anywhere}
-.header-halloween-text small{display:block;font-size:7px;line-height:1.1;font-weight:600;margin-top:2px;color:#ffd99e}
-@media(max-width:355px){#page-home .header-halloween-promo{width:78px;min-height:46px;right:4px;gap:2px;font-size:8px}.header-halloween-star{font-size:14px}.header-halloween-text small{font-size:6.5px}}
-
-/* Une seule ligne promo par produit concerné (aucune liste de tous les tarifs). */
-.halloween-special-line{display:flex;flex-wrap:wrap;gap:3px 6px;align-items:center;justify-content:center;
-  margin-top:8px;padding:7px 6px;border-radius:10px;border:1px solid #fbaf66;
-  background:linear-gradient(105deg,#301731,#52234b,#6b2c24);color:#ffe9ca;
-  text-align:center;box-shadow:0 0 9px #f18b3150;font-size:11px;line-height:1.3}
-.halloween-special-label{color:#ffd07b;font-size:10px;font-weight:900;letter-spacing:.015em}
-.halloween-special-weight{font-weight:700;color:#fff8df}
-.halloween-special-line strong{font-size:13px;color:#ffd380;font-weight:900}
-.product-card .halloween-special-line{margin-top:7px;font-size:10px}
-.product-card .halloween-special-label{font-size:9px}
-.product-card .halloween-special-line strong{font-size:12px}
-
-/* Le tarif Halloween est une carte de prix habituelle avec un petit marqueur en plus. */
-.tarif-item.halloween-special-tarif{position:relative;border-color:#ffc279;
-  background:linear-gradient(145deg,#54214d,#9b4f29,#2c1537);box-shadow:0 0 13px #f6a44b66;
+.header-noel-star{color:#ffe1a1;font-size:18px;line-height:1;flex:none;filter:drop-shadow(0 0 4px #fae9ae)}
+.header-noel-text{display:block;min-width:0;overflow-wrap:anywhere}
+.header-noel-text small{display:block;font-size:7px;line-height:1.1;font-weight:600;margin-top:2px;color:#f5dca7}
+@media(max-width:355px){#page-home .header-noel-special{width:78px;min-height:46px;right:4px;gap:2px;font-size:8px}.header-noel-star{font-size:14px}.header-noel-text small{font-size:6.5px}}
+/* Une seule ligne par véritable offre existante */
+.noel-special-line{display:flex;flex-wrap:wrap;gap:3px 6px;align-items:center;justify-content:center;
+  margin-top:8px;padding:7px 6px;border-radius:10px;border:1px solid #d8b66a;
+  background:linear-gradient(105deg,#174332,#296247,#903c43);color:#fff0cf;
+  text-align:center;box-shadow:0 0 9px #d7ba6750;font-size:11px;line-height:1.3}
+.noel-special-label{color:#ffe0a2;font-size:10px;font-weight:900;letter-spacing:.015em}
+.noel-special-weight{font-weight:700;color:#fff9e6}
+.noel-special-line strong{font-size:13px;color:#ffe1a0;font-weight:900}
+.product-card .noel-special-line{margin-top:7px;font-size:10px}
+.product-card .noel-special-label{font-size:9px}
+.product-card .noel-special-line strong{font-size:12px}
+.tarif-item.noel-special-tarif{position:relative;border-color:#e6ca81;
+  background:linear-gradient(145deg,#164935,#9c4344,#173e32);box-shadow:0 0 13px #cfae6466;
   padding-top:9px;min-height:120px}
-.halloween-special-tarif-label{display:block;text-align:center;font-size:10px;font-weight:900;
-  color:#ffebba;padding:4px 5px;line-height:1.15;letter-spacing:.02em}
-.halloween-special-tarif .box-tarif{font-size:21px}
-.halloween-special-tarif .tarif-price{color:#ffe18f}
-
-/* =========================
-   ANIMATION AJOUT PANIER HALLOWEEN
-   ========================= */
-.halloween-cart-burst{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:9999;
-}
-
-.halloween-cart-burst .fx{
-  position:absolute;
-  font-size:24px;
-  filter:drop-shadow(0 0 8px rgba(255,138,52,.5));
-  animation:halloweenBurstFly 1.2s ease-out forwards;
-  opacity:0;
-}
-
-@keyframes halloweenBurstFly{
-  0%{
-    transform:translate(0,0) scale(.45) rotate(0deg);
-    opacity:0;
-  }
-  18%{
-    opacity:1;
-  }
-  100%{
-    transform:translate(var(--tx), var(--ty)) scale(1.25) rotate(var(--rot));
-    opacity:0;
-  }
-}
-
-#notification-toast.halloween-toast{
-  border:1px solid rgba(255,183,92,.6);
-  box-shadow:0 0 16px rgba(244,132,60,.28),0 8px 22px rgba(0,0,0,.3);
-}
+.noel-special-tarif-label{display:block;text-align:center;font-size:10px;font-weight:900;
+  color:#fff0bd;padding:4px 5px;line-height:1.15;letter-spacing:.02em}
+.noel-special-tarif .box-tarif{font-size:21px}
+.noel-special-tarif .tarif-price{color:#ffe6a7}
+/* Au clic panier : petite explosion de flocons, cadeaux et clochettes */
+.noel-cart-burst{position:fixed;inset:0;pointer-events:none;z-index:9999}
+.noel-cart-burst .fx{position:absolute;font-size:24px;filter:drop-shadow(0 0 7px #ffe6b299);
+  animation:npNoelBurstFly 1.2s ease-out forwards;opacity:0}
+@keyframes npNoelBurstFly{0%{transform:translate(0,0) scale(.45) rotate(0deg);opacity:0}18%{opacity:1}
+  100%{transform:translate(var(--tx),var(--ty)) scale(1.25) rotate(var(--rot));opacity:0}}
+#notification-toast.noel-toast{border:1px solid #e2c787;box-shadow:0 0 16px #e5ce8947,0 8px 22px #0005}
+@media(prefers-reduced-motion:reduce){.noel-cart-burst .fx{animation:none!important;display:none!important}}
 
 
 /* Nice Place : videos visibles immediatement dans la fiche produit */
@@ -2779,29 +2713,34 @@ body.np-olives-overlay-open { overflow: hidden !important; }
     .np-olives-premiere-btn, .np-olives-replay-btn { transition: none; }
 }
 
+
+
+/* Prix avant/après : teintes de Noël sans modifier les montants */
+.np-previous-price{color:#b9c9c2;text-decoration-color:#e5bb77}
+.np-new-price{color:#ffe4a0;text-shadow:0 0 8px #d6b96b60}
+.tarif-item.np-reduced-tarif{border-color:#debc77;box-shadow:0 0 12px #b3a46852}
+.product-card.np-frozen-pack-card{background:linear-gradient(145deg,#143d30,#3d5340 50%,#804143);border-color:#f0d28c}
+.product-card.np-frozen-pack-card .np-pack-dual-media{background:linear-gradient(90deg,#21533f,#ae7955)}
+.product-card.np-frozen-pack-card .np-pack-image{background:#163b2d}
+.product-card.np-frozen-pack-card .np-pack-image small{background:#1b4031;color:#ffe7a9}
+.product-card.np-frozen-pack-card .name,.product-card.np-frozen-pack-card .price{color:#ffe9ae}
+.product-card.np-frozen-pack-card .farm{color:#c3ead1}
+
     </style>
 </head>
 
-<body class="np-halloween-theme">
-    <!-- HALLOWEEN : décor uniquement visuel, non bloquant pour les boutons -->
-    <div id="np-halloween-decor" class="np-halloween-decor" aria-hidden="true">
-      <div class="np-halloween-web np-halloween-web-left"><svg viewBox="0 0 280 280" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"><line x1="0" y1="0" x2="270.0" y2="0.0"/><line x1="0" y1="0" x2="265.9" y2="46.9"/><line x1="0" y1="0" x2="253.7" y2="92.3"/><line x1="0" y1="0" x2="233.8" y2="135.0"/><line x1="0" y1="0" x2="206.8" y2="173.6"/><line x1="0" y1="0" x2="173.6" y2="206.8"/><line x1="0" y1="0" x2="135.0" y2="233.8"/><line x1="0" y1="0" x2="92.3" y2="253.7"/><line x1="0" y1="0" x2="46.9" y2="265.9"/><line x1="0" y1="0" x2="0.0" y2="270.0"/><polyline points="35.0,0.0 34.5,6.1 32.9,12.0 30.3,17.5 26.8,22.5 22.5,26.8 17.5,30.3 12.0,32.9 6.1,34.5 0.0,35.0"/><polyline points="64.0,0.0 63.0,11.1 60.1,21.9 55.4,32.0 49.0,41.1 41.1,49.0 32.0,55.4 21.9,60.1 11.1,63.0 0.0,64.0"/><polyline points="93.0,0.0 91.6,16.1 87.4,31.8 80.5,46.5 71.2,59.8 59.8,71.2 46.5,80.5 31.8,87.4 16.1,91.6 0.0,93.0"/><polyline points="122.0,0.0 120.1,21.2 114.6,41.7 105.7,61.0 93.5,78.4 78.4,93.5 61.0,105.7 41.7,114.6 21.2,120.1 0.0,122.0"/><polyline points="151.0,0.0 148.7,26.2 141.9,51.6 130.8,75.5 115.7,97.1 97.1,115.7 75.5,130.8 51.6,141.9 26.2,148.7 0.0,151.0"/><polyline points="180.0,0.0 177.3,31.3 169.1,61.6 155.9,90.0 137.9,115.7 115.7,137.9 90.0,155.9 61.6,169.1 31.3,177.3 0.0,180.0"/><polyline points="209.0,0.0 205.8,36.3 196.4,71.5 181.0,104.5 160.1,134.3 134.3,160.1 104.5,181.0 71.5,196.4 36.3,205.8 0.0,209.0"/><polyline points="238.0,0.0 234.4,41.3 223.6,81.4 206.1,119.0 182.3,153.0 153.0,182.3 119.0,206.1 81.4,223.6 41.3,234.4 0.0,238.0"/></g></svg></div>
-      <div class="np-halloween-web np-halloween-web-right"><svg viewBox="0 0 280 280" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round"><line x1="0" y1="0" x2="270.0" y2="0.0"/><line x1="0" y1="0" x2="265.9" y2="46.9"/><line x1="0" y1="0" x2="253.7" y2="92.3"/><line x1="0" y1="0" x2="233.8" y2="135.0"/><line x1="0" y1="0" x2="206.8" y2="173.6"/><line x1="0" y1="0" x2="173.6" y2="206.8"/><line x1="0" y1="0" x2="135.0" y2="233.8"/><line x1="0" y1="0" x2="92.3" y2="253.7"/><line x1="0" y1="0" x2="46.9" y2="265.9"/><line x1="0" y1="0" x2="0.0" y2="270.0"/><polyline points="35.0,0.0 34.5,6.1 32.9,12.0 30.3,17.5 26.8,22.5 22.5,26.8 17.5,30.3 12.0,32.9 6.1,34.5 0.0,35.0"/><polyline points="64.0,0.0 63.0,11.1 60.1,21.9 55.4,32.0 49.0,41.1 41.1,49.0 32.0,55.4 21.9,60.1 11.1,63.0 0.0,64.0"/><polyline points="93.0,0.0 91.6,16.1 87.4,31.8 80.5,46.5 71.2,59.8 59.8,71.2 46.5,80.5 31.8,87.4 16.1,91.6 0.0,93.0"/><polyline points="122.0,0.0 120.1,21.2 114.6,41.7 105.7,61.0 93.5,78.4 78.4,93.5 61.0,105.7 41.7,114.6 21.2,120.1 0.0,122.0"/><polyline points="151.0,0.0 148.7,26.2 141.9,51.6 130.8,75.5 115.7,97.1 97.1,115.7 75.5,130.8 51.6,141.9 26.2,148.7 0.0,151.0"/><polyline points="180.0,0.0 177.3,31.3 169.1,61.6 155.9,90.0 137.9,115.7 115.7,137.9 90.0,155.9 61.6,169.1 31.3,177.3 0.0,180.0"/><polyline points="209.0,0.0 205.8,36.3 196.4,71.5 181.0,104.5 160.1,134.3 134.3,160.1 104.5,181.0 71.5,196.4 36.3,205.8 0.0,209.0"/><polyline points="238.0,0.0 234.4,41.3 223.6,81.4 206.1,119.0 182.3,153.0 153.0,182.3 119.0,206.1 81.4,223.6 41.3,234.4 0.0,238.0"/></g></svg></div>
-      <div class="np-halloween-bat np-bat-one">🦇</div>
-      <div class="np-halloween-bat np-bat-two">🦇</div>
-      <div class="np-halloween-bat np-bat-three">🦇</div>
-      <div class="np-halloween-spider"><svg class="np-spider-svg" viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-<g class="np-spider-legs" fill="none" stroke="#a67cc8" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
-<path d="M50 51L31 31L9 26M48 57L25 48L6 50M48 62L24 69L10 85M52 66L39 87L33 101M62 51L81 31L103 26M64 57L87 48L106 50M64 62L88 69L102 85M60 66L73 87L79 101"/></g>
-<ellipse cx="56" cy="68" rx="22" ry="25" fill="#281234" stroke="#ff993b" stroke-width="3"/>
-<ellipse cx="56" cy="46" rx="17" ry="17" fill="#181020" stroke="#ff993b" stroke-width="3"/>
-<ellipse cx="45" cy="44" rx="5.5" ry="6.5" fill="#fff7d1"/><ellipse cx="65" cy="44" rx="5.5" ry="6.5" fill="#fff7d1"/>
-<circle cx="46" cy="44" r="2.5" fill="#ff6c35"/><circle cx="64" cy="44" r="2.5" fill="#ff6c35"/>
-<path d="M52 54q4 5 8 0" fill="none" stroke="#ffd07a" stroke-width="2" stroke-linecap="round"/>
-<path d="M45 70q12-8 22 0" stroke="#9c64b7" stroke-width="3" fill="none" opacity=".7"/>
-</svg></div>
-      <div class="np-halloween-ghost">👻</div>
+<body class="np-noel-theme">
+    <!-- Décor de Noël transparent aux clics, affiché sur toutes les pages -->
+    <div id="np-noel-decor" class="np-noel-decor" aria-hidden="true">
+      <div class="np-noel-garland"><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i><i class="np-noel-light"></i></div>
+      <div id="np-noel-snow" class="np-noel-snow"></div>
+      <div class="np-noel-sleigh">🎅🛷</div>
+      <div class="np-noel-falling-gift" style="--gift-x:11%;--gift-duration:19s;--gift-delay:-4s">🎁</div>
+      <div class="np-noel-falling-gift" style="--gift-x:76%;--gift-duration:25s;--gift-delay:-11s">⭐</div>
+      <div class="np-noel-falling-gift" style="--gift-x:42%;--gift-duration:31s;--gift-delay:-16s">🎁</div>
     </div>
+    <!-- Musique créée spécialement pour Nice Place, en boucle, contrôlable -->
+    <audio id="np-noel-audio" src="noel-niceplace.mp3" preload="auto" loop></audio>
 
     <div id="page-contact" class="page">
         <div class="page-content">
@@ -3081,9 +3020,9 @@ body.np-olives-overlay-open { overflow: hidden !important; }
 
     <img src="Logo2.jpg" alt="Logo" class="home-logo">
 
-    <button type="button" id="header-halloween-promo" class="header-halloween-promo" aria-label="Promo d’Halloweedn à découvrir dans nos produits">
-        <span class="header-halloween-star" aria-hidden="true">✱</span>
-        <span class="header-halloween-text">Promo<br>d’Halloweedn<small>Dans nos produits</small></span>
+    <button type="button" id="header-noel-special" class="header-noel-special" aria-label="Voir les prix spéciaux dans nos produits">
+        <span class="header-noel-star" aria-hidden="true">✶</span>
+        <span class="header-noel-text">PRIX<br>SPÉCIAUX<small>Voir les offres 🎁</small></span>
     </button>
 
     <button class="cart-button" id="home-cart-button">
@@ -3095,15 +3034,18 @@ body.np-olives-overlay-open { overflow: hidden !important; }
 </div>
 
 
-        <!-- HALLOWEEN : bandeau spécial dans la page d'accueil -->
-        <section class="np-halloween-hero" aria-label="Ambiance Halloween Nice Place">
-          <span class="np-halloween-pumpkin" aria-hidden="true">🎃</span>
-          <div class="np-halloween-hero-text">
-            <span class="np-halloween-kicker">NICE PLACE · ÉDITION HALLOWEEN</span>
-            <strong>Bienvenue dans l'antre d'Halloween !</strong>
-            <span>🦇 Toiles, citrouilles et surprises nocturnes 🕸️</span>
+        <!-- NOËL : bandeau festif, musique et interrupteur pour les animations -->
+        <section class="np-noel-hero" aria-label="Ambiance de Noël Nice Place">
+          <span class="np-noel-tree" aria-hidden="true">🎄</span>
+          <div class="np-noel-hero-text">
+            <span class="np-noel-kicker">NICE PLACE · ÉDITION NOËL 2026</span>
+            <strong>La magie de Noël est là ! ✨</strong>
+            <span>❄️ Flocons, guirlandes et belles surprises 🎁</span>
           </div>
-          <button type="button" id="np-halloween-toggle" class="np-halloween-toggle" aria-pressed="true" aria-label="Désactiver les animations Halloween" title="Activer ou désactiver les animations">✨</button>
+          <div class="np-noel-actions">
+            <button type="button" id="np-noel-music-toggle" class="np-noel-btn" aria-pressed="true" aria-label="Couper la musique de Noël" title="Musique de Noël">🎵</button>
+            <button type="button" id="np-noel-toggle" class="np-noel-btn" aria-pressed="true" aria-label="Désactiver les animations de Noël" title="Activer ou désactiver la neige">❄️</button>
+          </div>
         </section>
 
         <!-- PARRAINAGE PREMIUM : grand bandeau dans la vraie page d’accueil -->
@@ -3428,7 +3370,7 @@ body.np-olives-overlay-open { overflow: hidden !important; }
       </div>
     </div>
     <div id="notification-toast"></div>
-    <script src="script.js?v=olives-premiere-20261109"></script>
+    <script src="script.js?v=noel-20261113-1"></script>
 </body>
 
 </html>
