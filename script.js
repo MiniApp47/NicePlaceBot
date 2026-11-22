@@ -482,6 +482,82 @@ document.addEventListener("DOMContentLoaded", function () {
             { weight: "10G", price: 180.0 },
           ],
         }, */
+         {
+          id: "Black Widow♥",
+          flag: "🇪🇸",
+          name: "Black Widow ♠️",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "Frozen us 🇺🇸",
+          selectionType: "Frozen us 🇺🇸",
+          featured: true,
+          image: "ProductBW.png",
+          video: "VideoBW.mov",
+          description:
+"♠️ BLACK WIDOW — NICE'SELECTION 🧞\n\nUne référence de la gamme Frozen US à l'identité sombre et mystérieuse. Black Widow évoque un univers aromatique profond, où les inspirations de fruits noirs rencontrent des nuances plus intenses et complexes.\n\n👃 Univers aromatique :\n🫐 Inspiration fruits noirs et baies sauvages\n🍇 Nuances de raisin mûr\n🌲 Accents boisés et terreux\n✨ Une identité sombre et contrastée\n\n❄️ Gamme Frozen US 🇺🇸\n💎 Sélection Nice'Selection 🧞\n\n♠️ BLACK WIDOW — Une référence au caractère mystérieux, inspirée des profils fruités sombres.\n\n🤝 Possibilité de mixer les variétés sur les formats éligibles.",          tarifs: [
+            { weight: "5G", price: 120.0 },
+            { weight: "10G", price: 200.0 },
+            { weight: "25G", price: 360.0 },
+          ],
+        },
+        {
+          id: "White Widow ♥",
+          flag: "🇪🇸",
+          name: "White Widow ♥",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "Frozen us 🇺🇸",
+          selectionType: "Frozen us 🇺🇸",
+          featured: true,
+          image: "ProductWW.png",
+          video: "VideoWW.mov",
+          description:
+          "🤍 WHITE WIDOW — NICE'SELECTION 🧞\n\nUne référence Frozen US à l'identité élégante et intemporelle. White Widow s'inspire d'un univers aromatique plus classique, associant fraîcheur végétale, nuances florales et touches légèrement épicées.\n\n👃 Univers aromatique :\n🌿 Inspiration végétale et herbacée\n🌸 Nuances florales délicates\n🌲 Touches boisées et terreuses\n🍋 Évocation d'une légère fraîcheur citronnée\n\n❄️ Gamme Frozen US 🇺🇸\n💎 Sélection Nice'Selection 🧞\n\n👑 WHITE WIDOW — L'esprit d'un grand classique revisité dans l'univers Frozen US.\n\n🤝 Possibilité de mixer les variétés sur les formats éligibles.",             
+          tarifs: [
+            { weight: "5G", price: 120.0 },
+            { weight: "10G", price: 200.0 },
+            { weight: "25G", price: 360.0 },
+          ],
+        },
+         {
+          id: "Cereal Milk",
+          flag: "🇪🇸",
+          name: "Cereal Milk 🥣",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "Frozen us 🇺🇸",
+          selectionType: "Frozen us 🇺🇸",
+          featured: true,
+          image: "ProductBZ.png",
+          video: "VideoBZ.mov",
+          description:
+          "🥣 CEREAL MILK — NICE'SELECTION 🧞\n\nUne référence Frozen US à l'identité résolument gourmande. Inspirée de l'univers des céréales sucrées et du lait crémeux, Cereal Milk évoque une association douce, réconfortante et originale.\n\n👃 Univers aromatique :\n🥣 Inspiration céréales sucrées\n🥛 Nuances lactées et crémeuses\n🍦 Évocation vanillée et gourmande\n🍬 Touches rappelant les confiseries\n\n❄️ Gamme Frozen US 🇺🇸\n💎 Sélection Nice'Selection 🧞\n\n🏆 CEREAL MILK — Une identité douce et gourmande, inspirée des saveurs du petit-déjeuner.\n\n🤝 Possibilité de mixer les variétés sur les formats éligibles.",
+          tarifs: [
+            { weight: "5G", price: 120.0 },
+            { weight: "10G", price: 200.0 },
+            { weight: "25G", price: 360.0 },
+          ],
+        },
+         {
+          id: "Bolinaz",
+          flag: "🇪🇸",
+          name: "Bolinaz 🖋️",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          type: "Frozen us 🇺🇸",
+          selectionType: "Frozen us 🇺🇸",
+          featured: true,
+          image: "ProductBZ.png",
+          video: "VideoBZ.mov",
+          description:
+          "🖋️ BOLINAZ — NICE'SELECTION 🧞\n\nBolinaz rejoint la gamme Frozen US avec une identité singulière et affirmée. Une référence au nom original, présentée dans un univers premium où le caractère, le mystère et la distinction occupent une place centrale.\n\n💎 Son univers :\n🖋️ Une signature originale et reconnaissable\n🌑 Une identité mystérieuse\n✨ Une présentation sobre et soignée\n🏆 Une référence de la sélection Frozen US\n\n❄️ Gamme Frozen US 🇺🇸\n💎 Sélection Nice'Selection 🧞\n\n👑 BOLINAZ — Une signature originale qui affirme son identité au sein de Nice'Selection.\n\n🤝 Possibilité de mixer les variétés sur les formats éligibles.",
+          tarifs: [
+            { weight: "5G", price: 120.0 },
+            { weight: "10G", price: 200.0 },
+            { weight: "25G", price: 360.0 },
+          ],
+        },
+       
        /*   {
           id: "Papaya Lemon",
           flag: "🇪🇸",
