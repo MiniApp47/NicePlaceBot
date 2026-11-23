@@ -484,7 +484,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, */
          {
           id: "Black Widow♥",
-          flag: "🇪🇸",
+          flag: "🇺🇸",
           name: "Black Widow ♠️",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         {
           id: "White Widow ♥",
-          flag: "🇪🇸",
+          flag: "🇺🇸",
           name: "White Widow ♥",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
@@ -521,7 +521,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
          {
           id: "Cereal Milk",
-          flag: "🇪🇸",
+          flag: "🇺🇸",
           name: "Cereal Milk 🥣",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
@@ -540,7 +540,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
          {
           id: "Bolinaz",
-          flag: "🇪🇸",
+          flag: "🇺🇸",
           name: "Bolinaz 🖋️",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
@@ -626,7 +626,7 @@ document.addEventListener("DOMContentLoaded", function () {
           name: "🫒 Cherry 🍒",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
-          customerFavorite: true,
+         // customerFavorite: true,
           type: "Hash",
           selectionType: "🫒 Olive Static 🔮",
           featured: true,
@@ -644,7 +644,7 @@ document.addEventListener("DOMContentLoaded", function () {
           name: "Grape Gaspline ⛽️",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
-          customerFavorite: true,
+          // customerFavorite: true,
           type: "Hash",
           selectionType: "🫒 Olive Static 🔮",
           featured: true,
