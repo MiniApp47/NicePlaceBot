@@ -528,8 +528,8 @@ document.addEventListener("DOMContentLoaded", function () {
           type: "Frozen us 🇺🇸",
           selectionType: "Frozen us 🇺🇸",
           featured: true,
-          image: "ProductBZ.png",
-          video: "VideoBZ.mov",
+          image: "ProductCM.png",
+          video: "VideoCM.mov",
           description:
           "🥣 CEREAL MILK — NICE'SELECTION 🧞\n\nUne référence Frozen US à l'identité résolument gourmande. Inspirée de l'univers des céréales sucrées et du lait crémeux, Cereal Milk évoque une association douce, réconfortante et originale.\n\n👃 Univers aromatique :\n🥣 Inspiration céréales sucrées\n🥛 Nuances lactées et crémeuses\n🍦 Évocation vanillée et gourmande\n🍬 Touches rappelant les confiseries\n\n❄️ Gamme Frozen US 🇺🇸\n💎 Sélection Nice'Selection 🧞\n\n🏆 CEREAL MILK — Une identité douce et gourmande, inspirée des saveurs du petit-déjeuner.\n\n🤝 Possibilité de mixer les variétés sur les formats éligibles.",
           tarifs: [
