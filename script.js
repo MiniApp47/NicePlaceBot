@@ -627,7 +627,7 @@ document.addEventListener("DOMContentLoaded", function () {
           flag: "🇲🇦",
           farm: "Nice'Selection 🧞",
           promoEligible: true,
-          customerFavorite: true,
+          // customerFavorite: true,
           type: "Hash",
           selectionType: "Static ⚡️",
           featured: true,
