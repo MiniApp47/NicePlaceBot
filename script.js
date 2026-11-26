@@ -621,6 +621,26 @@ document.addEventListener("DOMContentLoaded", function () {
           ],
         },
  */
+        {
+          id: "Candy kush 🍭 ",
+          name: "Candy kush 🍭",
+          flag: "🇲🇦",
+          farm: "Nice'Selection 🧞",
+          promoEligible: true,
+          customerFavorite: true,
+          type: "Hash",
+          selectionType: "Static ⚡️",
+          featured: true,
+          image: "ProductGK.png",
+          video: "VideoGK.mov",
+          description:
+              "🇲🇦 CANDY KUSH 🍭 — NICE'SELECTION 🧞\n\nUne référence de la gamme Static ⚡️ à l'identité gourmande et sucrée. Candy Kush évoque la rencontre entre l'univers des confiseries fruitées et le caractère plus profond des profils Kush. Une association entre douceur, originalité et intensité aromatique.\n\n👃 Univers aromatique :\n🍭 Inspiration bonbons sucrés et candy\n🍬 Nuances gourmandes et légèrement acidulées\n🌸 Évocation de notes florales délicates\n🌲 Fond terreux et boisé typique de l'univers Kush\n🍯 Une identité douce et chaleureuse\n\n⚡️ Gamme Static 🇲🇦\n💎 Sélection Nice'Selection 🧞\n❤️ Préféré des clients\n\n👑 CANDY KUSH — Une identité gourmande où l'esprit des confiseries rencontre le caractère classique du Kush.",
+          tarifs: [
+            { weight: "5G", price: 100.0 },
+            { weight: "10G", price: 180.0 },
+            { weight: "20G", price: 350.0 },
+          ],
+        },
           {
           id: "🫒 Cherry 🍒 ",
           name: "🫒 Cherry 🍒",
